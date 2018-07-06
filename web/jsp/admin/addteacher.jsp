@@ -28,7 +28,7 @@
                     <label class="control-label" for="email"><fmt:message key="label.registration.email" bundle="${rb}"/><span class="required">*</span></label>
                     <div class="controls">
                         <input type="email" id="email" name="user_email" required="" class="form-control" placeholder="email@example.com" />
-                        <p class="help-block"><fmt:message key="label.registration.email.help" bundle="${rb}"/></p>
+                        <p class="help-block"><fmt:message key="label.t.registration.email.help" bundle="${rb}"/></p>
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@
                     <label class="control-label" for="check_password"><fmt:message key="label.registration.repeatpassword" bundle="${rb}"/><span class="required">*</span></label>
                     <div class="controls">
                         <input type="password" id="check_password" name="check_password" required="" class="form-control" pattern="^[a-zA-Z0-9-_\.]{4,20}$"/>
-                        <p class="help-block"><fmt:message key="label.registration.repeatpassword.help" bundle="${rb}"/></p>
+                        <p class="help-block"><fmt:message key="label.registration.t.repeatpassword" bundle="${rb}"/></p>
                     </div>
                 </div>
 
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <p><span class="required">*</span> - <fmt:message key="label.form.required-fields" bundle="${rb}"/></p>
-                <button type="submit" class="btn btn-success" ><fmt:message key="label.login.registration" bundle="${rb}"/></button>
+                <button type="submit" class="btn btn-success" ><fmt:message key="label.login.t.registration" bundle="${rb}"/></button>
             </fieldset>
         </form>
     </div>
