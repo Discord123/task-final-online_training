@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserService extends Service {
     User login(String emailInput, String passwordInput) throws ServiceException;
     boolean isEmailTaken(String emailInput) throws ServiceException;
-    boolean singUp(String userEmail, String userPassword, String firstName, String lastName) throws ServiceException;
+    boolean singUp(String userEmail, String userPassword, String firstName, String lastName, String role) throws ServiceException;
     boolean joinCourse(int courseId, int userId ) throws ServiceException;
     List<User> showAllTeachers() throws ServiceException;
     boolean deleteUserById(int userId) throws ServiceException;

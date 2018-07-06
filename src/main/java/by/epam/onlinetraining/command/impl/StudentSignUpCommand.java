@@ -12,7 +12,7 @@ import by.epam.onlinetraining.service.UserService;
 import by.epam.onlinetraining.service.Validator;
 
 
-public class SignUpCommand extends AbstractCommand {
+public class StudentSignUpCommand extends AbstractCommand {
     private static final String LOGIN_PAGE_PATH = "/controller?command=getPage&expectedPage=login";
     private static final String REGISTRATION_PAGE_PATH = "/controller?command=getPage&expectedPage=registration";
 
@@ -24,6 +24,7 @@ public class SignUpCommand extends AbstractCommand {
     private static final String MESSAGE_PASSWORD_REPEAT_INVALID = "message.password.repeat.error";
     private static final String MESSAGE_SIGN_UP_SUCCESS = "message.sign-up-success";
     private static final String MESSAGE_SIGN_UP_FAIL = "message.sing-up-error";
+    private static final String USER_ROLE = "student";
 
     private String email;
     private String password;
@@ -32,7 +33,7 @@ public class SignUpCommand extends AbstractCommand {
     private String lastName;
     private String signUpFailMessage = MESSAGE_SIGN_UP_FAIL;
 
-    public SignUpCommand(Service service) {
+    public StudentSignUpCommand(Service service) {
         super(service);
     }
 
@@ -51,7 +52,7 @@ public class SignUpCommand extends AbstractCommand {
         try {
             boolean isParametersValid = isParametersValid(userService);
             if(isParametersValid){
-                isRegistered = userService.singUp(email, password, firstName, lastName);
+                isRegistered = userService.singUp(email, password, firstName, lastName, USER_ROLE);
             }
             putMessageIntoSession(content, isRegistered, MESSAGE_SIGN_UP_SUCCESS, signUpFailMessage);
 

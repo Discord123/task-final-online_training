@@ -17,8 +17,8 @@ public class WelcomeTag extends TagSupport {
     private static final String MESSAGE_END_ADMIN_KEY = "label.mainpage.end-admin";
     private static final String MESSAGE_END_TEACHER_KEY = "label.mainpage.end-teacher";
     private static final String MESSAGE_END_STUDENT_KEY = "label.mainpage.end-student";
-    private static final String OUTPUT_FORMAT_BEGIN = "<hr><h3 align=\"center\">";
-    private static final String OUTPUT_FORMAT_END = "</h3><hr>";
+    private static final String OUTPUT_FORMAT_BEGIN = "<hr><h2 align=\"center\">";
+    private static final String OUTPUT_FORMAT_END = "</h2><hr>";
 
     private Role role;
     private String locale;

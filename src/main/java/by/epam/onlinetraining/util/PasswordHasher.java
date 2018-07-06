@@ -11,7 +11,8 @@ import java.security.NoSuchAlgorithmException;
 public class PasswordHasher {
     private static final Logger LOGGER = LogManager.getLogger(PasswordHasher.class);
 
-    private PasswordHasher(){}
+    private PasswordHasher(){
+    }
 
 
     public static String shaHashing(String password) {

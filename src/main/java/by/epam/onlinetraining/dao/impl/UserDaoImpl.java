@@ -161,7 +161,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
     }
 
     @Override
-    public boolean addUser(String userEmail, String hashedPassword, String firstName, String lastName) throws DaoException {
+    public boolean addUser(String userEmail, String hashedPassword, String firstName, String lastName, String role) throws DaoException {
         boolean isUserAdded = false;
 
         try(PreparedStatement statement = proxyConnection.prepareStatement(ADD_USER)){
@@ -169,7 +169,13 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
             statement.setString(2, hashedPassword);
             statement.setString(3, firstName);
             statement.setString(4, lastName);
-            String userRole = Role.STUDENT.toString();
+
+            String userRole;
+            if (role.equalsIgnoreCase("teacher")){
+            userRole = Role.TEACHER.toString();
+            } else {
+                userRole = Role.STUDENT.toString();
+            }
             String userRoleLowerCase = userRole.toLowerCase();
             statement.setString(5, userRoleLowerCase);
             isUserAdded = statement.executeUpdate() != 0;

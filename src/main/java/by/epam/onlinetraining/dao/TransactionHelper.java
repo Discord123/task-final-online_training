@@ -31,11 +31,12 @@ public class TransactionHelper {
             connection.setAutoCommit(true);
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Problem when trying to set auto commit true.");
-        }
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "Problem when trying to close connection.", e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                LOGGER.log(Level.ERROR, "Problem when trying to close.");
+            }
         }
     }
 

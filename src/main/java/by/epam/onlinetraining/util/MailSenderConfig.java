@@ -40,13 +40,4 @@ public class MailSenderConfig {
             throw new RuntimeException("Exception during reading resourceBundle.", e);
         }
     }
-
-    public static void main(String[] args) {
-        System.out.println(MailSenderConfig.email);
-        System.out.println(MailSenderConfig.password);
-        System.out.println(MailSenderConfig.auth);
-        System.out.println(MailSenderConfig.startTls);
-        System.out.println(MailSenderConfig.host);
-        System.out.println(MailSenderConfig.port);
-    }
 }

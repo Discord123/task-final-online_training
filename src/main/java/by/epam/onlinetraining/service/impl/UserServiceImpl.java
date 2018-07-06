@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean singUp(String userEmail, String userPassword, String firstName, String lastName) throws ServiceException {
+    public boolean singUp(String userEmail, String userPassword, String firstName, String lastName, String role) throws ServiceException {
         boolean isRegistered = false;
         String hashedPassword = PasswordHasher.shaHashing(userPassword);
 
@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService {
         TransactionHelper helper = new TransactionHelper();
         try {
             helper.beginTransaction(userDao);
-            isRegistered = userDao.addUser(userEmail, hashedPassword, firstName, lastName);
+            isRegistered = userDao.addUser(userEmail, hashedPassword, firstName, lastName, role);
             helper.commit();
         } catch (DaoException e) {
             helper.rollback();

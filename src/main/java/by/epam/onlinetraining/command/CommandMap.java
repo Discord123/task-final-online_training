@@ -18,11 +18,12 @@ public class CommandMap {
     static{
         commandMap.put(LOGIN, new LoginCommand(new UserServiceImpl()));
         commandMap.put(LOGOUT, new LogoutCommand(new UserServiceImpl()));
-        commandMap.put(SIGNUP, new SignUpCommand(new UserServiceImpl()));
+        commandMap.put(SIGNUP, new StudentSignUpCommand(new UserServiceImpl()));
         commandMap.put(LOCALE, new LocaleCommand());
         commandMap.put(GETPAGE, new GetPageCommand());
         commandMap.put(RECOVERPASSWORD, new RecoverPasswordCommand(new UserServiceImpl()));
 
+        commandMap.put(ADDTEACHER, new TeacherSignUpCommand(new UserServiceImpl()));
         commandMap.put(SHOWALLTEACHERS, new ShowAllTeachersCommand(new UserServiceImpl()));
         commandMap.put(DELETEUSER, new DeleteUserCommand(new UserServiceImpl()));
         commandMap.put(SHOWALLCOURSES, new ShowAllCoursesCommand(new CoursesServiceImpl()));
