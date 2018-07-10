@@ -1,12 +1,31 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<html>
-  <head>
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <title>Online Training Index</title>
+<c:if test="${empty sessionScope.locale}">
+    <c:set var="locale" value="en_US" scope="session"  />
+</c:if>
 
-  </head>
-  <body>
-<jsp:forward page="./jsp/login.jsp"/>
-  </body>
+<fmt:setLocale value="${locale}" scope="session"/>
+<fmt:setBundle basename="localedata" var="rb" />
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="icon" href="../../../fonts/favicon.ico">
+</head>
+
+<body>
+<!--Navbar-->
+<jsp:include page="/jsp/parts/header.jsp"/>
+
+<!-- Intro cover picture and header -->
+<div class="intro">
+    <div class="layout-positioner">
+        <h1 class="promo"><fmt:message key="index.text" bundle="${rb}"/></h1>
+    </div>
+</div>
+</body>
 </html>
