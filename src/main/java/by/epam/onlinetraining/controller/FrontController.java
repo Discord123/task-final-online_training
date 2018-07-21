@@ -1,11 +1,11 @@
 package by.epam.onlinetraining.controller;
 
-import by.epam.onlinetraining.command.AbstractCommand;
+import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.factory.CommandFactory;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.RequestResult;
-import by.epam.onlinetraining.exceptions.CommandException;
+import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.pool.ConnectionPool;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -39,7 +39,7 @@ public class FrontController extends HttpServlet {
         requestContent.extractValues(request);
 
         CommandFactory commandFactory = new CommandFactory();
-        AbstractCommand command = commandFactory.initCommand(requestContent);
+        ActionCommand command = commandFactory.initCommand(requestContent);
         if(command != null){
             try{
                 RequestResult requestResult = command.execute(requestContent);

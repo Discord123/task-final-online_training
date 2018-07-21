@@ -1,19 +1,16 @@
 package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.bundles.ConfigurationManager;
-import by.epam.onlinetraining.command.AbstractCommand;
-import by.epam.onlinetraining.constants.EntityAttributes;
+import by.epam.onlinetraining.command.ActionCommand;
+import by.epam.onlinetraining.command.constant.EntityAttributes;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.entity.Subject;
 import by.epam.onlinetraining.entity.User;
-import by.epam.onlinetraining.exceptions.CommandException;
-import by.epam.onlinetraining.exceptions.ServiceException;
-import by.epam.onlinetraining.service.CoursesService;
-import by.epam.onlinetraining.service.Service;
-import by.epam.onlinetraining.service.SubjectService;
-import by.epam.onlinetraining.service.UserService;
+import by.epam.onlinetraining.exception.CommandException;
+import by.epam.onlinetraining.exception.ServiceException;
+import by.epam.onlinetraining.service.*;
 import by.epam.onlinetraining.service.impl.SubjectServiceImpl;
 import by.epam.onlinetraining.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
@@ -23,16 +20,16 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Map;
 
-public class AddCourseCommand extends AbstractCommand {
-    private static final Logger LOGGER = LogManager.getLogger(AbstractCommand.class);
+public class AddCourseCommand extends ActionCommand {
+    private static final Logger Logger = LogManager.getLogger(ActionCommand.class);
     private static final String ADD_COURSE_PAGE_PATH = ConfigurationManager.getProperty("path.page.addcourse");
     private static final String ADD_SUCCESS_MESSAGE_KEY = "message.admin.course-add-success";
     private static final String ADD_FAIL_MESSAGE_KEY = "message.admin.course-add-fail";
     private static final String ADD_COURSE_PARAM = "addCourse";
     private static final String GET_PAGE_URL_PARAM = "/controller?command=addcourse";
 
-    public AddCourseCommand(Service service) {
-        super(service);
+    public AddCourseCommand() {
+        super(ServiceManager.getCoursesService());
     }
 
     @Override
@@ -69,7 +66,7 @@ public class AddCourseCommand extends AbstractCommand {
             CoursesService coursesService = (CoursesService) getService();
             isAdded = coursesService.addCourse(courseTitle, subjectId, status, isAvailable, teacherId);
         } catch (ServiceException e) {
-            LOGGER.log(Level.FATAL,"Fail to add new course.", e);
+            Logger.log(Level.FATAL,"Fail to add new course.", e);
             throw new CommandException("Fail to add new course.", e);
         }
         return isAdded;
@@ -89,7 +86,7 @@ public class AddCourseCommand extends AbstractCommand {
             requestResult = new RequestResult(ADD_COURSE_PAGE_PATH, NavigationType.FORWARD);
 
         } catch (ServiceException e) {
-            LOGGER.log(Level.FATAL,"Fail to put required lists in the session", e);
+            Logger.log(Level.FATAL,"Fail to put required lists in the session", e);
             throw new CommandException("Fail to put required lists in the session", e);
         }
         return requestResult;

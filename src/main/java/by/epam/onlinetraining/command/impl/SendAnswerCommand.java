@@ -1,20 +1,20 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.AbstractCommand;
-import by.epam.onlinetraining.constants.SessionAttributes;
+import by.epam.onlinetraining.command.ActionCommand;
+import by.epam.onlinetraining.command.constant.SessionAttributes;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.entity.User;
-import by.epam.onlinetraining.exceptions.CommandException;
-import by.epam.onlinetraining.exceptions.ServiceException;
-import by.epam.onlinetraining.service.Service;
+import by.epam.onlinetraining.exception.CommandException;
+import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ReviewService;
+import by.epam.onlinetraining.service.ServiceManager;
 
 import java.util.Map;
 
 
-public class SendAnswerCommand extends AbstractCommand {
+public class SendAnswerCommand extends ActionCommand {
     private static final String RECEIVED_TASKS_PAGE = "/controller?command=showreceivedtasks";
     private static final String SEND_SUCCESS_MESSAGE = "message.student.answer-send-success";
     private static final String SEND_FAIL_MESSAGE = "message.student.answer-send-fail";
@@ -22,8 +22,8 @@ public class SendAnswerCommand extends AbstractCommand {
     private static final String ANSWER_PARAM = "answer";
 
 
-    public SendAnswerCommand(Service service) {
-        super(service);
+    public SendAnswerCommand() {
+        super(ServiceManager.getReviewService());
     }
 
     @Override

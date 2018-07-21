@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.SQLException;
 
 public class TransactionHelper {
-    private final static Logger LOGGER = LogManager.getLogger(TransactionHelper.class);
+    private final static Logger Logger = LogManager.getLogger(TransactionHelper.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
     private ProxyConnection connection = connectionPool.getConnection();
 
@@ -17,7 +17,7 @@ public class TransactionHelper {
         try {
             connection.setAutoCommit(false);
         } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "Problem when trying to set auto commit false.");
+            Logger.log(Level.ERROR, "Problem when trying to set auto commit false.");
         }
 
         dao.setConnection(connection);
@@ -30,12 +30,12 @@ public class TransactionHelper {
         try {
             connection.setAutoCommit(true);
         } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "Problem when trying to set auto commit true.");
+            Logger.log(Level.ERROR, "Problem when trying to set auto commit true.");
         } finally {
             try {
                 connection.close();
             } catch (SQLException e) {
-                LOGGER.log(Level.ERROR, "Problem when trying to close.");
+                Logger.log(Level.ERROR, "Problem when trying to close.");
             }
         }
     }
@@ -44,7 +44,7 @@ public class TransactionHelper {
         try {
             connection.commit();
         } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "Transaction commit false.", e);
+            Logger.log(Level.ERROR, "Transaction commit false.", e);
         }
     }
 
@@ -52,7 +52,7 @@ public class TransactionHelper {
         try {
             connection.rollback();
         } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "Problem when trying to rollback the transaction.", e);
+            Logger.log(Level.ERROR, "Problem when trying to rollback the transaction.", e);
         }
     }
 }

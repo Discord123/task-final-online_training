@@ -1,19 +1,19 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.AbstractCommand;
+import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.RequestResult;
-import by.epam.onlinetraining.exceptions.CommandException;
-import by.epam.onlinetraining.exceptions.ServiceException;
-import by.epam.onlinetraining.service.Service;
+import by.epam.onlinetraining.exception.CommandException;
+import by.epam.onlinetraining.exception.ServiceException;
+import by.epam.onlinetraining.service.ServiceManager;
 import by.epam.onlinetraining.service.TasksService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class AddTaskCommand extends AbstractCommand {
-    private static final Logger LOGGER = LogManager.getLogger(AbstractCommand.class);
+public class AddTaskCommand extends ActionCommand {
+    private static final Logger LOGGER = LogManager.getLogger(ActionCommand.class);
     private static final String COURSE_ID = "course_id";
     private static final String TASK_NAME = "task_name";
     private static final String TASK_DESCRIPTION = "task_description";
@@ -22,8 +22,8 @@ public class AddTaskCommand extends AbstractCommand {
     private static final String ADD_TASK_PAGE = "/controller?command=showteacherrelatedcourses&expectedpage=addtask";
 
 
-    public AddTaskCommand(Service service) {
-        super(service);
+    public AddTaskCommand() {
+        super(ServiceManager.getTasksService());
     }
 
     @Override

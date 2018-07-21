@@ -5,7 +5,7 @@ import by.epam.onlinetraining.dao.AbstractDao;
 import by.epam.onlinetraining.dao.UserDao;
 import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.entity.enums.Role;
-import by.epam.onlinetraining.exceptions.DaoException;
+import by.epam.onlinetraining.exception.DaoException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

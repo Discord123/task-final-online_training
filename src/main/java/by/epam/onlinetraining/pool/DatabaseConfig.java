@@ -8,7 +8,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class DatabaseConfig {
-    private final static Logger LOGGER = LogManager.getLogger(DatabaseConfig.class);
+    private final static Logger Logger = LogManager.getLogger(DatabaseConfig.class);
 
     static final String RESOURCE_BUNDLE_PATH = "db_config";
     static final String USER = "db_user";
@@ -31,7 +31,7 @@ public class DatabaseConfig {
             String poolSizeValue = resourceBundle.getString(POOL_SIZE);
             poolSize = Integer.parseInt(poolSizeValue);
         } catch (MissingResourceException e) {
-            LOGGER.log(Level.FATAL, "Exception during reading resourceBundle file", e);
+            Logger.log(Level.FATAL, "Exception during reading resourceBundle file", e);
             throw new RuntimeException("Exception during reading resourceBundle file", e);
         }
     }

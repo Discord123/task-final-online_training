@@ -3,8 +3,8 @@ package by.epam.onlinetraining.service.impl;
 import by.epam.onlinetraining.dao.TransactionHelper;
 import by.epam.onlinetraining.dao.impl.ReviewDaoImpl;
 import by.epam.onlinetraining.dto.ReviewDto;
-import by.epam.onlinetraining.exceptions.DaoException;
-import by.epam.onlinetraining.exceptions.ServiceException;
+import by.epam.onlinetraining.exception.DaoException;
+import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ReviewService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 public class ReviewServiceImpl implements ReviewService {
-    private static final Logger LOGGER = LogManager.getLogger(ReviewServiceImpl.class);
+    private static final Logger Logger = LogManager.getLogger(ReviewServiceImpl.class);
 
     @Override
     public boolean sendReview(int taskId, int userId, int mark, String review) throws ServiceException {
@@ -27,7 +27,7 @@ public class ReviewServiceImpl implements ReviewService {
             helper.commit();
         } catch (DaoException e){
             helper.rollback();
-            LOGGER.log(Level.FATAL, "Fail to process sendReview logic.", e);
+            Logger.log(Level.FATAL, "Fail to process sendReview logic.", e);
             throw new ServiceException("Fail to process sendReview logic.", e);
         } finally {
             helper.endTransaction();
@@ -48,7 +48,7 @@ public class ReviewServiceImpl implements ReviewService {
             helper.commit();
         } catch (DaoException e) {
             helper.rollback();
-            LOGGER.log(Level.FATAL, "Fail to send answer in service.", e);
+            Logger.log(Level.FATAL, "Fail to send answer in service.", e);
             throw new ServiceException("Fail to send answer in service.", e);
         } finally {
             helper.endTransaction();
@@ -68,7 +68,7 @@ public class ReviewServiceImpl implements ReviewService {
             helper.commit();
         } catch (DaoException e){
             helper.rollback();
-            LOGGER.log(Level.FATAL, "Fail to receive all students by task id.", e);
+            Logger.log(Level.FATAL, "Fail to receive all students by task id.", e);
             throw new ServiceException("Fail to receive all students by task id.",e);
         } finally {
             helper.endTransaction();

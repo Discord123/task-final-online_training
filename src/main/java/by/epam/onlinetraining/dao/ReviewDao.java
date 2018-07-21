@@ -1,10 +1,9 @@
 package by.epam.onlinetraining.dao;
 
 import by.epam.onlinetraining.dto.ReviewDto;
-import by.epam.onlinetraining.exceptions.DaoException;
+import by.epam.onlinetraining.exception.DaoException;
 
 import java.util.List;
-import java.util.Set;
 
 public interface ReviewDao {
     boolean sendAnswer(int taskId, int userId, String answer) throws DaoException;

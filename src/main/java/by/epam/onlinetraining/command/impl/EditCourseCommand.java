@@ -1,33 +1,30 @@
 package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.bundles.ConfigurationManager;
-import by.epam.onlinetraining.command.AbstractCommand;
-import by.epam.onlinetraining.constants.EntityAttributes;
+import by.epam.onlinetraining.command.ActionCommand;
+import by.epam.onlinetraining.command.constant.EntityAttributes;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.entity.Subject;
 import by.epam.onlinetraining.entity.User;
-import by.epam.onlinetraining.exceptions.CommandException;
-import by.epam.onlinetraining.exceptions.ServiceException;
-import by.epam.onlinetraining.service.CoursesService;
-import by.epam.onlinetraining.service.Service;
-import by.epam.onlinetraining.service.SubjectService;
-import by.epam.onlinetraining.service.UserService;
+import by.epam.onlinetraining.exception.CommandException;
+import by.epam.onlinetraining.exception.ServiceException;
+import by.epam.onlinetraining.service.*;
 import by.epam.onlinetraining.service.impl.SubjectServiceImpl;
 import by.epam.onlinetraining.service.impl.UserServiceImpl;
 
 import java.util.List;
 import java.util.Map;
 
-public class EditCourseCommand extends AbstractCommand {
+public class EditCourseCommand extends ActionCommand {
     private static final String EDIT_COURSE_PAGE_PATH = ConfigurationManager.getProperty("path.page.editcourse");
     private static final String ALL_COURSES_PATH = "/controller?command=showallcourses";
     private static final String UPDATE_SUCCESS_MESSAGE = "message.admin.course-update-success";
     private static final String UPDATE_FAIL_MESSAGE = "message.admin.course-update-fail";
 
-    public EditCourseCommand(Service service) {
-        super(service);
+    public EditCourseCommand() {
+        super(ServiceManager.getCoursesService());
     }
 
     @Override

@@ -1,17 +1,17 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.AbstractCommand;
-import by.epam.onlinetraining.constants.SessionAttributes;
+import by.epam.onlinetraining.command.ActionCommand;
+import by.epam.onlinetraining.command.constant.SessionAttributes;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.entity.enums.Role;
-import by.epam.onlinetraining.exceptions.CommandException;
+import by.epam.onlinetraining.exception.CommandException;
 
 import java.util.Map;
 
-public class LocaleCommand extends AbstractCommand{
+public class LocaleCommand extends ActionCommand {
     private static final String EN_LOCALE_MARKER = "EN";
     private static final String EN_LOCALE_ATTRIBUTE = "en_US";
     private static final String RU_LOCALE_ATTRIBUTE = "ru_RU";

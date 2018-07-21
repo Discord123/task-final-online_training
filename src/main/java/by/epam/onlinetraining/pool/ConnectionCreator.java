@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.pool;
 
-import by.epam.onlinetraining.exceptions.ConnectionPoolException;
+import by.epam.onlinetraining.exception.ConnectionPoolException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionCreator {
-    private static final Logger LOGGER = LogManager.getLogger(ConnectionCreator.class);
+    private static final Logger Logger = LogManager.getLogger(ConnectionCreator.class);
     static ProxyConnection createConnection() throws ConnectionPoolException {
         try {
             String url = DatabaseConfig.url;
@@ -19,7 +19,7 @@ public class ConnectionCreator {
             Connection connection = DriverManager.getConnection(url, user, password);
             return new ProxyConnection(connection);
         } catch (SQLException e) {
-            LOGGER.log(Level.FATAL, "Fail to create connection.", e);
+            Logger.log(Level.FATAL, "Fail to create connection.", e);
             throw new ConnectionPoolException("Fail to create connection." , e);
         }
     }

@@ -4,8 +4,8 @@ import by.epam.onlinetraining.dao.TransactionHelper;
 import by.epam.onlinetraining.dao.impl.TasksDaoImpl;
 import by.epam.onlinetraining.dto.TaskDto;
 import by.epam.onlinetraining.entity.Task;
-import by.epam.onlinetraining.exceptions.DaoException;
-import by.epam.onlinetraining.exceptions.ServiceException;
+import by.epam.onlinetraining.exception.DaoException;
+import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.TasksService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 public class TasksServiceImpl implements TasksService {
-    private static final Logger LOGGER = LogManager.getLogger(TasksServiceImpl.class);
+    private static final Logger Logger = LogManager.getLogger(TasksServiceImpl.class);
 
     @Override
     public List<TaskDto> showReceivedTasks(int userId) throws ServiceException {
@@ -28,7 +28,7 @@ public class TasksServiceImpl implements TasksService {
             helper.commit();
         } catch (DaoException e) {
             helper.rollback();
-            LOGGER.log(Level.FATAL, "Exception during showing available courses service process", e);
+            Logger.log(Level.FATAL, "Exception during showing available courses service process", e);
             throw new ServiceException("Exception during showing available courses service process", e);
         } finally {
             helper.endTransaction();
@@ -48,7 +48,7 @@ public class TasksServiceImpl implements TasksService {
             helper.commit();
         } catch (DaoException e) {
             helper.rollback();
-            LOGGER.log(Level.FATAL, "Fail to receive tasks by course ID.", e);
+            Logger.log(Level.FATAL, "Fail to receive tasks by course ID.", e);
             throw new ServiceException("Fail to receive tasks by course ID.", e);
         } finally {
             helper.endTransaction();
@@ -68,7 +68,7 @@ public class TasksServiceImpl implements TasksService {
             helper.commit();
         } catch (DaoException e){
             helper.rollback();
-            LOGGER.log(Level.FATAL, "Fail to add new task in service.", e);
+            Logger.log(Level.FATAL, "Fail to add new task in service.", e);
             throw new ServiceException("Fail to add new task in service.", e);
         } finally {
             helper.endTransaction();

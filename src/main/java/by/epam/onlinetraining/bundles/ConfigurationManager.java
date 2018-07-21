@@ -8,7 +8,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class ConfigurationManager {
-    private static final Logger LOGGER = LogManager.getLogger(ConfigurationManager.class);
+    private static final Logger Logger = LogManager.getLogger(ConfigurationManager.class);
     private static final String CONFIG_FILE_PATH = "config";
 
     private static ResourceBundle resourceBundle;
@@ -21,7 +21,7 @@ public class ConfigurationManager {
             resourceBundle = ResourceBundle.getBundle(CONFIG_FILE_PATH);
             resource = resourceBundle.getString(key);
         } catch (MissingResourceException | ExceptionInInitializerError e) {
-            LOGGER.log(Level.FATAL, "Exception during reading resourceBundle", e);
+            Logger.log(Level.FATAL, "Exception during reading resourceBundle", e);
             throw new RuntimeException("Exception during reading resourceBundle", e);
         }
         return resource;

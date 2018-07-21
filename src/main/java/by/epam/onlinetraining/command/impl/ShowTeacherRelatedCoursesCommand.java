@@ -1,22 +1,22 @@
 package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.bundles.ConfigurationManager;
-import by.epam.onlinetraining.command.AbstractCommand;
-import by.epam.onlinetraining.constants.SessionAttributes;
+import by.epam.onlinetraining.command.ActionCommand;
+import by.epam.onlinetraining.command.constant.SessionAttributes;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.dto.CourseDto;
 import by.epam.onlinetraining.entity.User;
-import by.epam.onlinetraining.exceptions.CommandException;
-import by.epam.onlinetraining.exceptions.ServiceException;
+import by.epam.onlinetraining.exception.CommandException;
+import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.CoursesService;
-import by.epam.onlinetraining.service.Service;
+import by.epam.onlinetraining.service.ServiceManager;
 
 import java.util.List;
 import java.util.Map;
 
-public class ShowTeacherRelatedCoursesCommand extends AbstractCommand {
+public class ShowTeacherRelatedCoursesCommand extends ActionCommand {
 
     private static final String RELATED_COURSES_ATTRIBUTE = "relatedCourses";
 
@@ -29,8 +29,8 @@ public class ShowTeacherRelatedCoursesCommand extends AbstractCommand {
     private static final String RELATED_TASKS_PAGE = ConfigurationManager.getProperty("path.page.relatedtasks");
     private static final String ADD_TASK_PAGE = ConfigurationManager.getProperty("path.page.addtask");
 
-    public ShowTeacherRelatedCoursesCommand(Service service) {
-        super(service);
+    public ShowTeacherRelatedCoursesCommand() {
+        super(ServiceManager.getCoursesService());
     }
 
     @Override

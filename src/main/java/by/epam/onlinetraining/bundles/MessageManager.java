@@ -12,7 +12,7 @@ public enum MessageManager {
     EN(ResourceBundle.getBundle("localedata", new Locale("en", "US"))),
     RU( ResourceBundle.getBundle("localedata", new Locale("ru", "RU")));
 
-    private static final Logger LOGGER = LogManager.getLogger(MessageManager.class);
+    private static final Logger Logger = LogManager.getLogger(MessageManager.class);
     private ResourceBundle resourceBundle;
 
     MessageManager(ResourceBundle bundle) {
@@ -34,7 +34,7 @@ public enum MessageManager {
         try {
             localizedContent = resourceBundle.getString(key);
         } catch (MissingResourceException e) {
-            LOGGER.log(Level.FATAL, "Exception during reading resourceBundle", e);
+            Logger.log(Level.FATAL, "Exception during reading resourceBundle", e);
             throw new RuntimeException("Exception during reading resourceBundle", e);
         }
         return localizedContent;

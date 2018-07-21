@@ -2,7 +2,7 @@ package by.epam.onlinetraining.dao;
 
 import by.epam.onlinetraining.dto.TaskDto;
 import by.epam.onlinetraining.entity.Task;
-import by.epam.onlinetraining.exceptions.DaoException;
+import by.epam.onlinetraining.exception.DaoException;
 
 import java.util.List;
 

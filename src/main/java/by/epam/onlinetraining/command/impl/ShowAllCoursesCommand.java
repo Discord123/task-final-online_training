@@ -1,24 +1,24 @@
 package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.bundles.ConfigurationManager;
-import by.epam.onlinetraining.command.AbstractCommand;
+import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.dto.CourseDto;
-import by.epam.onlinetraining.exceptions.CommandException;
-import by.epam.onlinetraining.exceptions.ServiceException;
+import by.epam.onlinetraining.exception.CommandException;
+import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.CoursesService;
-import by.epam.onlinetraining.service.Service;
+import by.epam.onlinetraining.service.ServiceManager;
 
 import java.util.List;
 
-public class ShowAllCoursesCommand extends AbstractCommand {
+public class ShowAllCoursesCommand extends ActionCommand {
     private static final String ALL_COURSES_PATH = ConfigurationManager.getProperty("path.page.allcourses");
     private static final String ALL_COURSES_PARAM = "allCourses";
 
-    public ShowAllCoursesCommand(Service service) {
-        super(service);
+    public ShowAllCoursesCommand() {
+        super(ServiceManager.getCoursesService());
     }
 
     @Override

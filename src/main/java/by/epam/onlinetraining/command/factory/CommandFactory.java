@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.command.factory;
 
-import by.epam.onlinetraining.command.AbstractCommand;
+import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.CommandMap;
 import by.epam.onlinetraining.content.RequestContent;
 
@@ -8,13 +8,13 @@ import by.epam.onlinetraining.content.RequestContent;
 public class CommandFactory {
     private static final String COMMAND_PARAMETER = "command";
 
-    public AbstractCommand initCommand(RequestContent content) {
-        AbstractCommand command = null;
+    public ActionCommand initCommand(RequestContent content) {
+        ActionCommand command = null;
         String commandName = null;
 
-        String commandIncomingName = content.getSingleRequestParameter(COMMAND_PARAMETER);
-        if (commandIncomingName != null && !commandIncomingName.isEmpty()) {
-            commandName = commandIncomingName.toUpperCase();
+        String incomingCommandName = content.getSingleRequestParameter(COMMAND_PARAMETER);
+        if (incomingCommandName != null && !incomingCommandName.isEmpty()) {
+            commandName = incomingCommandName.toUpperCase();
             command = CommandMap.defineCommandType(commandName);
         }
 

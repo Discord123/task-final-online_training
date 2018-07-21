@@ -1,21 +1,22 @@
 package by.epam.onlinetraining.command.impl;
 
 
-import by.epam.onlinetraining.command.AbstractCommand;
-import by.epam.onlinetraining.constants.SessionAttributes;
-import by.epam.onlinetraining.constants.SignUpAttributes;
+import by.epam.onlinetraining.command.ActionCommand;
+import by.epam.onlinetraining.command.constant.SessionAttributes;
+import by.epam.onlinetraining.command.constant.SignUpAttributes;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.entity.enums.Role;
-import by.epam.onlinetraining.exceptions.CommandException;
-import by.epam.onlinetraining.exceptions.ServiceException;
+import by.epam.onlinetraining.exception.CommandException;
+import by.epam.onlinetraining.exception.ServiceException;
+import by.epam.onlinetraining.service.ServiceManager;
 import by.epam.onlinetraining.service.UserService;
 
 import java.util.Map;
 
-public class LoginCommand extends AbstractCommand {
+public class LoginCommand extends ActionCommand {
     private static final String AUTHORIZATION_ATTRIBUTE = "authorization";
     private static final String FAIL_ATTRIBUTE = "actionFail";
     private static final String MESSAGE_LOGIN_ERROR = "message.login.error";
@@ -24,8 +25,8 @@ public class LoginCommand extends AbstractCommand {
     private static final String TEACHER_PAGE = "/controller?command=getPage&expectedPage=teacherpage";
     private static final String STUDENT_PAGE = "/controller?command=getPage&expectedPage=studentpage";
 
-    public LoginCommand(UserService receiver) {
-        super(receiver);
+    public LoginCommand() {
+        super(ServiceManager.getUserService());
     }
 
     @Override

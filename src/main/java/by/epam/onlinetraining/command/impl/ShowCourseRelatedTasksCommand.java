@@ -1,26 +1,26 @@
 package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.bundles.ConfigurationManager;
-import by.epam.onlinetraining.command.AbstractCommand;
+import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.entity.Task;
-import by.epam.onlinetraining.exceptions.CommandException;
-import by.epam.onlinetraining.exceptions.ServiceException;
-import by.epam.onlinetraining.service.Service;
+import by.epam.onlinetraining.exception.CommandException;
+import by.epam.onlinetraining.exception.ServiceException;
+import by.epam.onlinetraining.service.ServiceManager;
 import by.epam.onlinetraining.service.TasksService;
 
 import java.util.List;
 
-public class ShowCourseRelatedTasksCommand extends AbstractCommand {
+public class ShowCourseRelatedTasksCommand extends ActionCommand {
 
     private static final String TASKS_PAGE_PATH = ConfigurationManager.getProperty("path.page.relatedtasks");
     private static final String COURSE_ID_PARAM = "course_id";
     private static final String RELATED_TASKS_ATTR = "relatedTasks";
 
-    public ShowCourseRelatedTasksCommand(Service service) {
-        super(service);
+    public ShowCourseRelatedTasksCommand() {
+        super(ServiceManager.getTasksService());
     }
 
     @Override

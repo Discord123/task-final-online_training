@@ -12,7 +12,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 public class WelcomeTag extends TagSupport {
-    private static final Logger LOGGER = LogManager.getLogger(WelcomeTag.class);
+    private static final Logger Logger = LogManager.getLogger(WelcomeTag.class);
     private static final String MESSAGE_BEGIN_KEY = "label.mainpage.begin";
     private static final String MESSAGE_END_ADMIN_KEY = "label.mainpage.end-admin";
     private static final String MESSAGE_END_TEACHER_KEY = "label.mainpage.end-teacher";
@@ -55,7 +55,7 @@ public class WelcomeTag extends TagSupport {
             JspWriter writer = pageContext.getOut();
             writer.write(OUTPUT_FORMAT_BEGIN + outputMessage + OUTPUT_FORMAT_END);
         } catch (IOException e){
-            LOGGER.log(Level.FATAL, "Fail to send an email:\n" + e.getMessage(), e);
+            Logger.log(Level.FATAL, "Fail to send an email:\n" + e.getMessage(), e);
             throw new JspException(e.getMessage());
         }
         return SKIP_BODY;

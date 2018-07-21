@@ -2,7 +2,7 @@ package by.epam.onlinetraining.service;
 
 import by.epam.onlinetraining.dto.TaskDto;
 import by.epam.onlinetraining.entity.Task;
-import by.epam.onlinetraining.exceptions.ServiceException;
+import by.epam.onlinetraining.exception.ServiceException;
 
 import java.util.List;
 

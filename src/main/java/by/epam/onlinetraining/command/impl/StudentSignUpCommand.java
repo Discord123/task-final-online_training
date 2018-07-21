@@ -1,18 +1,18 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.AbstractCommand;
-import by.epam.onlinetraining.constants.SignUpAttributes;
+import by.epam.onlinetraining.command.ActionCommand;
+import by.epam.onlinetraining.command.constant.SignUpAttributes;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.RequestResult;
-import by.epam.onlinetraining.exceptions.CommandException;
-import by.epam.onlinetraining.exceptions.ServiceException;
-import by.epam.onlinetraining.service.Service;
+import by.epam.onlinetraining.exception.CommandException;
+import by.epam.onlinetraining.exception.ServiceException;
+import by.epam.onlinetraining.service.ServiceManager;
 import by.epam.onlinetraining.service.UserService;
 import by.epam.onlinetraining.service.Validator;
 
 
-public class StudentSignUpCommand extends AbstractCommand {
+public class StudentSignUpCommand extends ActionCommand {
     private static final String LOGIN_PAGE_PATH = "/controller?command=getPage&expectedPage=login";
     private static final String REGISTRATION_PAGE_PATH = "/controller?command=getPage&expectedPage=registration";
 
@@ -33,8 +33,8 @@ public class StudentSignUpCommand extends AbstractCommand {
     private String lastName;
     private String signUpFailMessage = MESSAGE_SIGN_UP_FAIL;
 
-    public StudentSignUpCommand(Service service) {
-        super(service);
+    public StudentSignUpCommand() {
+        super(ServiceManager.getUserService());
     }
 
     @Override

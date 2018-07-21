@@ -1,7 +1,7 @@
 package by.epam.onlinetraining.service;
 
 import by.epam.onlinetraining.dto.CourseDto;
-import by.epam.onlinetraining.exceptions.ServiceException;
+import by.epam.onlinetraining.exception.ServiceException;
 
 import java.util.List;
 

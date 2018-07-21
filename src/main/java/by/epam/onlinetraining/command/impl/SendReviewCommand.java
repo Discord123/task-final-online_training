@@ -1,15 +1,15 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.AbstractCommand;
+import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.RequestResult;
-import by.epam.onlinetraining.exceptions.CommandException;
-import by.epam.onlinetraining.exceptions.ServiceException;
+import by.epam.onlinetraining.exception.CommandException;
+import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ReviewService;
-import by.epam.onlinetraining.service.Service;
+import by.epam.onlinetraining.service.ServiceManager;
 
-public class SendReviewCommand extends AbstractCommand {
+public class SendReviewCommand extends ActionCommand {
     private static final String SHOW_REVIEWS_BY_TASK_ID_PAGE = "/controller?command=showreviewsbytaskid&taskid=";
     private static final String SEND_SUCCESS_MESSAGE = "message.teacher.review-sent-success";
     private static final String SEND_FAIL_MESSAGE = "message.teacher.review-sent-fail";
@@ -20,8 +20,8 @@ public class SendReviewCommand extends AbstractCommand {
     private static final String TASK_REVIEW_PARAM = "task_review";
 
 
-    public SendReviewCommand(Service service) {
-        super(service);
+    public SendReviewCommand() {
+        super(ServiceManager.getReviewService());
     }
 
     @Override

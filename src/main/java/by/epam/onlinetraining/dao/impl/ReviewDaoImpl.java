@@ -3,7 +3,7 @@ package by.epam.onlinetraining.dao.impl;
 import by.epam.onlinetraining.dao.AbstractDao;
 import by.epam.onlinetraining.dao.ReviewDao;
 import by.epam.onlinetraining.dto.ReviewDto;
-import by.epam.onlinetraining.exceptions.DaoException;
+import by.epam.onlinetraining.exception.DaoException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,9 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ReviewDaoImpl extends AbstractDao implements ReviewDao {
     private static final Logger LOGGER = LogManager.getLogger(ReviewDaoImpl.class);

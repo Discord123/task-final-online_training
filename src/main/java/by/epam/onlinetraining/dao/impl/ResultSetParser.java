@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.dao.impl;
 
-import by.epam.onlinetraining.constants.EntityAttributes;
+import by.epam.onlinetraining.command.constant.EntityAttributes;
 import by.epam.onlinetraining.dto.CourseDto;
 import by.epam.onlinetraining.dto.ReviewDto;
 import by.epam.onlinetraining.dto.TaskDto;
@@ -9,7 +9,7 @@ import by.epam.onlinetraining.entity.enums.Language;
 import by.epam.onlinetraining.entity.enums.LanguageLevel;
 import by.epam.onlinetraining.entity.enums.Role;
 import by.epam.onlinetraining.entity.enums.Status;
-import by.epam.onlinetraining.exceptions.DaoException;
+import by.epam.onlinetraining.exception.DaoException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

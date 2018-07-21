@@ -1,12 +1,12 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.constants.SignUpAttributes;
+import by.epam.onlinetraining.command.constant.SignUpAttributes;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.RequestResult;
-import by.epam.onlinetraining.exceptions.CommandException;
-import by.epam.onlinetraining.exceptions.ServiceException;
-import by.epam.onlinetraining.service.Service;
+import by.epam.onlinetraining.exception.CommandException;
+import by.epam.onlinetraining.exception.ServiceException;
+import by.epam.onlinetraining.service.ServiceManager;
 import by.epam.onlinetraining.service.UserService;
 import by.epam.onlinetraining.service.Validator;
 
@@ -31,8 +31,8 @@ public class TeacherSignUpCommand extends AddCourseCommand{
     private String lastName;
     private String signUpFailMessage = MESSAGE_SIGN_UP_FAIL;
 
-    public TeacherSignUpCommand(Service service) {
-        super(service);
+    public TeacherSignUpCommand() {
+        super(ServiceManager.getUserService());
     }
 
     @Override
