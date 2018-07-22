@@ -3,7 +3,7 @@ package by.epam.onlinetraining.command.impl;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.RequestResult;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ReviewService;
@@ -29,7 +29,7 @@ public class SendReviewCommand extends ActionCommand {
     }
 
     @Override
-    public RequestResult execute(RequestContent content) throws CommandException {
+    public ActionResult execute(RequestContent content) throws CommandException {
         boolean isSent = false;
 
         String taskIdLine = content.getSingleRequestParameter(TASK_ID_PARAM);
@@ -51,6 +51,6 @@ public class SendReviewCommand extends ActionCommand {
 
         putMessageIntoSession(content, isSent, SEND_SUCCESS_MESSAGE, SEND_FAIL_MESSAGE);
 
-        return new RequestResult(showReviewsPage, NavigationType.REDIRECT);
+        return new ActionResult(showReviewsPage, NavigationType.REDIRECT);
     }
 }

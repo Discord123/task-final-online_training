@@ -5,10 +5,10 @@ import by.epam.onlinetraining.dto.CourseDto;
 import by.epam.onlinetraining.dto.ReviewDto;
 import by.epam.onlinetraining.dto.TaskDto;
 import by.epam.onlinetraining.entity.*;
-import by.epam.onlinetraining.entity.enums.Language;
-import by.epam.onlinetraining.entity.enums.LanguageLevel;
-import by.epam.onlinetraining.entity.enums.Role;
-import by.epam.onlinetraining.entity.enums.Status;
+import by.epam.onlinetraining.entity.Language;
+import by.epam.onlinetraining.entity.LanguageLevel;
+import by.epam.onlinetraining.entity.Role;
+import by.epam.onlinetraining.dto.Status;
 import by.epam.onlinetraining.exception.DaoException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -20,7 +20,7 @@ import java.sql.SQLException;
 
 
 public class ResultSetParser {
-    private static final Logger LOGGER = LogManager.getLogger(ResultSetParser.class);
+    private static final Logger Logger = LogManager.getLogger(ResultSetParser.class);
 
     static User createUser(ResultSet resultSet) throws DaoException{
         User user = null;
@@ -37,7 +37,7 @@ public class ResultSetParser {
             user = new User(id, email, password, firstName, lastName, role);
 
         }catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Can't create a user", e);
+            Logger.log(Level.FATAL, "Can't create a user", e);
             throw new DaoException("Can't create a user", e);
         }
         return user;
@@ -59,7 +59,7 @@ public class ResultSetParser {
 
 
         }catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Can't create a course", e);
+            Logger.log(Level.FATAL, "Can't create a course", e);
             throw new DaoException("Can't create a course", e);
         }
         return course;
@@ -78,7 +78,7 @@ public class ResultSetParser {
 
             subject = new Subject(id, language, level);
         } catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Can't create a subject", e);
+            Logger.log(Level.FATAL, "Can't create a subject", e);
             throw new DaoException("Can't create a subject", e);
         }
         return subject;
@@ -95,7 +95,7 @@ public class ResultSetParser {
             task = new Task(id, name, description, courseId);
 
         } catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Can't create a task", e);
+            Logger.log(Level.FATAL, "Can't create a task", e);
             throw new DaoException("Can't create a task", e);
         }
         return task;
@@ -113,7 +113,7 @@ public class ResultSetParser {
             review = new Review(userId, taskId, answer, reviewText, mark);
 
         }catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Can't create a review", e);
+            Logger.log(Level.FATAL, "Can't create a review", e);
             throw new DaoException("Can't create a review", e);
         }
         return review;
@@ -138,7 +138,7 @@ public class ResultSetParser {
                 teacher = createUser(resultSet);
             }
         } catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Fail to create course DTO while parsing.", e);
+            Logger.log(Level.FATAL, "Fail to create course DTO while parsing.", e);
             throw new DaoException("Fail to create course DTO while parsing.", e);
         }
 

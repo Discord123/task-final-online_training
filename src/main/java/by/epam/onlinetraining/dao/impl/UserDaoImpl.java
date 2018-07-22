@@ -4,7 +4,7 @@ package by.epam.onlinetraining.dao.impl;
 import by.epam.onlinetraining.dao.AbstractDao;
 import by.epam.onlinetraining.dao.UserDao;
 import by.epam.onlinetraining.entity.User;
-import by.epam.onlinetraining.entity.enums.Role;
+import by.epam.onlinetraining.entity.Role;
 import by.epam.onlinetraining.exception.DaoException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl extends AbstractDao implements UserDao {
-    private static final Logger LOGGER = LogManager.getLogger(UserDaoImpl.class);
+    private static final Logger Logger = LogManager.getLogger(UserDaoImpl.class);
     private static final String USER_ID = "user_id";
     private static final String USER_IS_DELETED = "user_isDeleted";
 
@@ -76,7 +76,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
             statement.executeUpdate();
             isDeleteSuccessfully=true;
         } catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Fail to delete user by id in DAO.", e);
+            Logger.log(Level.FATAL, "Fail to delete user by id in DAO.", e);
             throw new DaoException("Fail to delete user by id in DAO.", e);
         }
         return isDeleteSuccessfully;
@@ -95,7 +95,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
                 teachersList.add(teacher);
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.FATAL, "Exception while trying to find user by role.", e);
+            Logger.log(Level.FATAL, "Exception while trying to find user by role.", e);
             throw new DaoException("Exception while trying to find user by role.", e);
         }
         return teachersList;
@@ -111,7 +111,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
             int result = statement.executeUpdate();
             isJoined = (result != 0);
         } catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Exception while trying to join the course in DAO.", e);
+            Logger.log(Level.FATAL, "Exception while trying to join the course in DAO.", e);
             throw new DaoException("Exception while trying to join the course in DAO.", e);
         }
         return isJoined;
@@ -130,7 +130,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
             }
 
         } catch (SQLException e) {
-            LOGGER.log(Level.FATAL, "Exception while trying to find user by email and password in DAO.", e);
+            Logger.log(Level.FATAL, "Exception while trying to find user by email and password in DAO.", e);
             throw new DaoException("Exception while trying to find user by email and password in DAO.", e);
         }
         return user;
@@ -151,7 +151,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
                 isDeleted = (resultSet.getInt(USER_IS_DELETED) == 1);
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.FATAL, "Can't find user with email: " + email, e);
+            Logger.log(Level.FATAL, "Can't find user with email: " + email, e);
             throw new DaoException("Can't find user with email: " + email, e);
         }
         if (userId != 0 && !isDeleted) {
@@ -180,7 +180,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
             statement.setString(5, userRoleLowerCase);
             isUserAdded = statement.executeUpdate() != 0;
         }catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Fail to add new user in DAO.", e);
+            Logger.log(Level.FATAL, "Fail to add new user in DAO.", e);
             throw new DaoException("Fail to add new user in DAO.", e);
         }
         return isUserAdded;
@@ -198,7 +198,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
             }
 
         } catch (SQLException e) {
-            LOGGER.log(Level.FATAL, "Fail to update user password in DAO.", e);
+            Logger.log(Level.FATAL, "Fail to update user password in DAO.", e);
             throw new DaoException("Fail to update user password in DAO.", e);
         }
         return isUpdated;

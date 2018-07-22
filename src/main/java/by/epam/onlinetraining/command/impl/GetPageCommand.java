@@ -4,7 +4,7 @@ import by.epam.onlinetraining.bundles.ConfigurationManager;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.RequestResult;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.exception.CommandException;
 
 public class GetPageCommand extends ActionCommand {
@@ -12,10 +12,10 @@ public class GetPageCommand extends ActionCommand {
     private static final String EXPECTED_PAGE_PARAMETER = "expectedPage";
 
     @Override
-    public RequestResult execute(RequestContent requestContent) throws CommandException {
+    public ActionResult execute(RequestContent requestContent) throws CommandException {
         String expectedPage = requestContent.getSingleRequestParameter(EXPECTED_PAGE_PARAMETER);
         String pageKey = PROPERTY_PREFIX + expectedPage;
         String page = ConfigurationManager.getProperty(pageKey);
-        return new RequestResult(page, NavigationType.FORWARD);
+        return new ActionResult(page, NavigationType.FORWARD);
     }
 }

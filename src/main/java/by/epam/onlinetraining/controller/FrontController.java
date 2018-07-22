@@ -4,7 +4,7 @@ import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.factory.CommandFactory;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.RequestResult;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.pool.ConnectionPool;
 import org.apache.logging.log4j.Level;
@@ -22,6 +22,7 @@ import java.io.IOException;
 @WebServlet("/controller")
 public class FrontController extends HttpServlet {
     private static Logger LOGGER = LogManager.getLogger(FrontController.class);
+    private static CommandFactory commandFactory = new CommandFactory();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,15 +39,14 @@ public class FrontController extends HttpServlet {
         RequestContent requestContent = new RequestContent();
         requestContent.extractValues(request);
 
-        CommandFactory commandFactory = new CommandFactory();
-        ActionCommand command = commandFactory.initCommand(requestContent);
-        if(command != null){
+        ActionCommand actionCommand = commandFactory.initCommand(requestContent);
+        if(actionCommand != null){
             try{
-                RequestResult requestResult = command.execute(requestContent);
+                ActionResult actionResult = actionCommand.execute(requestContent);
 
                 requestContent.insertAttributes(request);
-                String page = requestResult.getPage();
-                NavigationType navigationType = requestResult.getNavigationType();
+                String page = actionResult.getPage();
+                NavigationType navigationType = actionResult.getNavigationType();
 
                 if (navigationType == NavigationType.FORWARD) {
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher(page);

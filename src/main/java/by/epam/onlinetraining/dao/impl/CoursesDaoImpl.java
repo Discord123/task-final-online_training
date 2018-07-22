@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
-    private static final Logger LOGGER = LogManager.getLogger(CoursesDaoImpl.class);
+    private static final Logger Logger = LogManager.getLogger(CoursesDaoImpl.class);
 
     private static final String FIND_RELATED_COURSES =
             "SELECT * FROM courses " +
@@ -86,7 +86,7 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
                 courseDtoList.add(courseDto);
             }
         } catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Fail to find all teacher related courses in DAO.", e);
+            Logger.log(Level.FATAL, "Fail to find all teacher related courses in DAO.", e);
             throw new DaoException("Fail to find all teacher related courses in DAO.", e);
         }
         return courseDtoList;
@@ -104,7 +104,7 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
                 courseDtoList.add(courseDto);
             }
         } catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Exception during find available courses process in DAO.", e);
+            Logger.log(Level.FATAL, "Exception during find available courses process in DAO.", e);
             throw new DaoException("Exception during find available courses process in DAO.", e);
         }
         return courseDtoList;
@@ -121,7 +121,7 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
                 takenCourses.add(courseDto);
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.FATAL, "Exception during find taken courses process in DAO.", e);
+            Logger.log(Level.FATAL, "Exception during find taken courses process in DAO.", e);
             throw new DaoException("Exception during find taken courses process in DAO.", e);
         }
         return takenCourses;
@@ -143,7 +143,7 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
             statement.setInt(6, courseId);
             isUpdated = statement.executeUpdate() != 0;
         } catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Fail to update course by ID in DAO.", e);
+            Logger.log(Level.FATAL, "Fail to update course by ID in DAO.", e);
             throw new DaoException("Fail to update course by ID in DAO.", e);
         }
         return isUpdated;
@@ -159,7 +159,7 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
                 allCoursesDtoList.add(courseDto);
             }
         } catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Exception during find all courses process in DAO.", e);
+            Logger.log(Level.FATAL, "Exception during find all courses process in DAO.", e);
             throw new DaoException("Exception during find all courses process in DAO.", e);
         }
         return allCoursesDtoList;
@@ -181,7 +181,7 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
 
             isInserted = statement.executeUpdate() != 0;
         } catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Fail to insert new course in DAO.", e);
+            Logger.log(Level.FATAL, "Fail to insert new course in DAO.", e);
             throw new DaoException("Fail to insert new course in DAO.", e);
         }
         return isInserted;

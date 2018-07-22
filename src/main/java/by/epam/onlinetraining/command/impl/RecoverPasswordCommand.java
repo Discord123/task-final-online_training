@@ -3,9 +3,9 @@ package by.epam.onlinetraining.command.impl;
 import by.epam.onlinetraining.bundles.MessageManager;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.SessionAttributes;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ServiceManager;
@@ -34,7 +34,7 @@ public class RecoverPasswordCommand extends ActionCommand {
     }
 
     @Override
-    public RequestResult execute(RequestContent content) throws CommandException {
+    public ActionResult execute(RequestContent content) throws CommandException {
         boolean isSent = false;
         String email = content.getSingleRequestParameter(EMAIL_PARAMETER);
         try{
@@ -59,6 +59,6 @@ public class RecoverPasswordCommand extends ActionCommand {
             targetPagePath = RECOVERY_PAGE_PATH;
         }
 
-        return new RequestResult(targetPagePath, NavigationType.REDIRECT);
+        return new ActionResult(targetPagePath, NavigationType.REDIRECT);
     }
 }

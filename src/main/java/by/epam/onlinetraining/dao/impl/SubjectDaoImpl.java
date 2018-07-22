@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SubjectDaoImpl extends AbstractDao implements SubjectDao {
-    private static final Logger LOGGER = LogManager.getLogger(SubjectDaoImpl.class);
+    private static final Logger Logger = LogManager.getLogger(SubjectDaoImpl.class);
     private static final String FIND_ALL_SUBJECTS = "SELECT * FROM subjects";
 
     @Override
@@ -28,7 +28,7 @@ public class SubjectDaoImpl extends AbstractDao implements SubjectDao {
                 subjectList.add(subject);
             }
         } catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Fail to get all subjects from dao.", e);
+            Logger.log(Level.FATAL, "Fail to get all subjects from dao.", e);
             throw new DaoException("Fail to get all subjects from dao.", e);
         }
         return subjectList;

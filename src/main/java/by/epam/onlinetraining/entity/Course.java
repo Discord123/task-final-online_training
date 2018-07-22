@@ -1,10 +1,12 @@
 package by.epam.onlinetraining.entity;
 
-import by.epam.onlinetraining.entity.enums.Status;
+import by.epam.onlinetraining.dto.Status;
 
 import java.io.Serializable;
 
 public class Course extends OnlineTrainingEntity implements Serializable{
+
+    private static final long serialVersionUID = -7833596687102148336L;
     private int id;
     private String title;
     private int subjectId;
@@ -22,44 +24,6 @@ public class Course extends OnlineTrainingEntity implements Serializable{
         this.status = status;
         this.isAvailable = isAvailable;
         this.teacherId = teacherId;
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", subjectId=" + subjectId +
-                ", status=" + status +
-                ", isAvailable=" + isAvailable +
-                ", teacherId=" + teacherId +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Course course = (Course) o;
-
-        if (id != course.id) return false;
-        if (subjectId != course.subjectId) return false;
-        if (isAvailable != course.isAvailable) return false;
-        if (teacherId != course.teacherId) return false;
-        if (title != null ? !title.equals(course.title) : course.title != null) return false;
-        return status == course.status;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + subjectId;
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (isAvailable ? 1 : 0);
-        result = 31 * result + teacherId;
-        return result;
     }
 
     public int getId() {
@@ -108,5 +72,43 @@ public class Course extends OnlineTrainingEntity implements Serializable{
 
     public void setTeacherId(int teacherId) {
         this.teacherId = teacherId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Course course = (Course) o;
+
+        if (id != course.id) return false;
+        if (subjectId != course.subjectId) return false;
+        if (isAvailable != course.isAvailable) return false;
+        if (teacherId != course.teacherId) return false;
+        if (title != null ? !title.equals(course.title) : course.title != null) return false;
+        return status == course.status;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + subjectId;
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (isAvailable ? 1 : 0);
+        result = 31 * result + teacherId;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", subjectId=" + subjectId +
+                ", status=" + status +
+                ", isAvailable=" + isAvailable +
+                ", teacherId=" + teacherId +
+                '}';
     }
 }

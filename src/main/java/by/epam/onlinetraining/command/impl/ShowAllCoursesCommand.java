@@ -2,9 +2,9 @@ package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.bundles.ConfigurationManager;
 import by.epam.onlinetraining.command.ActionCommand;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.dto.CourseDto;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
@@ -26,16 +26,16 @@ public class ShowAllCoursesCommand extends ActionCommand {
     }
 
     @Override
-    public RequestResult execute(RequestContent requestContent) throws CommandException {
+    public ActionResult execute(RequestContent requestContent) throws CommandException {
         try {
             CoursesService coursesService = (CoursesService) getService();
-            List<CourseDto> courseList = coursesService.showAllCourses();
+            List<CourseDto> courseList = coursesService.getAllCourses();
             requestContent.setSessionAttributes(ALL_COURSES_PARAM, courseList);
         } catch (ServiceException e) {
             Logger.log(Level.FATAL,"Exception during show all courses command");
             throw new CommandException("Exception during show all courses command", e);
         }
 
-        return new RequestResult(ALL_COURSES_PATH, NavigationType.FORWARD);
+        return new ActionResult(ALL_COURSES_PATH, NavigationType.FORWARD);
     }
 }

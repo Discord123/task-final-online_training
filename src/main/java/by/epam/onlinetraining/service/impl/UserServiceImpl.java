@@ -6,9 +6,9 @@ import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.exception.DaoException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.UserService;
-import by.epam.onlinetraining.util.MailSender;
-import by.epam.onlinetraining.util.PasswordCreator;
-import by.epam.onlinetraining.util.PasswordHasher;
+import by.epam.onlinetraining.service.util.MailSender;
+import by.epam.onlinetraining.service.util.PasswordCreator;
+import by.epam.onlinetraining.service.util.PasswordHasher;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> showAllTeachers() throws ServiceException {
+    public List<User> getAllTeachers() throws ServiceException {
         List<User> teachersList = null;
         UserDaoImpl userDao = new UserDaoImpl();
         TransactionHelper helper = new TransactionHelper();

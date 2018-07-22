@@ -4,11 +4,11 @@ package by.epam.onlinetraining.command.impl;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.SessionAttributes;
 import by.epam.onlinetraining.command.constant.SignUpAttributes;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.entity.User;
-import by.epam.onlinetraining.entity.enums.Role;
+import by.epam.onlinetraining.entity.Role;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ServiceManager;
@@ -34,7 +34,7 @@ public class LoginCommand extends ActionCommand {
     }
 
     @Override
-    public RequestResult execute(RequestContent content) throws CommandException {
+    public ActionResult execute(RequestContent content) throws CommandException {
         User user = null;
         try {
             UserService userService = (UserService) getService();
@@ -46,24 +46,24 @@ public class LoginCommand extends ActionCommand {
             throw new CommandException("Exception during login command", e);
         }
 
-        RequestResult requestResult = null;
+        ActionResult actionResult = null;
         Map<String, Object> requestAttributes = content.getRequestAttributes();
         if(user != null){
             requestAttributes.put(AUTHORIZATION_ATTRIBUTE, Boolean.TRUE);
             content.setSessionAttributes(SessionAttributes.USER, user);
             Role userRole = user.getRole();
             if(userRole == Role.ADMIN){
-                requestResult = new RequestResult(ADMIN_PAGE, NavigationType.REDIRECT);
+                actionResult = new ActionResult(ADMIN_PAGE, NavigationType.REDIRECT);
             } else if (userRole == Role.TEACHER){
-                requestResult = new RequestResult(TEACHER_PAGE, NavigationType.REDIRECT);
+                actionResult = new ActionResult(TEACHER_PAGE, NavigationType.REDIRECT);
             } else {
-                requestResult = new RequestResult(STUDENT_PAGE, NavigationType.REDIRECT);
+                actionResult = new ActionResult(STUDENT_PAGE, NavigationType.REDIRECT);
             }
         } else {
             requestAttributes.put(AUTHORIZATION_ATTRIBUTE, Boolean.FALSE);
             content.setSessionAttributes(FAIL_ATTRIBUTE, MESSAGE_LOGIN_ERROR);
-            requestResult = new RequestResult(LOGIN_PAGE, NavigationType.REDIRECT);
+            actionResult = new ActionResult(LOGIN_PAGE, NavigationType.REDIRECT);
         }
-        return requestResult;
+        return actionResult;
     }
 }

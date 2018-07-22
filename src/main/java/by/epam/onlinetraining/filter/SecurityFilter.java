@@ -2,7 +2,7 @@ package by.epam.onlinetraining.filter;
 
 import by.epam.onlinetraining.command.constant.SessionAttributes;
 import by.epam.onlinetraining.entity.User;
-import by.epam.onlinetraining.entity.enums.Role;
+import by.epam.onlinetraining.entity.Role;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -29,22 +29,22 @@ public class SecurityFilter implements Filter {
         accessMap.put("GETPAGE", "ALL");
         accessMap.put("RECOVERPASSWORD", "ALL");
 
-        accessMap.put("TAKEALLTEACHERS", "ADMIN");
+        accessMap.put("SHOWALLTEACHERS", "ADMIN");
         accessMap.put("DELETEUSER", "ADMIN");
-        accessMap.put("TAKEALLCOURSES", "ADMIN");
+        accessMap.put("SHOWALLCOURSES", "ADMIN");
         accessMap.put("EDITCOURSE", "ADMIN");
         accessMap.put("ADDCOURSE", "ADMIN");
 
-        accessMap.put("TAKETEACHERRELATEDCOURSES", "TEACHER");
-        accessMap.put("TAKECOURSERELATEDTASKS", "TEACHER");
-        accessMap.put("TAKEREVIEWSBYTASKID", "TEACHER");
+        accessMap.put("SHOWTEACHERRELATEDCOURSES", "TEACHER");
+        accessMap.put("SHOWCOURSERELATEDTASKS", "TEACHER");
+        accessMap.put("SHOWREVIEWSBYTASKID", "TEACHER");
         accessMap.put("SENDREVIEW", "TEACHER");
         accessMap.put("ADDTASK", "TEACHER");
 
-        accessMap.put("TAKEAVAILABLECOURSES", "STUDENT");
+        accessMap.put("SHOWAVAILABLECOURSES", "STUDENT");
         accessMap.put("JOINCOURSE", "STUDENT");
-        accessMap.put("GETTAKENCOURSES", "STUDENT");
-        accessMap.put("TAKERECEIVEDTASKS", "STUDENT");
+        accessMap.put("SHOWTAKENCOURSES", "STUDENT");
+        accessMap.put("SHOWRECEIVEDTASKS", "STUDENT");
         accessMap.put("SENDANSWER", "STUDENT");
     }
 

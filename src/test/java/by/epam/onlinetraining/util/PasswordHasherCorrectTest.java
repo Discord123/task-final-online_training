@@ -1,5 +1,6 @@
 package by.epam.onlinetraining.util;
 
+import by.epam.onlinetraining.service.util.PasswordHasher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

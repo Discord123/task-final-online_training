@@ -17,7 +17,7 @@ public class TasksServiceImpl implements TasksService {
     private static final Logger Logger = LogManager.getLogger(TasksServiceImpl.class);
 
     @Override
-    public List<TaskDto> showReceivedTasks(int userId) throws ServiceException {
+    public List<TaskDto> getReceivedTasks(int userId) throws ServiceException {
         List<TaskDto> taskDtoList;
 
         TasksDaoImpl tasksDao = new TasksDaoImpl();
@@ -37,7 +37,7 @@ public class TasksServiceImpl implements TasksService {
     }
 
     @Override
-    public List<Task> showCourseRelatedTasks(int courseId) throws ServiceException {
+    public List<Task> getCourseRelatedTasks(int courseId) throws ServiceException {
         List<Task> taskList;
 
         TasksDaoImpl tasksDao = new TasksDaoImpl();

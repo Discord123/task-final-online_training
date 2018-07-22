@@ -11,7 +11,7 @@ public interface UserService extends Service {
     boolean isEmailTaken(String emailInput) throws ServiceException;
     boolean singUp(String userEmail, String userPassword, String firstName, String lastName, String role) throws ServiceException;
     boolean joinCourse(int courseId, int userId ) throws ServiceException;
-    List<User> showAllTeachers() throws ServiceException;
+    List<User> getAllTeachers() throws ServiceException;
     boolean deleteUserById(int userId) throws ServiceException;
     boolean recoverPassword(String email, String subject, String text) throws ServiceException;
 }

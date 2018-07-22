@@ -3,9 +3,9 @@ package by.epam.onlinetraining.command.impl;
 import by.epam.onlinetraining.bundles.ConfigurationManager;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.EntityAttributes;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.entity.Subject;
 import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.exception.CommandException;
@@ -33,21 +33,21 @@ public class AddCourseCommand extends ActionCommand {
     }
 
     @Override
-    public RequestResult execute(RequestContent requestContent) throws CommandException {
-        RequestResult requestResult = null;
+    public ActionResult execute(RequestContent requestContent) throws CommandException {
+        ActionResult actionResult = null;
 
         Map<String, String[]> requestParameters = requestContent.getRequestParameters();
         String[] addCourseParam = requestParameters.get(ADD_COURSE_PARAM);
         if(addCourseParam == null){
-            requestResult = putRequiredDataIntoSession(requestContent);
+            actionResult = putRequiredDataIntoSession(requestContent);
         } else {
             boolean isAdded = processCourseAdding(requestContent);
             putMessageIntoSession(requestContent, isAdded, ADD_SUCCESS_MESSAGE_KEY, ADD_FAIL_MESSAGE_KEY);
 
-            requestResult = new RequestResult(GET_PAGE_URL_PARAM, NavigationType.REDIRECT);
+            actionResult = new ActionResult(GET_PAGE_URL_PARAM, NavigationType.REDIRECT);
         }
 
-        return requestResult;
+        return actionResult;
     }
 
     private boolean processCourseAdding(RequestContent requestContent) throws CommandException {
@@ -72,23 +72,23 @@ public class AddCourseCommand extends ActionCommand {
         return isAdded;
     }
 
-    private RequestResult putRequiredDataIntoSession(RequestContent requestContent) throws CommandException {
-        RequestResult requestResult;
+    private ActionResult putRequiredDataIntoSession(RequestContent requestContent) throws CommandException {
+        ActionResult actionResult;
         try {
             SubjectService subjectService = new SubjectServiceImpl();
-            List<Subject> subjectList = subjectService.showAllSubjects();
+            List<Subject> subjectList = subjectService.getAllSubjects();
             requestContent.setSessionAttributes(EntityAttributes.ALL_SUBJECTS_PARAM, subjectList);
 
             UserService userService = new UserServiceImpl();
-            List<User> teachersList = userService.showAllTeachers();
+            List<User> teachersList = userService.getAllTeachers();
             requestContent.setSessionAttributes(EntityAttributes.ALL_TEACHERS_PARAM, teachersList);
 
-            requestResult = new RequestResult(ADD_COURSE_PAGE_PATH, NavigationType.FORWARD);
+            actionResult = new ActionResult(ADD_COURSE_PAGE_PATH, NavigationType.FORWARD);
 
         } catch (ServiceException e) {
             Logger.log(Level.FATAL,"Fail to put required lists in the session", e);
             throw new CommandException("Fail to put required lists in the session", e);
         }
-        return requestResult;
+        return actionResult;
     }
 }

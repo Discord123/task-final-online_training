@@ -2,9 +2,9 @@ package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.SignUpAttributes;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ServiceManager;
@@ -41,7 +41,7 @@ public class TeacherSignUpCommand extends ActionCommand{
     }
 
     @Override
-    public RequestResult execute(RequestContent content) throws CommandException {
+    public ActionResult execute(RequestContent content) throws CommandException {
 
         email = content.getSingleRequestParameter(SignUpAttributes.EMAIL_PARAM);
         password = content.getSingleRequestParameter(SignUpAttributes.PASSWORD_PARAM);
@@ -72,7 +72,7 @@ public class TeacherSignUpCommand extends ActionCommand{
             targetPagePath = GET_PAGE_URL_PARAM;
         }
 
-        return new RequestResult(targetPagePath, NavigationType.FORWARD);
+        return new ActionResult(targetPagePath, NavigationType.FORWARD);
     }
 
     private boolean isParametersValid(UserService userService) throws ServiceException {

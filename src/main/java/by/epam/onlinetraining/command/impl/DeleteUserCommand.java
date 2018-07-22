@@ -2,9 +2,9 @@ package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.SessionAttributes;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ServiceManager;
@@ -27,7 +27,7 @@ public class DeleteUserCommand extends ActionCommand {
     }
 
     @Override
-    public RequestResult execute(RequestContent requestContent) throws CommandException {
+    public ActionResult execute(RequestContent requestContent) throws CommandException {
         String userIdLine = requestContent.getSingleRequestParameter(USER_ID_PARAM);
         int userId = Integer.parseInt(userIdLine);
         Map<String, Object> sessionAttributes = requestContent.getSessionAttributes();
@@ -37,12 +37,12 @@ public class DeleteUserCommand extends ActionCommand {
         try{
             isDeletedSuccessfully = userReceiver.deleteUserById(userId);
         } catch (ServiceException e){
-            Logger.log(Level.FATAL,"Fail to execute delete user command.");
+            Logger.log(Level.FATAL, "Fail to execute delete user command.");
             throw new CommandException("Fail to execute delete user command.", e);
         }
 
         putMessageIntoSession(requestContent, isDeletedSuccessfully, DELETE_SUCCESS_MESSAGE_KEY, DELETE_FAIL_MESSAGE_KEY);
 
-        return new RequestResult(GET_PAGE_URL_PARAM, NavigationType.REDIRECT);
+        return new ActionResult(GET_PAGE_URL_PARAM, NavigationType.REDIRECT);
     }
 }

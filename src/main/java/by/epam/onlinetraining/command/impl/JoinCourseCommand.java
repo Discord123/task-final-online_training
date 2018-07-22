@@ -4,7 +4,7 @@ import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.SessionAttributes;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.RequestResult;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
@@ -28,7 +28,7 @@ public class JoinCourseCommand extends ActionCommand {
     }
 
     @Override
-    public RequestResult execute(RequestContent content) throws CommandException {
+    public ActionResult execute(RequestContent content) throws CommandException {
 
         Map<String, Object> sessionAttributes = content.getSessionAttributes();
         User user = (User) sessionAttributes.get(SessionAttributes.USER);
@@ -47,6 +47,6 @@ public class JoinCourseCommand extends ActionCommand {
         }
         putMessageIntoSession(content, isJoined, JOIN_SUCCESS_MESSAGE, JOIN_FAIL_MESSAGE);
 
-        return new RequestResult(TAKEN_COURSES_PATH, NavigationType.REDIRECT);
+        return new ActionResult(TAKEN_COURSES_PATH, NavigationType.REDIRECT);
     }
 }

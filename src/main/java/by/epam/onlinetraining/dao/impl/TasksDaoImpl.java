@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TasksDaoImpl extends AbstractDao implements TasksDao {
-    private static final Logger LOGGER = LogManager.getLogger(TasksDaoImpl.class);
+    private static final Logger Logger = LogManager.getLogger(TasksDaoImpl.class);
 
     private static final String FIND_RECEIVED_TASKS =
             "SELECT * FROM tasks " +
@@ -45,7 +45,7 @@ public class TasksDaoImpl extends AbstractDao implements TasksDao {
                 taskList.add(task);
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.FATAL, "Fail to find tasks by course ID in DAO.", e);
+            Logger.log(Level.FATAL, "Fail to find tasks by course ID in DAO.", e);
             throw new DaoException("Fail to find tasks by course ID in DAO.", e);
         }
         return taskList;
@@ -62,7 +62,7 @@ public class TasksDaoImpl extends AbstractDao implements TasksDao {
                 receivedTaskDtoList.add(taskDto);
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.FATAL, "Exception during find received tasks process in DAO.", e);
+            Logger.log(Level.FATAL, "Exception during find received tasks process in DAO.", e);
             throw new DaoException("Exception during find received tasks process in DAO.", e);
         }
         return receivedTaskDtoList;
@@ -77,7 +77,7 @@ public class TasksDaoImpl extends AbstractDao implements TasksDao {
             statement.setInt(3, courseId);
             isAdded = statement.executeUpdate() != 0;
         } catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Fail to add new task in DAO.", e);
+            Logger.log(Level.FATAL, "Fail to add new task in DAO.", e);
             throw new DaoException("Fail to add new task in DAO.", e);
         }
         return isAdded;

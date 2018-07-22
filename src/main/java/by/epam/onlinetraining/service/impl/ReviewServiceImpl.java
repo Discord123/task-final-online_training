@@ -57,7 +57,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<ReviewDto> showReviewsByTaskId(int taskId) throws ServiceException {
+    public List<ReviewDto> getReviewsByTaskId(int taskId) throws ServiceException {
         List<ReviewDto> reviewDtoList = null;
 
         ReviewDaoImpl reviewDao = new ReviewDaoImpl();

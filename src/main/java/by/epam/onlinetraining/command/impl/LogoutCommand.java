@@ -1,9 +1,9 @@
 package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.command.ActionCommand;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.service.ServiceManager;
 
@@ -16,10 +16,10 @@ public class LogoutCommand extends ActionCommand {
     }
 
     @Override
-    public RequestResult execute(RequestContent requestContent) throws CommandException {
+    public ActionResult execute(RequestContent requestContent) throws CommandException {
         requestContent.cleanSession();
         requestContent.setSessionAttributes(INVALIDE_SESSION_MARKER, Boolean.TRUE);
 
-        return new RequestResult(LOGIN_PAGE_PATH, NavigationType.REDIRECT);
+        return new ActionResult(LOGIN_PAGE_PATH, NavigationType.REDIRECT);
     }
 }

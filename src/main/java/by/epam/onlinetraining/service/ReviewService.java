@@ -8,6 +8,6 @@ import java.util.List;
 public interface ReviewService extends Service {
     boolean sendAnswer(int taskId, int userId, String answer) throws ServiceException;
     boolean sendReview(int taskId, int userId, int mark, String review) throws ServiceException;
-    List<ReviewDto> showReviewsByTaskId(int taskId) throws ServiceException;
+    List<ReviewDto> getReviewsByTaskId(int taskId) throws ServiceException;
 
 }

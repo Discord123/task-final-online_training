@@ -6,5 +6,5 @@ import by.epam.onlinetraining.exception.ServiceException;
 import java.util.List;
 
 public interface SubjectService extends Service {
-    List<Subject> showAllSubjects() throws ServiceException;
+    List<Subject> getAllSubjects() throws ServiceException;
 }

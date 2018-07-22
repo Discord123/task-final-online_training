@@ -1,7 +1,7 @@
 package by.epam.onlinetraining.command;
 
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.RequestResult;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.service.Service;
 
@@ -21,7 +21,7 @@ public abstract class ActionCommand {
         return service;
     }
 
-    public abstract RequestResult execute(RequestContent requestContent) throws CommandException;
+    public abstract ActionResult execute(RequestContent requestContent) throws CommandException;
 
     protected void putMessageIntoSession(RequestContent requestContent, boolean isAdded, String successMessageKey, String failMessageKey) {
         if (isAdded){

@@ -16,7 +16,7 @@ public class CoursesServiceImpl implements CoursesService {
     private static final Logger Logger = LogManager.getLogger(CoursesServiceImpl.class);
 
     @Override
-    public List<CourseDto> showRelatedCourses(int teacherId) throws ServiceException {
+    public List<CourseDto> getRelatedCourses(int teacherId) throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
         CoursesDaoImpl coursesDao = new CoursesDaoImpl();
@@ -57,7 +57,7 @@ public class CoursesServiceImpl implements CoursesService {
     }
 
     @Override
-    public List<CourseDto> showAvailableCourses(int userId) throws ServiceException {
+    public List<CourseDto> getAvailableCourses(int userId) throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
         CoursesDaoImpl coursesDao = new CoursesDaoImpl();
@@ -96,7 +96,7 @@ public class CoursesServiceImpl implements CoursesService {
     }
 
     @Override
-    public List<CourseDto> showTakenCourses(int userId) throws ServiceException {
+    public List<CourseDto> getTakenCourses(int userId) throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
         CoursesDaoImpl coursesDao = new CoursesDaoImpl();
@@ -117,7 +117,7 @@ public class CoursesServiceImpl implements CoursesService {
     }
 
     @Override
-    public List<CourseDto> showAllCourses() throws ServiceException {
+    public List<CourseDto> getAllCourses() throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
         CoursesDaoImpl coursesDao = new CoursesDaoImpl();

@@ -16,7 +16,7 @@ public class SubjectServiceImpl implements SubjectService {
     private static final Logger Logger = LogManager.getLogger(SubjectServiceImpl.class);
 
     @Override
-    public List<Subject> showAllSubjects() throws ServiceException {
+    public List<Subject> getAllSubjects() throws ServiceException {
         List<Subject> subjectList = null;
         SubjectDaoImpl subjectDao = new SubjectDaoImpl();
         TransactionHelper helper = new TransactionHelper();

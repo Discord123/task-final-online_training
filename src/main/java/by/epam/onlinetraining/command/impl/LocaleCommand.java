@@ -4,9 +4,9 @@ import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.SessionAttributes;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.RequestResult;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.entity.User;
-import by.epam.onlinetraining.entity.enums.Role;
+import by.epam.onlinetraining.entity.Role;
 import by.epam.onlinetraining.exception.CommandException;
 
 import java.util.Map;
@@ -24,7 +24,7 @@ public class LocaleCommand extends ActionCommand {
     }
 
     @Override
-    public RequestResult execute(RequestContent content) throws CommandException {
+    public ActionResult execute(RequestContent content) throws CommandException {
         String requestLocale = content.getSingleRequestParameter(SessionAttributes.LOCALE);
         String locale = null;
         if(EN_LOCALE_MARKER.equals(requestLocale)) {
@@ -36,7 +36,7 @@ public class LocaleCommand extends ActionCommand {
 
         String targetUrl = defineTargetPage(content);
 
-        return new RequestResult(targetUrl, NavigationType.REDIRECT);
+        return new ActionResult(targetUrl, NavigationType.REDIRECT);
     }
 
     private String defineTargetPage(RequestContent content) {

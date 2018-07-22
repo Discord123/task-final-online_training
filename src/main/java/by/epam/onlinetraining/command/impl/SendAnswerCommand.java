@@ -2,9 +2,9 @@ package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.SessionAttributes;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.RequestResult;
 import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
@@ -31,7 +31,7 @@ public class SendAnswerCommand extends ActionCommand {
     }
 
     @Override
-    public RequestResult execute(RequestContent content) throws CommandException {
+    public ActionResult execute(RequestContent content) throws CommandException {
         boolean isSent = false;
         Map<String, Object> sessionAttributes = content.getSessionAttributes();
 
@@ -50,6 +50,6 @@ public class SendAnswerCommand extends ActionCommand {
         }
 
         putMessageIntoSession(content, isSent, SEND_SUCCESS_MESSAGE, SEND_FAIL_MESSAGE);
-        return new RequestResult(RECEIVED_TASKS_PAGE, NavigationType.REDIRECT);
+        return new ActionResult(RECEIVED_TASKS_PAGE, NavigationType.REDIRECT);
     }
 }

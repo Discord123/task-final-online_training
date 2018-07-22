@@ -3,7 +3,7 @@ package by.epam.onlinetraining.command.impl;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.RequestResult;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ServiceManager;
@@ -27,7 +27,7 @@ public class AddTaskCommand extends ActionCommand {
     }
 
     @Override
-    public RequestResult execute(RequestContent content) throws CommandException {
+    public ActionResult execute(RequestContent content) throws CommandException {
         boolean isAdded = false;
 
         String courseIdLine = content.getSingleRequestParameter(COURSE_ID);
@@ -44,6 +44,6 @@ public class AddTaskCommand extends ActionCommand {
         }
 
         putMessageIntoSession(content, isAdded, ADD_SUCCESS_MESSAGE, ADD_FAIL_MESSAGE);
-        return new RequestResult(ADD_TASK_PAGE, NavigationType.REDIRECT);
+        return new ActionResult(ADD_TASK_PAGE, NavigationType.REDIRECT);
     }
 }

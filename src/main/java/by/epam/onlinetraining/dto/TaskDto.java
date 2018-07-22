@@ -23,41 +23,6 @@ public class TaskDto implements Serializable {
         this.review = review;
     }
 
-    @Override
-    public String toString() {
-        return "TaskDto{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", courseId=" + courseId +
-                ", review=" + review +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TaskDto taskDto = (TaskDto) o;
-
-        if (courseId != taskDto.courseId) return false;
-        if (id != null ? !id.equals(taskDto.id) : taskDto.id != null) return false;
-        if (name != null ? !name.equals(taskDto.name) : taskDto.name != null) return false;
-        if (description != null ? !description.equals(taskDto.description) : taskDto.description != null) return false;
-        return review != null ? review.equals(taskDto.review) : taskDto.review == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + courseId;
-        result = 31 * result + (review != null ? review.hashCode() : 0);
-        return result;
-    }
-
     public Integer getId() {
         return id;
     }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewDaoImpl extends AbstractDao implements ReviewDao {
-    private static final Logger LOGGER = LogManager.getLogger(ReviewDaoImpl.class);
+    private static final Logger Logger = LogManager.getLogger(ReviewDaoImpl.class);
 
     private static final String UPDATE_ANSWER_IN_REWIEW =
             "UPDATE students_has_tasks " +
@@ -45,7 +45,7 @@ public class ReviewDaoImpl extends AbstractDao implements ReviewDao {
             statement.setInt(4, taskId);
             isSent = statement.executeUpdate() != 0;
         } catch (SQLException e){
-            LOGGER.log(Level.FATAL, "Fail to send review in DAO.", e);
+            Logger.log(Level.FATAL, "Fail to send review in DAO.", e);
             throw new DaoException("Fail to send review in DAO.", e);
         }
         return isSent;
@@ -62,7 +62,7 @@ public class ReviewDaoImpl extends AbstractDao implements ReviewDao {
                 result = true;
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.FATAL, "Fail to send an answer in DAO.", e);
+            Logger.log(Level.FATAL, "Fail to send an answer in DAO.", e);
             throw new DaoException("Fail to send an answer in DAO.", e);
         }
         return result;
@@ -79,7 +79,7 @@ public class ReviewDaoImpl extends AbstractDao implements ReviewDao {
                 reviewDtoList.add(reviewDto);
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.FATAL, "Fail to find reviews and users by task id in DAO.", e);
+            Logger.log(Level.FATAL, "Fail to find reviews and users by task id in DAO.", e);
             throw new DaoException("Fail to find reviews and users by task id in DAO.", e);
         }
         return reviewDtoList;
