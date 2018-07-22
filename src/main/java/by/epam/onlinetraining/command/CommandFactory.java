@@ -1,4 +1,4 @@
-package by.epam.onlinetraining.command.factory;
+package by.epam.onlinetraining.command;
 
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.ActionCommandMap;

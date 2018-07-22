@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.tag;
 
-import by.epam.onlinetraining.bundles.MessageManager;
+import by.epam.onlinetraining.command.bundles.MessageManager;
 import by.epam.onlinetraining.entity.Role;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

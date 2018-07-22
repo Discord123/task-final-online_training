@@ -1,5 +1,6 @@
 package by.epam.onlinetraining.service;
 
+import by.epam.onlinetraining.service.util.Validator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

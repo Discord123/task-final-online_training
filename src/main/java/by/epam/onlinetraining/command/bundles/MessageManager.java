@@ -1,4 +1,4 @@
-package by.epam.onlinetraining.bundles;
+package by.epam.onlinetraining.command.bundles;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

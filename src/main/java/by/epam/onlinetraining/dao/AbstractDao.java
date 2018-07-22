@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.dao;
 
-import by.epam.onlinetraining.pool.ProxyConnection;
+import by.epam.onlinetraining.dao.pool.ProxyConnection;
 
 public abstract class AbstractDao {
 

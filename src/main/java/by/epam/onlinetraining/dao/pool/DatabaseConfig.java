@@ -1,4 +1,4 @@
-package by.epam.onlinetraining.pool;
+package by.epam.onlinetraining.dao.pool;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

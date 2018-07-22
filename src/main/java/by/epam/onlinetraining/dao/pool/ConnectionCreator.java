@@ -1,4 +1,4 @@
-package by.epam.onlinetraining.pool;
+package by.epam.onlinetraining.dao.pool;
 
 import by.epam.onlinetraining.exception.ConnectionPoolException;
 import org.apache.logging.log4j.Level;

@@ -1,4 +1,4 @@
-package by.epam.onlinetraining.service;
+package by.epam.onlinetraining.service.util;
 
 
 public class Validator {

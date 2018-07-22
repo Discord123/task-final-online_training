@@ -1,12 +1,12 @@
 package by.epam.onlinetraining.controller;
 
 import by.epam.onlinetraining.command.ActionCommand;
-import by.epam.onlinetraining.command.factory.CommandFactory;
+import by.epam.onlinetraining.command.CommandFactory;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.exception.CommandException;
-import by.epam.onlinetraining.pool.ConnectionPool;
+import by.epam.onlinetraining.dao.pool.ConnectionPool;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

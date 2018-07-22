@@ -1,4 +1,4 @@
-package by.epam.onlinetraining.pool;
+package by.epam.onlinetraining.dao.pool;
 
 import java.sql.*;
 import java.util.Map;

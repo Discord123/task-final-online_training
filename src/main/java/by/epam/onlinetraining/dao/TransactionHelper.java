@@ -1,7 +1,7 @@
 package by.epam.onlinetraining.dao;
 
-import by.epam.onlinetraining.pool.ConnectionPool;
-import by.epam.onlinetraining.pool.ProxyConnection;
+import by.epam.onlinetraining.dao.pool.ConnectionPool;
+import by.epam.onlinetraining.dao.pool.ProxyConnection;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

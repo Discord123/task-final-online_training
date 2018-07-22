@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.filter;
 
-import by.epam.onlinetraining.bundles.ConfigurationManager;
+import by.epam.onlinetraining.command.bundles.ConfigurationManager;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
