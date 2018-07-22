@@ -10,9 +10,13 @@ import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ServiceManager;
 import by.epam.onlinetraining.service.UserService;
 import by.epam.onlinetraining.service.Validator;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class StudentSignUpCommand extends ActionCommand {
+    private static final Logger Logger = LogManager.getLogger(StudentSignUpCommand.class);
     private static final String LOGIN_PAGE_PATH = "/controller?command=getPage&expectedPage=login";
     private static final String REGISTRATION_PAGE_PATH = "/controller?command=getPage&expectedPage=registration";
 
@@ -57,6 +61,7 @@ public class StudentSignUpCommand extends ActionCommand {
             putMessageIntoSession(content, isRegistered, MESSAGE_SIGN_UP_SUCCESS, signUpFailMessage);
 
         } catch (ServiceException e) {
+            Logger.log(Level.FATAL, "Problem during user sign up");
             throw new CommandException("Problem during user sign up", e);
         }
 

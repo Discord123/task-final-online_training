@@ -10,10 +10,14 @@ import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ReviewService;
 import by.epam.onlinetraining.service.ServiceManager;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class ShowReviewsByTaskId extends ActionCommand {
+    private static final Logger Logger = LogManager.getLogger(ShowReviewsByTaskId.class);
     private static final String TASK_REVIEWS_PAGE_PATH = ConfigurationManager.getProperty("path.page.taskreviews");
     private static final String TASK_ID_PARAM = "taskid";
     private static final String REVIEWS_AND_USERS_DTO_ATTR = "reviewsAndUsers";
@@ -33,6 +37,7 @@ public class ShowReviewsByTaskId extends ActionCommand {
             content.setSessionAttributes(REVIEWS_AND_USERS_DTO_ATTR, reviewDtoList);
 
         } catch (ServiceException e){
+            Logger.log(Level.FATAL, "Fail to execute show reviews by task id command.");
             throw new CommandException("Fail to execute show reviews by task id command.",e);
         }
         return new RequestResult(TASK_REVIEWS_PAGE_PATH, NavigationType.FORWARD);

@@ -8,8 +8,12 @@ import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ReviewService;
 import by.epam.onlinetraining.service.ServiceManager;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class SendReviewCommand extends ActionCommand {
+    private static final Logger Logger = LogManager.getLogger(SendReviewCommand.class);
     private static final String SHOW_REVIEWS_BY_TASK_ID_PAGE = "/controller?command=showreviewsbytaskid&taskid=";
     private static final String SEND_SUCCESS_MESSAGE = "message.teacher.review-sent-success";
     private static final String SEND_FAIL_MESSAGE = "message.teacher.review-sent-fail";
@@ -40,6 +44,7 @@ public class SendReviewCommand extends ActionCommand {
             ReviewService reviewService = (ReviewService) getService();
             isSent = reviewService.sendReview(taskId, userId, mark, taskReview);
         } catch (ServiceException e){
+            Logger.log(Level.FATAL,"Fail to execute send review command.");
             throw new CommandException("Fail to execute send review command.",e);
         }
         String showReviewsPage = SHOW_REVIEWS_BY_TASK_ID_PAGE + taskIdLine;

@@ -9,10 +9,14 @@ import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ServiceManager;
 import by.epam.onlinetraining.service.UserService;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
 public class DeleteUserCommand extends ActionCommand {
+    private static final Logger Logger = LogManager.getLogger(DeleteUserCommand.class);
     private static final String USER_ID_PARAM = "userid";
     private static final String DELETE_SUCCESS_MESSAGE_KEY = "message.admin.teacher-delete-success";
     private static final String DELETE_FAIL_MESSAGE_KEY = "message.admin.teacher-delete-fail";
@@ -33,6 +37,7 @@ public class DeleteUserCommand extends ActionCommand {
         try{
             isDeletedSuccessfully = userReceiver.deleteUserById(userId);
         } catch (ServiceException e){
+            Logger.log(Level.FATAL,"Fail to execute delete user command.");
             throw new CommandException("Fail to execute delete user command.", e);
         }
 

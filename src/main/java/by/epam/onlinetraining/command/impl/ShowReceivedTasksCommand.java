@@ -12,12 +12,15 @@ import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ServiceManager;
 import by.epam.onlinetraining.service.TasksService;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Map;
 
 public class ShowReceivedTasksCommand extends ActionCommand {
-
+    private static final Logger Logger = LogManager.getLogger(ShowReceivedTasksCommand.class);
     private static final String RECEIVED_TASKS_PATH = ConfigurationManager.getProperty("path.page.received-tasks");
     private static final String RECEIVED_TASKS_PARAM = "receivedTasks";
 
@@ -35,6 +38,7 @@ public class ShowReceivedTasksCommand extends ActionCommand {
             List<TaskDto> taskDtoList = tasksReceiver.showReceivedTasks(userId);
             content.setRequestAttributes(RECEIVED_TASKS_PARAM, taskDtoList);
         } catch (ServiceException e) {
+            Logger.log(Level.FATAL, "Exception during show taken courses command");
             throw new CommandException("Exception during show taken courses command", e);
         }
 

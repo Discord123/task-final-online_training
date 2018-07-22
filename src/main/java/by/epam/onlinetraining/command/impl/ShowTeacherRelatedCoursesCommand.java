@@ -12,12 +12,15 @@ import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.CoursesService;
 import by.epam.onlinetraining.service.ServiceManager;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Map;
 
 public class ShowTeacherRelatedCoursesCommand extends ActionCommand {
-
+    private static final Logger Logger = LogManager.getLogger(ShowTeacherRelatedCoursesCommand.class);
     private static final String RELATED_COURSES_ATTRIBUTE = "relatedCourses";
 
     private static final String RELATED_COURSES = "relatedcourses";
@@ -43,6 +46,7 @@ public class ShowTeacherRelatedCoursesCommand extends ActionCommand {
             List<CourseDto> courseDtoList = coursesService.showRelatedCourses(teacherId);
             content.setSessionAttributes(RELATED_COURSES_ATTRIBUTE, courseDtoList);
         } catch (ServiceException e) {
+            Logger.log(Level.FATAL, "Fail to show all courses related to the teacher.");
             throw new CommandException("Fail to show all courses related to the teacher.", e);
         }
 

@@ -11,10 +11,14 @@ import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ServiceManager;
 import by.epam.onlinetraining.service.UserService;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class ShowAllTeachersCommand extends ActionCommand {
+    private static final Logger Logger = LogManager.getLogger(ShowAllTeachersCommand.class);
     private static final String ALL_TEACHERS_PATH = ConfigurationManager.getProperty("path.page.allteachers");
 
     public ShowAllTeachersCommand() {
@@ -28,6 +32,7 @@ public class ShowAllTeachersCommand extends ActionCommand {
             List<User> teachersList = userReceiver.showAllTeachers();
             requestContent.setSessionAttributes(EntityAttributes.ALL_TEACHERS_PARAM, teachersList);
         } catch (ServiceException e) {
+            Logger.log(Level.FATAL,"Exception during showing all teachers command");
             throw new CommandException("Exception during showing all teachers command", e);
         }
 

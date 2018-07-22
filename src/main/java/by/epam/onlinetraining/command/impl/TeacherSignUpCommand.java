@@ -1,5 +1,6 @@
 package by.epam.onlinetraining.command.impl;
 
+import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.SignUpAttributes;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
@@ -9,8 +10,12 @@ import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ServiceManager;
 import by.epam.onlinetraining.service.UserService;
 import by.epam.onlinetraining.service.Validator;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class TeacherSignUpCommand extends AddCourseCommand{
+public class TeacherSignUpCommand extends ActionCommand{
+    private static final Logger Logger = LogManager.getLogger(TeacherSignUpCommand.class);
     private static final String ADMIN_PAGE_PATH = "/jsp/admin/adminpage.jsp";
     private static final String GET_PAGE_URL_PARAM = "/jsp/admin/addteacher.jsp";
 
@@ -56,6 +61,7 @@ public class TeacherSignUpCommand extends AddCourseCommand{
             }
 
         } catch (ServiceException e) {
+            Logger.log(Level.FATAL, "Problem during user sign up");
             throw new CommandException("Problem during user sign up", e);
         }
 

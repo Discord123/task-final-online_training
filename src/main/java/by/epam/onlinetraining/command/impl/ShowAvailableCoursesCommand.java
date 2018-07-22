@@ -12,12 +12,15 @@ import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.CoursesService;
 import by.epam.onlinetraining.service.ServiceManager;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Map;
 
 public class ShowAvailableCoursesCommand extends ActionCommand {
-
+    private static final Logger Logger = LogManager.getLogger(ShowAllCoursesCommand.class);
     private static final String AVAILABLE_COURSES_PATH = ConfigurationManager.getProperty("path.page.available-courses");
     private static final String AVAILABLE_COURSES_PARAM = "availableCourses";
 
@@ -35,6 +38,7 @@ public class ShowAvailableCoursesCommand extends ActionCommand {
             List<CourseDto> courseDtoList = coursesService.showAvailableCourses(userId);
             content.setRequestAttributes(AVAILABLE_COURSES_PARAM, courseDtoList);
         } catch (ServiceException e) {
+            Logger.log(Level.FATAL,"Exception during show available courses command");
             throw new CommandException("Exception during show available courses command", e);
         }
 

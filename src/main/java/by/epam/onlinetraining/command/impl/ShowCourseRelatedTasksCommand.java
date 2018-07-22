@@ -10,11 +10,14 @@ import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ServiceManager;
 import by.epam.onlinetraining.service.TasksService;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class ShowCourseRelatedTasksCommand extends ActionCommand {
-
+    private static final Logger Logger = LogManager.getLogger(ShowCourseRelatedTasksCommand.class);
     private static final String TASKS_PAGE_PATH = ConfigurationManager.getProperty("path.page.relatedtasks");
     private static final String COURSE_ID_PARAM = "course_id";
     private static final String RELATED_TASKS_ATTR = "relatedTasks";
@@ -33,6 +36,7 @@ public class ShowCourseRelatedTasksCommand extends ActionCommand {
             List<Task> taskList = tasksService.showCourseRelatedTasks(courseId);
             content.setSessionAttributes(RELATED_TASKS_ATTR, taskList);
         } catch (ServiceException e) {
+            Logger.log(Level.FATAL,"Fail to show course related tasks.");
             throw new CommandException("Fail to show course related tasks.", e);
         }
 

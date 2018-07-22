@@ -13,11 +13,15 @@ import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.*;
 import by.epam.onlinetraining.service.impl.SubjectServiceImpl;
 import by.epam.onlinetraining.service.impl.UserServiceImpl;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Map;
 
 public class EditCourseCommand extends ActionCommand {
+    private static final Logger Logger = LogManager.getLogger(EditCourseCommand.class);
     private static final String EDIT_COURSE_PAGE_PATH = ConfigurationManager.getProperty("path.page.editcourse");
     private static final String ALL_COURSES_PATH = "/controller?command=showallcourses";
     private static final String UPDATE_SUCCESS_MESSAGE = "message.admin.course-update-success";
@@ -52,6 +56,7 @@ public class EditCourseCommand extends ActionCommand {
                 CoursesService coursesService = (CoursesService) getService();
                 isUpdated = coursesService.updateCourse(courseId, courseTitle, subjectId, status, isAvailable, teacherId);
             } catch (ServiceException e) {
+                Logger.log(Level.FATAL,"Fail to update course.");
                 throw new CommandException("Fail to update course.", e);
             }
 
@@ -77,6 +82,7 @@ public class EditCourseCommand extends ActionCommand {
             requestResult = new RequestResult(EDIT_COURSE_PAGE_PATH, NavigationType.FORWARD);
 
         } catch (ServiceException e) {
+            Logger.log(Level.FATAL,"Fail to put required lists in the session");
             throw new CommandException("Fail to put required lists in the session", e);
         }
         return requestResult;

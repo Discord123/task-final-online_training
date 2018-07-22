@@ -10,10 +10,14 @@ import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ServiceManager;
 import by.epam.onlinetraining.service.UserService;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
 public class RecoverPasswordCommand extends ActionCommand {
+    private static final Logger Logger = LogManager.getLogger(RecoverPasswordCommand.class);
     private static final String LOGIN_PAGE_PATH = "/controller?command=getPage&expectedPage=login";
     private static final String RECOVERY_PAGE_PATH = "/controller?command=getPage&expectedPage=recovery";
 
@@ -42,6 +46,7 @@ public class RecoverPasswordCommand extends ActionCommand {
             String text = messageManager.getMessage(MESSAGE_MAIL_TEXT);
             isSent = userService.recoverPassword(email, subject, text);
         } catch (ServiceException e){
+            Logger.log(Level.FATAL, "Fail to recover password for " + email + ".");
             throw new CommandException("Fail to recover password for " + email + ".", e);
         }
 

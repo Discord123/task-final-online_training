@@ -13,10 +13,14 @@ import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ServiceManager;
 import by.epam.onlinetraining.service.UserService;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
 public class LoginCommand extends ActionCommand {
+    private static final Logger Logger = LogManager.getLogger(LoginCommand.class);
     private static final String AUTHORIZATION_ATTRIBUTE = "authorization";
     private static final String FAIL_ATTRIBUTE = "actionFail";
     private static final String MESSAGE_LOGIN_ERROR = "message.login.error";
@@ -38,6 +42,7 @@ public class LoginCommand extends ActionCommand {
             String passwordInput = content.getSingleRequestParameter(SignUpAttributes.PASSWORD_PARAM);
             user = userService.login(emailInput, passwordInput);
         } catch (ServiceException e) {
+            Logger.log(Level.FATAL, "Exception during login command");
             throw new CommandException("Exception during login command", e);
         }
 

@@ -13,7 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class AddTaskCommand extends ActionCommand {
-    private static final Logger LOGGER = LogManager.getLogger(ActionCommand.class);
+    private static final Logger Logger = LogManager.getLogger(ActionCommand.class);
     private static final String COURSE_ID = "course_id";
     private static final String TASK_NAME = "task_name";
     private static final String TASK_DESCRIPTION = "task_description";
@@ -39,7 +39,7 @@ public class AddTaskCommand extends ActionCommand {
             TasksService tasksService = (TasksService) getService();
             isAdded = tasksService.addTask(courseId, taskName, taskDescription);
         } catch (ServiceException e) {
-            LOGGER.log(Level.FATAL,"Exception during processing add task command.", e);
+            Logger.log(Level.FATAL,"Exception during processing add task command.", e);
             throw new CommandException("Exception during processing add task command.", e);
         }
 

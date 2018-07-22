@@ -10,10 +10,14 @@ import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.CoursesService;
 import by.epam.onlinetraining.service.ServiceManager;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class ShowAllCoursesCommand extends ActionCommand {
+    private static final Logger Logger = LogManager.getLogger(ShowAllCoursesCommand.class);
     private static final String ALL_COURSES_PATH = ConfigurationManager.getProperty("path.page.allcourses");
     private static final String ALL_COURSES_PARAM = "allCourses";
 
@@ -28,6 +32,7 @@ public class ShowAllCoursesCommand extends ActionCommand {
             List<CourseDto> courseList = coursesService.showAllCourses();
             requestContent.setSessionAttributes(ALL_COURSES_PARAM, courseList);
         } catch (ServiceException e) {
+            Logger.log(Level.FATAL,"Exception during show all courses command");
             throw new CommandException("Exception during show all courses command", e);
         }
 

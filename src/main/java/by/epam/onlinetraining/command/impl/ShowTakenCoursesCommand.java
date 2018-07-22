@@ -12,11 +12,15 @@ import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.CoursesService;
 import by.epam.onlinetraining.service.ServiceManager;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Map;
 
 public class ShowTakenCoursesCommand extends ActionCommand {
+    private static final Logger Logger = LogManager.getLogger(ShowTakenCoursesCommand.class);
     private static final String TAKEN_COURSES_PATH = ConfigurationManager.getProperty("path.page.takencourses");
     private static final String TAKEN_COURSES_PARAM = "takenCourses";
 
@@ -35,6 +39,7 @@ public class ShowTakenCoursesCommand extends ActionCommand {
             List<CourseDto> courseDtoList = coursesService.showTakenCourses(userId);
             content.setRequestAttributes(TAKEN_COURSES_PARAM, courseDtoList);
         } catch (ServiceException e) {
+            Logger.log(Level.FATAL, "Exception during show taken courses command");
             throw new CommandException("Exception during show taken courses command", e);
         }
 

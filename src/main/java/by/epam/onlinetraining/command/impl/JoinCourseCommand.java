@@ -12,8 +12,12 @@ import by.epam.onlinetraining.service.ServiceManager;
 import by.epam.onlinetraining.service.UserService;
 
 import java.util.Map;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class JoinCourseCommand extends ActionCommand {
+    private static final Logger Logger = LogManager.getLogger(JoinCourseCommand.class);
     private static final String COURSE_ID_PARAM = "course_id";
     private static final String TAKEN_COURSES_PATH = "/controller?command=showtakencourses";
     private static final String JOIN_SUCCESS_MESSAGE = "message.student.course-join-success";
@@ -38,6 +42,7 @@ public class JoinCourseCommand extends ActionCommand {
         try {
             isJoined = userReceiver.joinCourse(courseId, userId);
         } catch (ServiceException e) {
+            Logger.log(Level.FATAL,"Fail to execute join course command.");
             throw new CommandException("Fail to execute join course command.", e);
         }
         putMessageIntoSession(content, isJoined, JOIN_SUCCESS_MESSAGE, JOIN_FAIL_MESSAGE);
