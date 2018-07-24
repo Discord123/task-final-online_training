@@ -2,6 +2,7 @@ package by.epam.onlinetraining.service.impl;
 
 import by.epam.onlinetraining.dao.TransactionHelper;
 import by.epam.onlinetraining.dao.impl.UserDaoImpl;
+import by.epam.onlinetraining.dto.StatisticDTO;
 import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.exception.DaoException;
 import by.epam.onlinetraining.exception.ServiceException;
@@ -41,6 +42,26 @@ public class UserServiceImpl implements UserService {
             helper.endTransaction();
         }
         return user;
+    }
+
+    @Override
+    public StatisticDTO getStatistic() throws ServiceException {
+        StatisticDTO statisticDTO = null;
+
+        UserDaoImpl userDao = new UserDaoImpl();
+        TransactionHelper helper = new TransactionHelper();
+        try{
+            helper.beginTransaction(userDao);
+            statisticDTO = userDao.getStatistic();
+            helper.commit();
+        } catch (DaoException e){
+            helper.rollback();
+            Logger.log(Level.FATAL, "Fail to process create statistic.", e);
+            throw new ServiceException("Fail to process create statistic.", e);
+        } finally {
+            helper.endTransaction();
+        }
+        return statisticDTO;
     }
 
     @Override
@@ -171,5 +192,10 @@ public class UserServiceImpl implements UserService {
         }
 
         return isSent;
+    }
+
+    @Override
+    public boolean saveStatistic(StatisticDTO statisticDTO) throws ServiceException {
+        return false;
     }
 }

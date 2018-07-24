@@ -28,7 +28,6 @@
             <table class="table table-striped table-bordered table-condensed">
                 <thead>
                 <tr>
-                    <th><fmt:message key="label.allteachers.teacherid" bundle="${rb}"/></th>
                     <th><fmt:message key="label.allteachers.teacheremail" bundle="${rb}"/></th>
                     <th><fmt:message key="label.allteachers.teachername" bundle="${rb}"/></th>
                     <th><fmt:message key="label.allteachers.teacher-lastname" bundle="${rb}"/></th>
@@ -38,7 +37,6 @@
                 <tbody>
                 <c:forEach items="${sessionScope.allTeachers}" var="teachers">
                     <tr>
-                        <td>${teachers.id}</td>
                         <td>${teachers.email}</td>
                         <td>${teachers.firstName}</td>
                         <td>${teachers.lastName}</td>

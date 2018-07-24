@@ -42,6 +42,7 @@
                         <li><a href="/controller?command=addcourse"><fmt:message key="label.navbar.admin.addcourse" bundle="${rb}"/></a></li>
                     </ul>
                 </li>
+                <li><a href="/controller?command=getstatistic"><fmt:message key="label.navbar.admin.statistic"  bundle="${rb}"/></a></li>
             </ul>
             <ul class="nav navbar-nav active pull-right">
                 <li>

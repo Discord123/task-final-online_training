@@ -15,6 +15,7 @@
 </head>
 <body>
 <jsp:include page="../../jsp/admin/parts/header.jsp"/>
+<H1 align="center"><fmt:message key="label.addteacher.title" bundle="${rb}"/></H1>
 <div class="container" role="main">
     <div class="col-md-4"></div>
     <div class="col-md-4">

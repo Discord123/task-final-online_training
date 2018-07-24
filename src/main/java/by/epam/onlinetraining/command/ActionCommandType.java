@@ -23,5 +23,6 @@ public enum ActionCommandType {
     GETPAGE,
     ADDTASK,
     RECOVERPASSWORD,
-    GETSTATISTICS
+    GETSTATISTIC,
+    SAVESTATISTIC
 }

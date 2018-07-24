@@ -3,6 +3,7 @@ package by.epam.onlinetraining.dao.impl;
 
 import by.epam.onlinetraining.dao.AbstractDao;
 import by.epam.onlinetraining.dao.UserDao;
+import by.epam.onlinetraining.dto.StatisticDTO;
 import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.entity.Role;
 import by.epam.onlinetraining.exception.DaoException;
@@ -38,6 +39,20 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
             "SELECT user_id, user_isDeleted " +
                     "FROM users " +
                     "WHERE user_email=?";
+
+    private static final String GET_STATISTIC =
+            "SELECT COUNT(*) " +
+                    "FROM users " +
+                    "UNION ALL " +
+                    "SELECT COUNT(*) " +
+                    "FROM tasks " +
+                    "UNION ALL " +
+                    "SELECT COUNT(*) " +
+                    "FROM courses " +
+                    "UNION ALL " +
+                    "SELECT COUNT(*) " +
+                    "FROM users " +
+                    "WHERE user_role = 'teacher'";
 
     private static final String ADD_COURSE_TO_USER =
             "INSERT INTO courses_has_students " +
@@ -134,6 +149,35 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
             throw new DaoException("Exception while trying to find user by email and password in DAO.", e);
         }
         return user;
+    }
+
+    @Override
+    public StatisticDTO getStatistic() throws DaoException {
+        StatisticDTO statisticDTO = null;
+        int usersCount = 0;
+        int tasksCount = 0;
+        int coursesCount = 0;
+        int teacherCount = 0;
+
+        try(PreparedStatement statement = proxyConnection.prepareStatement(GET_STATISTIC)){
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            usersCount = resultSet.getInt(1);
+            resultSet.next();
+            tasksCount = resultSet.getInt(1);
+            resultSet.next();
+            coursesCount = resultSet.getInt(1);
+            resultSet.next();
+            teacherCount = resultSet.getInt(1);
+
+        } catch (SQLException e){
+            Logger.log(Level.FATAL, "Fail to get statistic information in DAO.", e);
+            throw new DaoException("Fail to get statistic information in DAO.", e);
+        }
+
+        statisticDTO = new StatisticDTO(usersCount,tasksCount,coursesCount, teacherCount);
+
+        return statisticDTO;
     }
 
     @Override

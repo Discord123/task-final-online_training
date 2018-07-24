@@ -19,6 +19,8 @@ public class ActionCommandMap {
         commandMap.put(RECOVERPASSWORD, new RecoverPasswordCommand());
 
         commandMap.put(ADDTEACHER, new TeacherSignUpCommand());
+        commandMap.put(GETSTATISTIC, new GetStatisticCommand());
+        commandMap.put(SAVESTATISTIC, new SaveStatisticCommand());
         commandMap.put(SHOWALLTEACHERS, new ShowAllTeachersCommand());
         commandMap.put(DELETEUSER, new DeleteUserCommand());
         commandMap.put(SHOWALLCOURSES, new ShowAllCoursesCommand());

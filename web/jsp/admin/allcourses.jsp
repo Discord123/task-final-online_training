@@ -22,7 +22,6 @@
             <table class="table table-striped table-bordered table-condensed">
                 <thead>
                 <tr>
-                    <th><fmt:message key="label.allcourses.id" bundle="${rb}"/></th>
                     <th><fmt:message key="label.availablecourses.title" bundle="${rb}"/></th>
                     <th><fmt:message key="label.availablecourses.subject-language" bundle="${rb}"/></th>
                     <th><fmt:message key="label.availablecourses.subject-level" bundle="${rb}"/></th>
@@ -35,7 +34,6 @@
                 <tbody>
                 <c:forEach items="${sessionScope.allCourses}" var="courses">
                     <tr>
-                        <td>${courses.id}</td>
                         <td>${courses.title}</td>
                         <td>${courses.subject.language}</td>
                         <td>${courses.subject.level}</td>

@@ -1,14 +1,11 @@
 package by.epam.onlinetraining.dao.impl;
 
 import by.epam.onlinetraining.command.constant.EntityAttributes;
-import by.epam.onlinetraining.dto.CourseDto;
-import by.epam.onlinetraining.dto.ReviewDto;
-import by.epam.onlinetraining.dto.TaskDto;
+import by.epam.onlinetraining.dto.*;
 import by.epam.onlinetraining.entity.*;
 import by.epam.onlinetraining.entity.Language;
 import by.epam.onlinetraining.entity.LanguageLevel;
 import by.epam.onlinetraining.entity.Role;
-import by.epam.onlinetraining.dto.Status;
 import by.epam.onlinetraining.exception.DaoException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -124,6 +121,23 @@ public class ResultSetParser {
         User student = createUser(resultSet);
 
         return new ReviewDto(review, student);
+    }
+
+    static StatisticDTO createStatisticDto(ResultSet resultSet) throws DaoException{
+        StatisticDTO statisticDTO = null;
+
+        try {
+            Integer usersCount = resultSet.getInt(EntityAttributes.USER_ID);
+            Integer tasksCount = resultSet.getInt(EntityAttributes.TASK_ID);
+            Integer coursesCount = resultSet.getInt(EntityAttributes.COURSE_ID);
+
+//            statisticDTO = new StatisticDTO(1, 2, 3);
+        } catch (SQLException e) {
+            Logger.log(Level.FATAL, "Fail to create statistic DTO while parsing.", e);
+            throw new DaoException("Fail to create statistic DTO while parsing.", e);
+        }
+
+        return statisticDTO;
     }
 
     static CourseDto createCourseDto(ResultSet resultSet) throws DaoException{
