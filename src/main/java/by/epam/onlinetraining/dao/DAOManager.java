@@ -2,34 +2,28 @@ package by.epam.onlinetraining.dao;
 
 import by.epam.onlinetraining.dao.impl.*;
 
-public class DAOManager {
-
-    public static final CoursesDaoImpl COURSES_DAO = new CoursesDaoImpl();
-    public static final ReviewDaoImpl REVIEW_DAO = new ReviewDaoImpl();
-    public static final SubjectDaoImpl SUBJECT_DAO = new SubjectDaoImpl();
-    public static final TasksDaoImpl TASKS_DAO = new TasksDaoImpl();
-    public static final UserDaoImpl USER_DAO = new UserDaoImpl();
+public final class DAOManager {
 
     private DAOManager() {
     }
 
     public static CoursesDaoImpl getCoursesDao() {
-        return COURSES_DAO;
+        return new CoursesDaoImpl();
     }
 
     public static ReviewDaoImpl getReviewDao() {
-        return REVIEW_DAO;
+        return new ReviewDaoImpl();
     }
 
     public static SubjectDaoImpl getSubjectDao() {
-        return SUBJECT_DAO;
+        return new SubjectDaoImpl();
     }
 
     public static TasksDaoImpl getTasksDao() {
-        return TASKS_DAO;
+        return new TasksDaoImpl();
     }
 
     public static UserDaoImpl getUserDao() {
-        return USER_DAO;
+        return new UserDaoImpl();
     }
 }

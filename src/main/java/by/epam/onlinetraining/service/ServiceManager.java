@@ -2,7 +2,7 @@ package by.epam.onlinetraining.service;
 
 import by.epam.onlinetraining.service.impl.*;
 
-public class ServiceManager {
+public final class ServiceManager {
 
     private static final CoursesService COURSES_SERVICE = new CoursesServiceImpl();
     private static final ReviewService REVIEW_SERVICE = new ReviewServiceImpl();
