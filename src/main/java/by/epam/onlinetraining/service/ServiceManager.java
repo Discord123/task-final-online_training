@@ -10,7 +10,7 @@ public class ServiceManager {
     private static final TasksService TASKS_SERVICE = new TasksServiceImpl();
     private static final UserService USER_SERVICE = new UserServiceImpl();
 
-    private ServiceManager () {
+    private ServiceManager() {
     }
 
     public static CoursesService getCoursesService() {

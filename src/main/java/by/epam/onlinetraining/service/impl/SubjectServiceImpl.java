@@ -1,5 +1,6 @@
 package by.epam.onlinetraining.service.impl;
 
+import by.epam.onlinetraining.dao.DAOManager;
 import by.epam.onlinetraining.dao.TransactionHelper;
 import by.epam.onlinetraining.dao.impl.SubjectDaoImpl;
 import by.epam.onlinetraining.entity.Subject;
@@ -18,11 +19,12 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public List<Subject> getAllSubjects() throws ServiceException {
         List<Subject> subjectList = null;
-        SubjectDaoImpl subjectDao = new SubjectDaoImpl();
+
+        SubjectDaoImpl subjectDAO = DAOManager.getSubjectDao();
         TransactionHelper helper = new TransactionHelper();
         try{
-            helper.beginTransaction(subjectDao);
-            subjectList = subjectDao.showAllSubjects();
+            helper.beginTransaction(subjectDAO);
+            subjectList = subjectDAO.showAllSubjects();
             helper.commit();
         } catch (DaoException e){
             helper.rollback();

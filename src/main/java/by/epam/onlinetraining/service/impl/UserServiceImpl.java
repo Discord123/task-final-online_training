@@ -1,5 +1,6 @@
 package by.epam.onlinetraining.service.impl;
 
+import by.epam.onlinetraining.dao.DAOManager;
 import by.epam.onlinetraining.dao.TransactionHelper;
 import by.epam.onlinetraining.dao.impl.UserDaoImpl;
 import by.epam.onlinetraining.dto.StatisticDTO;
@@ -26,12 +27,12 @@ public class UserServiceImpl implements UserService {
 
         String passwordHash = PasswordHasher.shaHashing(passwordInput);
 
-        UserDaoImpl userDao = new UserDaoImpl();
+        UserDaoImpl userDAO = DAOManager.getUserDao();
         TransactionHelper helper = new TransactionHelper();
         try{
-            helper.beginTransaction(userDao);
-            if(userDao.checkUserByEmail(emailInput)){
-                user = userDao.findUserByEmailAndPassword(emailInput, passwordHash);
+            helper.beginTransaction(userDAO);
+            if(userDAO.checkUserByEmail(emailInput)){
+                user = userDAO.findUserByEmailAndPassword(emailInput, passwordHash);
             }
             helper.commit();
         } catch (DaoException e){
@@ -48,11 +49,11 @@ public class UserServiceImpl implements UserService {
     public StatisticDTO getStatistic() throws ServiceException {
         StatisticDTO statisticDTO = null;
 
-        UserDaoImpl userDao = new UserDaoImpl();
+        UserDaoImpl userDAO = DAOManager.getUserDao();
         TransactionHelper helper = new TransactionHelper();
         try{
-            helper.beginTransaction(userDao);
-            statisticDTO = userDao.getStatistic();
+            helper.beginTransaction(userDAO);
+            statisticDTO = userDAO.getStatistic();
             helper.commit();
         } catch (DaoException e){
             helper.rollback();
@@ -67,11 +68,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteUserById(int userId) throws ServiceException {
         boolean isDeletedSuccessfully = false;
-        UserDaoImpl userDao = new UserDaoImpl();
+
+        UserDaoImpl userDAO = DAOManager.getUserDao();
         TransactionHelper helper = new TransactionHelper();
         try{
-            helper.beginTransaction(userDao);
-            isDeletedSuccessfully = userDao.deleteUserById(userId);
+            helper.beginTransaction(userDAO);
+            isDeletedSuccessfully = userDAO.deleteUserById(userId);
             helper.commit();
         } catch (DaoException e){
             helper.rollback();
@@ -87,11 +89,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllTeachers() throws ServiceException {
         List<User> teachersList = null;
-        UserDaoImpl userDao = new UserDaoImpl();
+
+        UserDaoImpl userDAO = DAOManager.getUserDao();
         TransactionHelper helper = new TransactionHelper();
         try{
-            helper.beginTransaction(userDao);
-            teachersList = userDao.findAllTeachers();
+            helper.beginTransaction(userDAO);
+            teachersList = userDAO.findAllTeachers();
             helper.commit();
         } catch (DaoException e) {
             helper.rollback();
@@ -107,11 +110,11 @@ public class UserServiceImpl implements UserService {
     public boolean isEmailTaken(String emailInput) throws ServiceException {
         boolean isTaken = false;
 
-        UserDaoImpl userDao = new UserDaoImpl();
+        UserDaoImpl userDAO = DAOManager.getUserDao();
         TransactionHelper helper = new TransactionHelper();
         try{
-            helper.beginTransaction(userDao);
-            isTaken = userDao.checkUserByEmail(emailInput);
+            helper.beginTransaction(userDAO);
+            isTaken = userDAO.checkUserByEmail(emailInput);
             helper.commit();
         } catch (DaoException e){
             helper.rollback();
@@ -128,11 +131,11 @@ public class UserServiceImpl implements UserService {
         boolean isRegistered = false;
         String hashedPassword = PasswordHasher.shaHashing(userPassword);
 
-        UserDaoImpl userDao = new UserDaoImpl();
+        UserDaoImpl userDAO = DAOManager.getUserDao();
         TransactionHelper helper = new TransactionHelper();
         try {
-            helper.beginTransaction(userDao);
-            isRegistered = userDao.addUser(userEmail, hashedPassword, firstName, lastName, role);
+            helper.beginTransaction(userDAO);
+            isRegistered = userDAO.addUser(userEmail, hashedPassword, firstName, lastName, role);
             helper.commit();
         } catch (DaoException e) {
             helper.rollback();
@@ -147,11 +150,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean joinCourse(int courseId, int userId) throws ServiceException {
         Boolean isJoined = false;
-        UserDaoImpl userDao = new UserDaoImpl();
+
+        UserDaoImpl userDAO = DAOManager.getUserDao();
         TransactionHelper helper = new TransactionHelper();
         try {
-            helper.beginTransaction(userDao);
-            isJoined = userDao.joinCourse(courseId, userId);
+            helper.beginTransaction(userDAO);
+            isJoined = userDAO.joinCourse(courseId, userId);
             helper.commit();
         } catch (DaoException e) {
             helper.rollback();
@@ -167,14 +171,15 @@ public class UserServiceImpl implements UserService {
     public boolean recoverPassword(String userEmail, String subject, String text) throws ServiceException {
         boolean isSent = false;
         String password = PasswordCreator.createPassword();
-        UserDaoImpl userDao = new UserDaoImpl();
+
+        UserDaoImpl userDAO = DAOManager.getUserDao();
         TransactionHelper helper = new TransactionHelper();
         try{
-            helper.beginTransaction(userDao);
-            boolean isUserExists = userDao.checkUserByEmail(userEmail);
+            helper.beginTransaction(userDAO);
+            boolean isUserExists = userDAO.checkUserByEmail(userEmail);
             if(isUserExists) {
                 String hashedPassword = PasswordHasher.shaHashing(password);
-                userDao.updateUserPassword(userEmail, hashedPassword);
+                userDAO.updateUserPassword(userEmail, hashedPassword);
 
                 MailSender mailSender = new MailSender();
                 String completeMessage = text + password;

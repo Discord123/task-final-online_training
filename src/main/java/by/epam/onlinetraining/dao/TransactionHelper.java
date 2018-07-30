@@ -13,7 +13,7 @@ public class TransactionHelper {
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
     private ProxyConnection connection = connectionPool.getConnection();
 
-    public void beginTransaction(AbstractDao dao, AbstractDao... daos) {
+    public void beginTransaction(AbstractDao dao) {
         try {
             connection.setAutoCommit(false);
         } catch (SQLException e) {
@@ -21,9 +21,6 @@ public class TransactionHelper {
         }
 
         dao.setConnection(connection);
-        for (AbstractDao daoIteration : daos) {
-            daoIteration.setConnection(connection);
-        }
     }
 
     public void endTransaction() {

@@ -71,7 +71,7 @@ public class EditCourseCommand extends ActionCommand {
     private ActionResult putRequiredDataIntoSession(RequestContent requestContent) throws CommandException {
         ActionResult actionResult;
         try {
-            SubjectService subjectService = new SubjectServiceImpl();
+            SubjectService subjectService = ServiceManager.getSubjectService();
             List<Subject> subjectList = subjectService.getAllSubjects();
             requestContent.setSessionAttributes(EntityAttributes.ALL_SUBJECTS_PARAM, subjectList);
 

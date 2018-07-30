@@ -11,7 +11,6 @@ import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.*;
-import by.epam.onlinetraining.service.impl.SubjectServiceImpl;
 import by.epam.onlinetraining.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -75,7 +74,7 @@ public class AddCourseCommand extends ActionCommand {
     private ActionResult putRequiredDataIntoSession(RequestContent requestContent) throws CommandException {
         ActionResult actionResult;
         try {
-            SubjectService subjectService = new SubjectServiceImpl();
+            SubjectService subjectService = ServiceManager.getSubjectService();
             List<Subject> subjectList = subjectService.getAllSubjects();
             requestContent.setSessionAttributes(EntityAttributes.ALL_SUBJECTS_PARAM, subjectList);
 

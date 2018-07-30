@@ -1,5 +1,6 @@
 package by.epam.onlinetraining.service.impl;
 
+import by.epam.onlinetraining.dao.DAOManager;
 import by.epam.onlinetraining.dao.TransactionHelper;
 import by.epam.onlinetraining.dao.impl.ReviewDaoImpl;
 import by.epam.onlinetraining.dto.ReviewDto;
@@ -19,11 +20,11 @@ public class ReviewServiceImpl implements ReviewService {
     public boolean sendReview(int taskId, int userId, int mark, String review) throws ServiceException {
         boolean isSent = false;
 
-        ReviewDaoImpl reviewDao = new ReviewDaoImpl();
+        ReviewDaoImpl reviewDAO = DAOManager.getReviewDao();
         TransactionHelper helper = new TransactionHelper();
         try{
-            helper.beginTransaction(reviewDao);
-            isSent = reviewDao.sendReview(taskId, userId, mark, review);
+            helper.beginTransaction(reviewDAO);
+            isSent = reviewDAO.sendReview(taskId, userId, mark, review);
             helper.commit();
         } catch (DaoException e){
             helper.rollback();
@@ -40,11 +41,11 @@ public class ReviewServiceImpl implements ReviewService {
     public boolean sendAnswer(int taskId, int userId, String answer) throws ServiceException {
         boolean result = false;
 
-        ReviewDaoImpl reviewDao = new ReviewDaoImpl();
+        ReviewDaoImpl reviewDAO = DAOManager.getReviewDao();
         TransactionHelper helper = new TransactionHelper();
         try{
-            helper.beginTransaction(reviewDao);
-            result = reviewDao.sendAnswer(taskId, userId, answer) ;
+            helper.beginTransaction(reviewDAO);
+            result = reviewDAO.sendAnswer(taskId, userId, answer) ;
             helper.commit();
         } catch (DaoException e) {
             helper.rollback();
@@ -60,11 +61,11 @@ public class ReviewServiceImpl implements ReviewService {
     public List<ReviewDto> getReviewsByTaskId(int taskId) throws ServiceException {
         List<ReviewDto> reviewDtoList = null;
 
-        ReviewDaoImpl reviewDao = new ReviewDaoImpl();
+        ReviewDaoImpl reviewDAO = DAOManager.getReviewDao();
         TransactionHelper helper = new TransactionHelper();
         try{
-            helper.beginTransaction(reviewDao);
-            reviewDtoList = reviewDao.findAllReviewsByTaskId(taskId);
+            helper.beginTransaction(reviewDAO);
+            reviewDtoList = reviewDAO.findAllReviewsByTaskId(taskId);
             helper.commit();
         } catch (DaoException e){
             helper.rollback();

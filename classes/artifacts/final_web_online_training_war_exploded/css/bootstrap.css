@@ -8,6 +8,13 @@ body {
   padding-top:50px;
   margin: 0;
 }
+.save_btn {
+  padding: 5px;
+  border: solid 2px black;
+  background-color: red;
+  color: white;
+  border-round: 5px;
+}
 .promo {
   color: #ffffff;
   font-weight: bold;

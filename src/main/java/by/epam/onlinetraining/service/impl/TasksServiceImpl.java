@@ -1,5 +1,6 @@
 package by.epam.onlinetraining.service.impl;
 
+import by.epam.onlinetraining.dao.DAOManager;
 import by.epam.onlinetraining.dao.TransactionHelper;
 import by.epam.onlinetraining.dao.impl.TasksDaoImpl;
 import by.epam.onlinetraining.dto.TaskDto;
@@ -20,11 +21,11 @@ public class TasksServiceImpl implements TasksService {
     public List<TaskDto> getReceivedTasks(int userId) throws ServiceException {
         List<TaskDto> taskDtoList;
 
-        TasksDaoImpl tasksDao = new TasksDaoImpl();
+        TasksDaoImpl taskDAO = DAOManager.getTasksDao();
         TransactionHelper helper = new TransactionHelper();
         try{
-            helper.beginTransaction(tasksDao);
-            taskDtoList = tasksDao.findReceivedTasks(userId);
+            helper.beginTransaction(taskDAO);
+            taskDtoList = taskDAO.findReceivedTasks(userId);
             helper.commit();
         } catch (DaoException e) {
             helper.rollback();
@@ -40,11 +41,11 @@ public class TasksServiceImpl implements TasksService {
     public List<Task> getCourseRelatedTasks(int courseId) throws ServiceException {
         List<Task> taskList;
 
-        TasksDaoImpl tasksDao = new TasksDaoImpl();
+        TasksDaoImpl taskDAO = DAOManager.getTasksDao();
         TransactionHelper helper = new TransactionHelper();
         try {
-            helper.beginTransaction(tasksDao);
-            taskList = tasksDao.findTasksByCourseId(courseId);
+            helper.beginTransaction(taskDAO);
+            taskList = taskDAO.findTasksByCourseId(courseId);
             helper.commit();
         } catch (DaoException e) {
             helper.rollback();
@@ -60,11 +61,11 @@ public class TasksServiceImpl implements TasksService {
     public boolean addTask(int courseId, String taskName, String taskDescription) throws ServiceException {
         boolean isAdded = false;
 
-        TasksDaoImpl tasksDao = new TasksDaoImpl();
+        TasksDaoImpl taskDAO = DAOManager.getTasksDao();
         TransactionHelper helper = new TransactionHelper();
         try{
-            helper.beginTransaction(tasksDao);
-            isAdded = tasksDao.addTask(courseId, taskName, taskDescription);
+            helper.beginTransaction(taskDAO);
+            isAdded = taskDAO.addTask(courseId, taskName, taskDescription);
             helper.commit();
         } catch (DaoException e){
             helper.rollback();

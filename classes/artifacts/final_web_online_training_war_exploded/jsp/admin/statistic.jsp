@@ -23,43 +23,11 @@
     <br/>
     <form method="POST" action="/controller">
         <input type="hidden"  name="command" value="savestatistic" />
-        <button type="submit" class="btn btn-warning">
+        <button type="" class="btn btn-warning">
             <fmt:message key="label.statistic.save-btn" bundle="${rb}"/>
         </button>
     </form>
 </div>
-
-<%--<!-- Кнопка пуска модальное окно -->--%>
-<%--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">--%>
-    <%--Launch demo modal--%>
-<%--</button>--%>
-
-<%--<!-- Модальное окно -->--%>
-<%--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">--%>
-    <%--<div class="modal-dialog" role="document">--%>
-        <%--<div class="modal-content">--%>
-            <%--<div class="modal-header">--%>
-                <%--<button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
-                    <%--<span aria-hidden="true">&times;</span>--%>
-                <%--</button>--%>
-                <%--<h4 class="modal-title" id="myModalLabel">Modal title</h4>--%>
-            <%--</div>--%>
-            <%--<div class="modal-body">--%>
-                <%--...--%>
-            <%--</div>--%>
-            <%--<div class="modal-footer">--%>
-                <%--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--%>
-                <%--<button type="button" class="btn btn-primary">Save changes</button>--%>
-                <%--<form method="POST" action="/controller">--%>
-                    <%--<input type="hidden"  name="command" value="savestatistic" />--%>
-                    <%--<button type="button" class="btn btn-primary">--%>
-                        <%--<fmt:message key="label.statistic.save-btn" bundle="${rb}"/>--%>
-                    <%--</button>--%>
-                <%--</form>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</div>--%>
 
 <jsp:include page="../../jsp/admin/parts/footer.jsp"/>
 </body>

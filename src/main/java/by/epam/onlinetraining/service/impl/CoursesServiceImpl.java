@@ -1,5 +1,6 @@
 package by.epam.onlinetraining.service.impl;
 
+import by.epam.onlinetraining.dao.DAOManager;
 import by.epam.onlinetraining.dao.TransactionHelper;
 import by.epam.onlinetraining.dao.impl.CoursesDaoImpl;
 import by.epam.onlinetraining.dto.CourseDto;
@@ -19,11 +20,11 @@ public class CoursesServiceImpl implements CoursesService {
     public List<CourseDto> getRelatedCourses(int teacherId) throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
-        CoursesDaoImpl coursesDao = new CoursesDaoImpl();
+        CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
         TransactionHelper helper = new TransactionHelper();
         try {
-            helper.beginTransaction(coursesDao);
-            courseDtoList = coursesDao.findRelatedCourses(teacherId);
+            helper.beginTransaction(coursesDAO);
+            courseDtoList = coursesDAO.findRelatedCourses(teacherId);
             helper.commit();
         } catch (DaoException e) {
             helper.rollback();
@@ -40,11 +41,11 @@ public class CoursesServiceImpl implements CoursesService {
                                 int isAvailable, int teacherId) throws ServiceException {
 
         boolean isUpdated = false;
-        CoursesDaoImpl coursesDao = new CoursesDaoImpl();
+        CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
         TransactionHelper helper = new TransactionHelper();
         try{
-            helper.beginTransaction(coursesDao);
-            isUpdated = coursesDao.updateCourseById(courseId, courseTitle, subjectId, status, isAvailable, teacherId);
+            helper.beginTransaction(coursesDAO);
+            isUpdated = coursesDAO.updateCourseById(courseId, courseTitle, subjectId, status, isAvailable, teacherId);
             helper.commit();
         } catch (DaoException e){
             helper.rollback();
@@ -60,11 +61,11 @@ public class CoursesServiceImpl implements CoursesService {
     public List<CourseDto> getAvailableCourses(int userId) throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
-        CoursesDaoImpl coursesDao = new CoursesDaoImpl();
+        CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
         TransactionHelper helper = new TransactionHelper();
         try {
-            helper.beginTransaction(coursesDao);
-            courseDtoList = coursesDao.findAvailableCourses(userId);
+            helper.beginTransaction(coursesDAO);
+            courseDtoList = coursesDAO.findAvailableCourses(userId);
             helper.commit();
         } catch (DaoException e) {
             helper.rollback();
@@ -79,11 +80,12 @@ public class CoursesServiceImpl implements CoursesService {
     @Override
     public boolean addCourse(String courseTitle, int subjectId, String status, int isAvailable, int teacherId) throws ServiceException {
         boolean isAdded = false;
-        CoursesDaoImpl coursesDao = new CoursesDaoImpl();
+
+        CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
         TransactionHelper helper = new TransactionHelper();
         try{
-            helper.beginTransaction(coursesDao);
-            isAdded = coursesDao.addCourse(courseTitle, subjectId, status, isAvailable, teacherId);
+            helper.beginTransaction(coursesDAO);
+            isAdded = coursesDAO.addCourse(courseTitle, subjectId, status, isAvailable, teacherId);
             helper.commit();
         } catch (DaoException e){
             helper.rollback();
@@ -99,11 +101,11 @@ public class CoursesServiceImpl implements CoursesService {
     public List<CourseDto> getTakenCourses(int userId) throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
-        CoursesDaoImpl coursesDao = new CoursesDaoImpl();
+        CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
         TransactionHelper helper = new TransactionHelper();
         try {
-            helper.beginTransaction(coursesDao);
-            courseDtoList = coursesDao.findTakenCourses(userId);
+            helper.beginTransaction(coursesDAO);
+            courseDtoList = coursesDAO.findTakenCourses(userId);
             helper.commit();
         } catch (DaoException e) {
             helper.rollback();
@@ -120,11 +122,11 @@ public class CoursesServiceImpl implements CoursesService {
     public List<CourseDto> getAllCourses() throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
-        CoursesDaoImpl coursesDao = new CoursesDaoImpl();
+        CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
         TransactionHelper helper = new TransactionHelper();
         try{
-            helper.beginTransaction(coursesDao);
-            courseDtoList = coursesDao.findAllCourses();
+            helper.beginTransaction(coursesDAO);
+            courseDtoList = coursesDAO.findAllCourses();
             helper.commit();
         } catch (DaoException e){
             helper.rollback();
