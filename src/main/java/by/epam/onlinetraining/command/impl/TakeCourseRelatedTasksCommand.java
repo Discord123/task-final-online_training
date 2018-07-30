@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.bundles.ConfigurationManager;
+import by.epam.onlinetraining.command.bundle.PagePathManager;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class TakeCourseRelatedTasksCommand extends ActionCommand {
     private static final Logger Logger = LogManager.getLogger(TakeCourseRelatedTasksCommand.class);
-    private static final String TASKS_PAGE_PATH = ConfigurationManager.getProperty("path.page.relatedtasks");
+    private static final String TASKS_PAGE_PATH = PagePathManager.getProperty("path.page.relatedtasks");
     private static final String COURSE_ID_PARAM = "course_id";
     private static final String RELATED_TASKS_ATTR = "relatedTasks";
 

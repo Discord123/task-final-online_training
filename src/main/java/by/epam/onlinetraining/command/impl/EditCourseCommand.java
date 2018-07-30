@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.bundles.ConfigurationManager;
+import by.epam.onlinetraining.command.bundle.PagePathManager;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.EntityAttributes;
 import by.epam.onlinetraining.content.ActionResult;
@@ -11,7 +11,6 @@ import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.*;
-import by.epam.onlinetraining.service.impl.SubjectServiceImpl;
 import by.epam.onlinetraining.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -22,7 +21,7 @@ import java.util.Map;
 
 public class EditCourseCommand extends ActionCommand {
     private static final Logger Logger = LogManager.getLogger(EditCourseCommand.class);
-    private static final String EDIT_COURSE_PAGE_PATH = ConfigurationManager.getProperty("path.page.editcourse");
+    private static final String EDIT_COURSE_PAGE_PATH = PagePathManager.getProperty("path.page.editcourse");
     private static final String ALL_COURSES_PATH = "/controller?command=showallcourses";
     private static final String UPDATE_SUCCESS_MESSAGE = "message.admin.course-update-success";
     private static final String UPDATE_FAIL_MESSAGE = "message.admin.course-update-fail";

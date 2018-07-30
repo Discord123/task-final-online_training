@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.bundles.ConfigurationManager;
+import by.epam.onlinetraining.command.bundle.PagePathManager;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.SessionAttributes;
 import by.epam.onlinetraining.content.ActionResult;
@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class TakeAvailableCoursesCommand extends ActionCommand {
     private static final Logger Logger = LogManager.getLogger(ShowAllCoursesCommand.class);
-    private static final String AVAILABLE_COURSES_PATH = ConfigurationManager.getProperty("path.page.available-courses");
+    private static final String AVAILABLE_COURSES_PATH = PagePathManager.getProperty("path.page.available-courses");
     private static final String AVAILABLE_COURSES_PARAM = "availableCourses";
 
     public TakeAvailableCoursesCommand() {

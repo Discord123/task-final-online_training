@@ -1,7 +1,5 @@
 package by.epam.onlinetraining.command;
 
-import by.epam.onlinetraining.command.ActionCommand;
-import by.epam.onlinetraining.command.ActionCommandMap;
 import by.epam.onlinetraining.content.RequestContent;
 
 

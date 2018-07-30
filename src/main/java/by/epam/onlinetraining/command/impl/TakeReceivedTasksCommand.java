@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.bundles.ConfigurationManager;
+import by.epam.onlinetraining.command.bundle.PagePathManager;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.SessionAttributes;
 import by.epam.onlinetraining.content.NavigationType;
@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class TakeReceivedTasksCommand extends ActionCommand {
     private static final Logger Logger = LogManager.getLogger(TakeReceivedTasksCommand.class);
-    private static final String RECEIVED_TASKS_PATH = ConfigurationManager.getProperty("path.page.received-tasks");
+    private static final String RECEIVED_TASKS_PATH = PagePathManager.getProperty("path.page.received-tasks");
     private static final String RECEIVED_TASKS_PARAM = "receivedTasks";
 
     public TakeReceivedTasksCommand() {

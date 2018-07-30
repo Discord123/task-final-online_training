@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.bundles.ConfigurationManager;
+import by.epam.onlinetraining.command.bundle.PagePathManager;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.SessionAttributes;
 import by.epam.onlinetraining.content.NavigationType;
@@ -28,9 +28,9 @@ public class TakeTeacherRelatedCoursesCommand extends ActionCommand {
     private static final String ADD_TASK = "addtask";
     private static final String EXPECTED_PAGE_PARAMETER = "expectedpage";
 
-    private static final String RELATED_COURSES_PAGE = ConfigurationManager.getProperty("path.page.relatedcourses");
-    private static final String RELATED_TASKS_PAGE = ConfigurationManager.getProperty("path.page.relatedtasks");
-    private static final String ADD_TASK_PAGE = ConfigurationManager.getProperty("path.page.addtask");
+    private static final String RELATED_COURSES_PAGE = PagePathManager.getProperty("path.page.relatedcourses");
+    private static final String RELATED_TASKS_PAGE = PagePathManager.getProperty("path.page.relatedtasks");
+    private static final String ADD_TASK_PAGE = PagePathManager.getProperty("path.page.addtask");
 
     public TakeTeacherRelatedCoursesCommand() {
         super(ServiceManager.getCoursesService());

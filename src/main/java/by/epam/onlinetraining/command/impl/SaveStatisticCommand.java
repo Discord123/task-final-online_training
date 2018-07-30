@@ -1,7 +1,7 @@
 package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.command.ActionCommand;
-import by.epam.onlinetraining.command.bundles.ConfigurationManager;
+import by.epam.onlinetraining.command.bundle.PagePathManager;
 import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 public class SaveStatisticCommand extends ActionCommand {
 
     private static final Logger Logger = LogManager.getLogger(SaveStatisticCommand.class);
-    private static final String STATISTIC_PATH = ConfigurationManager.getProperty("path.page.statistic");
+    private static final String STATISTIC_PATH = PagePathManager.getProperty("path.page.statistic");
     private static final String STATISTIC_PARAM = "saveStatistic";
 
     public SaveStatisticCommand() {

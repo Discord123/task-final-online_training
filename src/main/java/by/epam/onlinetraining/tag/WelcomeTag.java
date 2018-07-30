@@ -1,6 +1,5 @@
 package by.epam.onlinetraining.tag;
 
-import by.epam.onlinetraining.command.bundles.MessageManager;
 import by.epam.onlinetraining.entity.Role;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -10,6 +9,8 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class WelcomeTag extends TagSupport {
     private static final Logger Logger = LogManager.getLogger(WelcomeTag.class);
@@ -21,7 +22,7 @@ public class WelcomeTag extends TagSupport {
     private static final String OUTPUT_FORMAT_END = "</h2><hr>";
 
     private Role role;
-    private String locale;
+    private String locale ;
     private String fullName;
 
     public void setFullName(String fullName) {
@@ -38,16 +39,18 @@ public class WelcomeTag extends TagSupport {
 
     @Override
     public int doStartTag() throws JspException {
-        MessageManager manager = MessageManager.getManager(locale);
-        String messageBegin = manager.getMessage(MESSAGE_BEGIN_KEY);
+        String language = locale.substring(0,locale.indexOf("_"));
+        String country = locale.substring(locale.indexOf("_") + 1);
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("localedata", new Locale(language,country));
+        String messageBegin = resourceBundle.getString(MESSAGE_BEGIN_KEY);
         String messageEnd = null;
 
         if(role == Role.ADMIN){
-            messageEnd = manager.getMessage(MESSAGE_END_ADMIN_KEY);
+            messageEnd = resourceBundle.getString(MESSAGE_END_ADMIN_KEY);
         } else if (role == Role.TEACHER){
-            messageEnd = manager.getMessage(MESSAGE_END_TEACHER_KEY);
+            messageEnd = resourceBundle.getString(MESSAGE_END_TEACHER_KEY);
         } else {
-            messageEnd = manager.getMessage(MESSAGE_END_STUDENT_KEY);
+            messageEnd = resourceBundle.getString(MESSAGE_END_STUDENT_KEY);
         }
 
         String outputMessage = messageBegin + fullName + messageEnd;

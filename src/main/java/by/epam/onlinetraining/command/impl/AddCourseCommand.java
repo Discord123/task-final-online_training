@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.bundles.ConfigurationManager;
+import by.epam.onlinetraining.command.bundle.PagePathManager;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.EntityAttributes;
 import by.epam.onlinetraining.content.ActionResult;
@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class AddCourseCommand extends ActionCommand {
     private static final Logger Logger = LogManager.getLogger(ActionCommand.class);
-    private static final String ADD_COURSE_PAGE_PATH = ConfigurationManager.getProperty("path.page.addcourse");
+    private static final String ADD_COURSE_PAGE_PATH = PagePathManager.getProperty("path.page.addcourse");
     private static final String ADD_SUCCESS_MESSAGE_KEY = "message.admin.course-add-success";
     private static final String ADD_FAIL_MESSAGE_KEY = "message.admin.course-add-fail";
     private static final String ADD_COURSE_PARAM = "addCourse";

@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.bundles.ConfigurationManager;
+import by.epam.onlinetraining.command.bundle.PagePathManager;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class TakeReviewsByTaskId extends ActionCommand {
     private static final Logger Logger = LogManager.getLogger(TakeReviewsByTaskId.class);
-    private static final String TASK_REVIEWS_PAGE_PATH = ConfigurationManager.getProperty("path.page.taskreviews");
+    private static final String TASK_REVIEWS_PAGE_PATH = PagePathManager.getProperty("path.page.taskreviews");
     private static final String TASK_ID_PARAM = "taskid";
     private static final String REVIEWS_AND_USERS_DTO_ATTR = "reviewsAndUsers";
 

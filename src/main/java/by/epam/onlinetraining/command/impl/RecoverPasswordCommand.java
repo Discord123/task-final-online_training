@@ -1,6 +1,5 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.bundles.MessageManager;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.SessionAttributes;
 import by.epam.onlinetraining.content.ActionResult;
@@ -14,7 +13,9 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 public class RecoverPasswordCommand extends ActionCommand {
     private static final Logger Logger = LogManager.getLogger(RecoverPasswordCommand.class);
@@ -41,9 +42,9 @@ public class RecoverPasswordCommand extends ActionCommand {
             UserService userService = (UserService) getService();
             Map<String, Object> sessionAttributes = content.getSessionAttributes();
             String locale = (String) sessionAttributes.get(SessionAttributes.LOCALE);
-            MessageManager messageManager = MessageManager.getManager(locale);
-            String subject = messageManager.getMessage(MESSAGE_MAIL_SUBJECT);
-            String text = messageManager.getMessage(MESSAGE_MAIL_TEXT);
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("localedata", new Locale(locale));
+            String subject = resourceBundle.getString(MESSAGE_MAIL_SUBJECT);
+            String text = resourceBundle.getString(MESSAGE_MAIL_TEXT);
             isSent = userService.recoverPassword(email, subject, text);
         } catch (ServiceException e){
             Logger.log(Level.FATAL, "Fail to recover password for " + email + ".");

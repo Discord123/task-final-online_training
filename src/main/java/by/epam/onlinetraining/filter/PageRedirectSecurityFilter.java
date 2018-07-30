@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.filter;
 
-import by.epam.onlinetraining.command.bundles.ConfigurationManager;
+import by.epam.onlinetraining.command.bundle.PagePathManager;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -13,7 +13,7 @@ public class PageRedirectSecurityFilter implements Filter {
     private String indexPath;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        indexPath = ConfigurationManager.getProperty("path.page.index");
+        indexPath = PagePathManager.getProperty("path.page.index");
     }
 
     @Override

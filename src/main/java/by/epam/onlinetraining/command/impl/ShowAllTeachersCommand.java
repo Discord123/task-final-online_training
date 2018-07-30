@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.bundles.ConfigurationManager;
+import by.epam.onlinetraining.command.bundle.PagePathManager;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.EntityAttributes;
 import by.epam.onlinetraining.content.ActionResult;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ShowAllTeachersCommand extends ActionCommand {
     private static final Logger Logger = LogManager.getLogger(ShowAllTeachersCommand.class);
-    private static final String ALL_TEACHERS_PATH = ConfigurationManager.getProperty("path.page.allteachers");
+    private static final String ALL_TEACHERS_PATH = PagePathManager.getProperty("path.page.allteachers");
 
     public ShowAllTeachersCommand() {
         super(ServiceManager.getUserService());

@@ -44,15 +44,7 @@ public class ActionCommandMap {
     }
 
     public static ActionCommand defineCommandType(String command) {
-        ActionCommand definedCommand = null;
-        for (Map.Entry<ActionCommandType, ActionCommand> entry : commandMap.entrySet()) {
-            ActionCommandType currentCommandKey = entry.getKey();
-            String currentKeyValue = currentCommandKey.toString();
-            if (currentKeyValue.equals(command)) {
-                definedCommand = entry.getValue();
-                break;
-            }
-        }
-        return definedCommand;
+        ActionCommandType actionCommandType = ActionCommandType.valueOf(command);
+        return commandMap.get(actionCommandType);
     }
 }
