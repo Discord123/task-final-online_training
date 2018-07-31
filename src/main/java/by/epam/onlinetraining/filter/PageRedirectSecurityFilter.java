@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.filter;
 
-import by.epam.onlinetraining.command.bundle.PagePathManager;
+import by.epam.onlinetraining.command.util.PagePathManager;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
