@@ -66,6 +66,14 @@
     </build>
 
     <dependencies>
+        <!--Tomcat-->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <version>${tomcat.embed.version}</version>
+        </dependency>
+        <!--    -->
+
         <!-- Junit -->
         <dependency>
             <groupId>junit</groupId>
