@@ -8,7 +8,7 @@ import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.service.ServiceManager;
 
 public class LogoutCommand extends ActionCommand {
-    private static final String INVALIDE_SESSION_MARKER = "invalidate";
+    private static final String INVALIDATE_SESSION_MARKER = "invalidate";
     private static final String LOGIN_PAGE_PATH = "/controller?command=getPage&expectedPage=login";
 
     public LogoutCommand() {
@@ -18,7 +18,7 @@ public class LogoutCommand extends ActionCommand {
     @Override
     public ActionResult execute(RequestContent requestContent) throws CommandException {
         requestContent.cleanSession();
-        requestContent.setSessionAttributes(INVALIDE_SESSION_MARKER, Boolean.TRUE);
+        requestContent.setSessionAttributes(INVALIDATE_SESSION_MARKER, Boolean.TRUE);
 
         return new ActionResult(LOGIN_PAGE_PATH, NavigationType.REDIRECT);
     }

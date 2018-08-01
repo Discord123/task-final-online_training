@@ -18,6 +18,7 @@ public class SecurityFilter implements Filter {
     private static final String COMMAND_PARAMETER = "command";
     private static final String UNAUTHORIZED_ROLE = "ALL";
     private static final String INDEX_PAGE_PATH = "/index.jsp";
+    private static final String INVALIDATE_SESSION_MARKER = "invalidate";
     Map<String, String> accessMap = new HashMap<>();
 
     @Override
@@ -52,6 +53,15 @@ public class SecurityFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
+
+        if(httpServletRequest.getSession() != null){
+            Object invalidate = httpServletRequest.getSession().getAttribute(INVALIDATE_SESSION_MARKER);
+            if(invalidate != null && (boolean) invalidate){
+                httpServletRequest.getSession().invalidate();
+                httpServletResponse.sendRedirect(INDEX_PAGE_PATH);
+                return;
+            }
+        }
 
         String commandValue = httpServletRequest.getParameter(COMMAND_PARAMETER);
         if(isCommandValid(commandValue)){
