@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.util.PagePathManager;
+import by.epam.onlinetraining.command.bundle.PagePathManager;
 import by.epam.onlinetraining.command.ActionCommand;
 import by.epam.onlinetraining.command.constant.EntityAttributes;
 import by.epam.onlinetraining.content.ActionResult;

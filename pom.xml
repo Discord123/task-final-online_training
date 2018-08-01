@@ -8,15 +8,58 @@
     <artifactId>final_web_online_training</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <packaging>war</packaging>
+
+    <properties>
+        <!--TomcatServer Properties-->
+        <tomcat.embed.version>9.0.8</tomcat.embed.version>
+        <tomcat.maven.plugin.version>2.2</tomcat.maven.plugin.version>
+        <tomcat.server.port>9090</tomcat.server.port>
+        <tomcat.context.path>/</tomcat.context.path>
+        <!--    -->
+
+        <junit.version>4.11</junit.version>
+        <log4j.version>2.8.2</log4j.version>
+        <servlet.version>3.1.0</servlet.version>
+        <java.ee.api.version>8.0</java.ee.api.version>
+        <mysql.driver.version>8.0.11</mysql.driver.version>
+        <jstl.version>1.2.5</jstl.version>
+        <javax.mail.version>1.6.1</javax.mail.version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5</version>
+                <version>3.8.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>${tomcat.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>tomcat-run</id>
+                        <goals>
+                            <goal>run-war-only</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <port>${tomcat.server.port}</port>
+                    <path>${tomcat.context.path}</path>
                 </configuration>
             </plugin>
         </plugins>
@@ -27,80 +70,76 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>1.10.19</version>
-            <scope>test</scope>
-        </dependency>
+        <!--    -->
 
         <!-- Logger -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>2.8.2</version>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.8.2</version>
+            <version>${log4j.version}</version>
         </dependency>
+        <!--    -->
+
         <!-- Servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>${servlet.version}</version>
             <scope>provided</scope>
         </dependency>
+        <!--    -->
+
         <!-- EE -->
         <dependency>
-            <groupId>javaee</groupId>
+            <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
-            <version>5</version>
+            <version>${java.ee.api.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
+            <version>${java.ee.api.version}</version>
             <scope>provided</scope>
         </dependency>
-        <!-- MySQL driver -->
+        <!--    -->
+
+        <!--MySQL-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.6</version>
+            <version>${mysql.driver.version}</version>
         </dependency>
+        <!--    -->
+
         <!-- JSTL -->
         <dependency>
             <groupId>org.apache.taglibs</groupId>
-            <artifactId>taglibs-standard-spec</artifactId>
-            <version>1.2.5</version>
+            <artifactId>taglibs-standard-impl</artifactId>
+            <version>${jstl.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.taglibs</groupId>
-            <artifactId>taglibs-standard-impl</artifactId>
-            <version>1.2.5</version>
+            <artifactId>taglibs-standard-spec</artifactId>
+            <version>${jstl.version}</version>
         </dependency>
+        <!--    -->
+
         <!--Mail-->
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>javax.mail-api</artifactId>
-            <version>1.5.5</version>
-        </dependency>
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
-            <version>1.5.1</version>
+            <version>${javax.mail.version}</version>
         </dependency>
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4</version>
-        </dependency>
+        <!--    -->
     </dependencies>
 
 </project>

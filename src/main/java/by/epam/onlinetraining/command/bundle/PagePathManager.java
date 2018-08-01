@@ -1,4 +1,4 @@
-package by.epam.onlinetraining.command.util;
+package by.epam.onlinetraining.command.bundle;
 
 import java.util.ResourceBundle;
 
