@@ -66,7 +66,7 @@
                             </c:choose>
                         </td>
                         <td>
-                            <form method="POST" action="/controller">
+                            <form method="GET" action="/controller">
                                 <input type="hidden" name="command" value="getPage" />
                                 <input type="hidden"  name="expectedPage" value="reviewtask" />
                                 <input type="hidden"  name="user_id" value="${reviews.userId}" />

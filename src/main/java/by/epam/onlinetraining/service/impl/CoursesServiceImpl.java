@@ -21,7 +21,7 @@ public class CoursesServiceImpl implements CoursesService {
         List<CourseDto> courseDtoList = null;
 
         CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try {
             helper.beginTransaction(coursesDAO);
             courseDtoList = coursesDAO.findRelatedCourses(teacherId);
@@ -42,7 +42,7 @@ public class CoursesServiceImpl implements CoursesService {
 
         boolean isUpdated = false;
         CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try{
             helper.beginTransaction(coursesDAO);
             isUpdated = coursesDAO.updateCourseById(courseId, courseTitle, subjectId, status, isAvailable, teacherId);
@@ -62,7 +62,7 @@ public class CoursesServiceImpl implements CoursesService {
         List<CourseDto> courseDtoList = null;
 
         CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try {
             helper.beginTransaction(coursesDAO);
             courseDtoList = coursesDAO.findAvailableCourses(userId);
@@ -82,7 +82,7 @@ public class CoursesServiceImpl implements CoursesService {
         boolean isAdded = false;
 
         CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try{
             helper.beginTransaction(coursesDAO);
             isAdded = coursesDAO.addCourse(courseTitle, subjectId, status, isAvailable, teacherId);
@@ -102,7 +102,7 @@ public class CoursesServiceImpl implements CoursesService {
         List<CourseDto> courseDtoList = null;
 
         CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try {
             helper.beginTransaction(coursesDAO);
             courseDtoList = coursesDAO.findTakenCourses(userId);
@@ -123,7 +123,7 @@ public class CoursesServiceImpl implements CoursesService {
         List<CourseDto> courseDtoList = null;
 
         CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try{
             helper.beginTransaction(coursesDAO);
             courseDtoList = coursesDAO.findAllCourses();

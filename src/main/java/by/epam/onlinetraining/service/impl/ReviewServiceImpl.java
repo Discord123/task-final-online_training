@@ -21,9 +21,10 @@ public class ReviewServiceImpl implements ReviewService {
         boolean isSent = false;
 
         ReviewDaoImpl reviewDAO = DAOManager.getReviewDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try{
             helper.beginTransaction(reviewDAO);
+            review = scriptCheck(review);
             isSent = reviewDAO.sendReview(taskId, userId, mark, review);
             helper.commit();
         } catch (DaoException e){
@@ -42,7 +43,7 @@ public class ReviewServiceImpl implements ReviewService {
         boolean result = false;
 
         ReviewDaoImpl reviewDAO = DAOManager.getReviewDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try{
             helper.beginTransaction(reviewDAO);
             result = reviewDAO.sendAnswer(taskId, userId, answer) ;
@@ -62,7 +63,7 @@ public class ReviewServiceImpl implements ReviewService {
         List<ReviewDto> reviewDtoList = null;
 
         ReviewDaoImpl reviewDAO = DAOManager.getReviewDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try{
             helper.beginTransaction(reviewDAO);
             reviewDtoList = reviewDAO.findAllReviewsByTaskId(taskId);
@@ -77,4 +78,9 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewDtoList;
     }
 
+    private String scriptCheck(String review) {
+        review = review.replace("<script>", "(= ");
+        review = review.replace("</script>", " =)");
+        return review;
+    }
 }

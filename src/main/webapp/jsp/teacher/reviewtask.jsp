@@ -44,7 +44,7 @@
     <div class="col-md-4">
         <H2 align="center"><fmt:message key="label.reviewtask.h2" bundle="${rb}"/></H2>
 
-        <form name="editCourseForm" method="POST" action="/controller">
+        <form name="editCourseForm" method="GET" action="/controller">
             <input type="hidden" name="command" value="sendreview"/>
             <input type="hidden" name="task_id" value="${param.task_id}"/>
             <input type="hidden" name="user_id" value="${param.user_id}"/>

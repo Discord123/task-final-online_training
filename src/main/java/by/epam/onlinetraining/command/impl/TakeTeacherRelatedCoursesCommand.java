@@ -1,11 +1,11 @@
 package by.epam.onlinetraining.command.impl;
 
-import by.epam.onlinetraining.command.bundle.PagePathManager;
 import by.epam.onlinetraining.command.ActionCommand;
+import by.epam.onlinetraining.command.bundle.PagePathManager;
 import by.epam.onlinetraining.command.constant.SessionAttributes;
+import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
-import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.dto.CourseDto;
 import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.exception.CommandException;
@@ -45,6 +45,7 @@ public class TakeTeacherRelatedCoursesCommand extends ActionCommand {
         try {
             List<CourseDto> courseDtoList = coursesService.getRelatedCourses(teacherId);
             content.setSessionAttributes(RELATED_COURSES_ATTRIBUTE, courseDtoList);
+
         } catch (ServiceException e) {
             Logger.log(Level.FATAL, "Fail to show all courses related to the teacher.");
             throw new CommandException("Fail to show all courses related to the teacher.", e);

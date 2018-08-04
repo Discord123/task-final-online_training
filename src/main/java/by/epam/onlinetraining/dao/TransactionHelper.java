@@ -12,6 +12,11 @@ public class TransactionHelper {
     private final static Logger Logger = LogManager.getLogger(TransactionHelper.class);
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
     private ProxyConnection connection = connectionPool.getConnection();
+    private static ThreadLocal<TransactionHelper> transactionHelper = ThreadLocal.withInitial(TransactionHelper::new);
+
+    public static TransactionHelper get() {
+        return transactionHelper.get();
+    }
 
     public void beginTransaction(AbstractDao dao) {
         try {

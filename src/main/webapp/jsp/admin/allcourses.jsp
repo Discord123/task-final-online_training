@@ -41,7 +41,7 @@
                         <td>${courses.teacher.id}</td>
                         <td>${courses.teacher.lastName} ${courses.teacher.firstName}</td>
                         <td>
-                            <form method="POST" action="/controller">
+                            <form method="GET" action="/controller">
                                 <input type="hidden"  name="command" value="editcourse" />
                                 <input type="hidden"  name="course_id" value="${courses.id}" />
                                 <button type="submit" class="btn btn-warning"><fmt:message key="label.allcourses.edit-btn" bundle="${rb}"/></button>

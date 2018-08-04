@@ -26,7 +26,7 @@
     <div class="col-md-4"></div>
     <div class="col-md-4">
 
-        <form name="editCourseForm" method="POST" action="/controller">
+        <form name="editCourseForm" method="GET" action="/controller">
             <input type="hidden" name="command" value="showcourserelatedtasks"/>
             <div class="control-group">
                 <!-- Related courses -->
@@ -72,7 +72,7 @@
                             <td>${tasks.name}</td>
                             <td>${tasks.description}</td>
                             <td>
-                                <form method="POST" action="/controller">
+                                <form method="GET" action="/controller">
                                     <input type="hidden" name="command" value="showreviewsbytaskid"/>
                                     <input type="hidden" name="taskid" value="${tasks.id}"/>
                                     <button type="submit" class="btn btn-info"><fmt:message

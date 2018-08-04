@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
         String passwordHash = PasswordHasher.shaHashing(passwordInput);
 
         UserDaoImpl userDAO = DAOManager.getUserDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try{
             helper.beginTransaction(userDAO);
             if(userDAO.checkUserByEmail(emailInput)){
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         StatisticDTO statisticDTO = null;
 
         UserDaoImpl userDAO = DAOManager.getUserDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try{
             helper.beginTransaction(userDAO);
             statisticDTO = userDAO.getStatistic();
@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
         boolean isDeletedSuccessfully = false;
 
         UserDaoImpl userDAO = DAOManager.getUserDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try{
             helper.beginTransaction(userDAO);
             isDeletedSuccessfully = userDAO.deleteUserById(userId);
@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
         List<User> teachersList = null;
 
         UserDaoImpl userDAO = DAOManager.getUserDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try{
             helper.beginTransaction(userDAO);
             teachersList = userDAO.findAllTeachers();
@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService {
         boolean isTaken = false;
 
         UserDaoImpl userDAO = DAOManager.getUserDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try{
             helper.beginTransaction(userDAO);
             isTaken = userDAO.checkUserByEmail(emailInput);
@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService {
         String hashedPassword = PasswordHasher.shaHashing(userPassword);
 
         UserDaoImpl userDAO = DAOManager.getUserDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try {
             helper.beginTransaction(userDAO);
             isRegistered = userDAO.addUser(userEmail, hashedPassword, firstName, lastName, role);
@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
         Boolean isJoined = false;
 
         UserDaoImpl userDAO = DAOManager.getUserDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try {
             helper.beginTransaction(userDAO);
             isJoined = userDAO.joinCourse(courseId, userId);
@@ -173,7 +173,7 @@ public class UserServiceImpl implements UserService {
         String password = PasswordCreator.createPassword();
 
         UserDaoImpl userDAO = DAOManager.getUserDao();
-        TransactionHelper helper = new TransactionHelper();
+        TransactionHelper helper = TransactionHelper.get();
         try{
             helper.beginTransaction(userDAO);
             boolean isUserExists = userDAO.checkUserByEmail(userEmail);
