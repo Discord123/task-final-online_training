@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TakeAvailableCoursesCommand extends ActionCommand {
-    private static final Logger Logger = LogManager.getLogger(ShowAllCoursesCommand.class);
+    private static final Logger Logger = LogManager.getLogger(TakeAllCoursesCommand.class);
     private static final String AVAILABLE_COURSES_PATH = PagePathManager.getProperty("path.page.available-courses");
     private static final String AVAILABLE_COURSES_PARAM = "availableCourses";
 

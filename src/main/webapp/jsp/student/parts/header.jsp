@@ -27,9 +27,9 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/controller?command=getPage&expectedPage=studentpage"><fmt:message key="label.navbar.admin.main"  bundle="${rb}"/></a></li>
-                <li><a href="/controller?command=showreceivedtasks"><fmt:message key="label.navbar.student.main"  bundle="${rb}"/></a></li>
-                <li><a href="/controller?command=showtakencourses"><fmt:message key="label.navbar.student.taken-courses"  bundle="${rb}"/></a></li>
-                <li><a href="/controller?command=showavailablecourses"><fmt:message key="label.navbar.student.available-courses"  bundle="${rb}"/></a></li>
+                <li><a href="/controller?command=takereceivedtasks"><fmt:message key="label.navbar.student.main"  bundle="${rb}"/></a></li>
+                <li><a href="/controller?command=gettakencourses"><fmt:message key="label.navbar.student.taken-courses"  bundle="${rb}"/></a></li>
+                <li><a href="/controller?command=takeavailablecourses"><fmt:message key="label.navbar.student.available-courses"  bundle="${rb}"/></a></li>
             </ul>
             <ul class="nav navbar-nav active pull-right">
                 <li>

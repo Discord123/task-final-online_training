@@ -20,7 +20,7 @@ public class DeleteUserCommand extends ActionCommand {
     private static final String USER_ID_PARAM = "userid";
     private static final String DELETE_SUCCESS_MESSAGE_KEY = "message.admin.teacher-delete-success";
     private static final String DELETE_FAIL_MESSAGE_KEY = "message.admin.teacher-delete-fail";
-    private static final String GET_PAGE_URL_PARAM = "/controller?command=showallteachers";
+    private static final String GET_PAGE_URL_PARAM = "/controller?command=takeallteachers";
 
     public DeleteUserCommand() {
         super(ServiceManager.getUserService());

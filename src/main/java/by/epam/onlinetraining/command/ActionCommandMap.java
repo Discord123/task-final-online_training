@@ -21,22 +21,22 @@ public class ActionCommandMap {
         commandMap.put(ADDTEACHER, new TeacherSignUpCommand());
         commandMap.put(GETSTATISTIC, new GetStatisticCommand());
         commandMap.put(SAVESTATISTIC, new SaveStatisticCommand());
-        commandMap.put(SHOWALLTEACHERS, new ShowAllTeachersCommand());
+        commandMap.put(TAKEALLTEACHERS, new TakeAllTeachersCommand());
         commandMap.put(DELETEUSER, new DeleteUserCommand());
-        commandMap.put(SHOWALLCOURSES, new ShowAllCoursesCommand());
+        commandMap.put(TAKEALLCOURSES, new TakeAllCoursesCommand());
         commandMap.put(EDITCOURSE, new EditCourseCommand());
         commandMap.put(ADDCOURSE, new AddCourseCommand());
 
-        commandMap.put(SHOWTEACHERRELATEDCOURSES, new TakeTeacherRelatedCoursesCommand());
-        commandMap.put(SHOWCOURSERELATEDTASKS, new TakeCourseRelatedTasksCommand());
-        commandMap.put(SHOWREVIEWSBYTASKID, new TakeReviewsByTaskId());
+        commandMap.put(TAKETEACHERRELATEDCOURSES, new TakeTeacherRelatedCoursesCommand());
+        commandMap.put(TAKECOURSERELATEDTASKS, new TakeCourseRelatedTasksCommand());
+        commandMap.put(TAKEREVIEWSBYTASKID, new TakeReviewsByTaskId());
         commandMap.put(SENDREVIEW, new SendReviewCommand());
         commandMap.put(ADDTASK, new AddTaskCommand());
 
-        commandMap.put(SHOWAVAILABLECOURSES, new TakeAvailableCoursesCommand());
+        commandMap.put(TAKEAVAILABLECOURSES, new TakeAvailableCoursesCommand());
         commandMap.put(JOINCOURSE, new JoinCourseCommand());
-        commandMap.put(SHOWTAKENCOURSES, new GetTakenCoursesCommand());
-        commandMap.put(SHOWRECEIVEDTASKS, new TakeReceivedTasksCommand());
+        commandMap.put(GETTAKENCOURSES, new GetTakenCoursesCommand());
+        commandMap.put(TAKERECEIVEDTASKS, new TakeReceivedTasksCommand());
         commandMap.put(SENDANSWER, new SendAnswerCommand());
     }
 

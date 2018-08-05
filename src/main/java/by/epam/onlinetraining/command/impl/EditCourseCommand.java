@@ -22,7 +22,7 @@ import java.util.Map;
 public class EditCourseCommand extends ActionCommand {
     private static final Logger Logger = LogManager.getLogger(EditCourseCommand.class);
     private static final String EDIT_COURSE_PAGE_PATH = PagePathManager.getProperty("path.page.editcourse");
-    private static final String ALL_COURSES_PATH = "/controller?command=showallcourses";
+    private static final String ALL_COURSES_PATH = "/controller?command=takeallcourses";
     private static final String UPDATE_SUCCESS_MESSAGE = "message.admin.course-update-success";
     private static final String UPDATE_FAIL_MESSAGE = "message.admin.course-update-fail";
 

@@ -31,14 +31,14 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><fmt:message key="label.navbar.admin.teachers"  bundle="${rb}"/><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/controller?command=showallteachers"><fmt:message key="label.navbar.admin.viewteachers"  bundle="${rb}"/></a></li>
+                        <li><a href="/controller?command=takeallteachers"><fmt:message key="label.navbar.admin.viewteachers"  bundle="${rb}"/></a></li>
                         <li><a href="/controller?command=addteacher"><fmt:message key="label.navbar.admin.addteacher" bundle="${rb}"/></a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><fmt:message key="label.navbar.admin.courses"  bundle="${rb}"/><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/controller?command=showallcourses"><fmt:message key="label.navbar.admin.viewcourses"  bundle="${rb}"/></a></li>
+                        <li><a href="/controller?command=takeallcourses"><fmt:message key="label.navbar.admin.viewcourses"  bundle="${rb}"/></a></li>
                         <li><a href="/controller?command=addcourse"><fmt:message key="label.navbar.admin.addcourse" bundle="${rb}"/></a></li>
                     </ul>
                 </li>

@@ -17,11 +17,11 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class ShowAllTeachersCommand extends ActionCommand {
-    private static final Logger Logger = LogManager.getLogger(ShowAllTeachersCommand.class);
+public class TakeAllTeachersCommand extends ActionCommand {
+    private static final Logger Logger = LogManager.getLogger(TakeAllTeachersCommand.class);
     private static final String ALL_TEACHERS_PATH = PagePathManager.getProperty("path.page.allteachers");
 
-    public ShowAllTeachersCommand() {
+    public TakeAllTeachersCommand() {
         super(ServiceManager.getUserService());
     }
 

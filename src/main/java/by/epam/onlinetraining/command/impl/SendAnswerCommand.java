@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class SendAnswerCommand extends ActionCommand {
     private static final Logger Logger = LogManager.getLogger(SendAnswerCommand.class);
-    private static final String RECEIVED_TASKS_PAGE = "/controller?command=showreceivedtasks";
+    private static final String RECEIVED_TASKS_PAGE = "/controller?command=takereceivedtasks";
     private static final String SEND_SUCCESS_MESSAGE = "message.student.answer-send-success";
     private static final String SEND_FAIL_MESSAGE = "message.student.answer-send-fail";
     private static final String TASK_ID_PARAM = "taskid";

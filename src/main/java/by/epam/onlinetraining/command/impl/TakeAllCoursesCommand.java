@@ -16,12 +16,12 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class ShowAllCoursesCommand extends ActionCommand {
-    private static final Logger Logger = LogManager.getLogger(ShowAllCoursesCommand.class);
+public class TakeAllCoursesCommand extends ActionCommand {
+    private static final Logger Logger = LogManager.getLogger(TakeAllCoursesCommand.class);
     private static final String ALL_COURSES_PATH = PagePathManager.getProperty("path.page.allcourses");
     private static final String ALL_COURSES_PARAM = "allCourses";
 
-    public ShowAllCoursesCommand() {
+    public TakeAllCoursesCommand() {
         super(ServiceManager.getCoursesService());
     }
 

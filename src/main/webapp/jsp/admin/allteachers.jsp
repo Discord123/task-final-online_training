@@ -13,7 +13,7 @@
 <body>
 <jsp:include page="../../jsp/admin/parts/header.jsp"/>
 <c:if test="${empty sessionScope.allTeachers}">
-    <jsp:forward page="/controller?command=showallteachers"></jsp:forward>
+    <jsp:forward page="/controller?command=takeallteachers"></jsp:forward>
 </c:if>
 
 <H1 align="center"><fmt:message key="label.allteachers.title" bundle="${rb}"/></H1>

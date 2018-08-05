@@ -19,7 +19,7 @@ public class AddTaskCommand extends ActionCommand {
     private static final String TASK_DESCRIPTION = "task_description";
     private static final String ADD_SUCCESS_MESSAGE = "message.teacher.task-add-success";
     private static final String ADD_FAIL_MESSAGE = "message.teacher.task-add-fail";
-    private static final String ADD_TASK_PAGE = "/controller?command=showteacherrelatedcourses&expectedpage=addtask";
+    private static final String ADD_TASK_PAGE = "/controller?command=taketeacherrelatedcourses&expectedpage=addtask";
 
 
     public AddTaskCommand() {

@@ -27,12 +27,12 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/controller?command=getPage&expectedPage=teacherpage"><fmt:message key="label.navbar.teacher.main"  bundle="${rb}"/></a></li>
-                <li><a href="/controller?command=showteacherrelatedcourses&expectedpage=relatedcourses"><fmt:message key="label.navbar.teacher.related-courses"  bundle="${rb}"/></a></li>
+                <li><a href="/controller?command=taketeacherrelatedcourses&expectedpage=relatedcourses"><fmt:message key="label.navbar.teacher.related-courses"  bundle="${rb}"/></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><fmt:message key="label.navbar.teacher.tasks-management"  bundle="${rb}"/><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/controller?command=showteacherrelatedcourses&expectedpage=relatedtasks"><fmt:message key="label.navbar.teacher.tasks-bycourse"  bundle="${rb}"/></a></li>
-                        <li><a href="/controller?command=showteacherrelatedcourses&expectedpage=addtask"><fmt:message key="label.navbar.teacher.add-task" bundle="${rb}"/></a></li>
+                        <li><a href="/controller?command=taketeacherrelatedcourses&expectedpage=relatedtasks"><fmt:message key="label.navbar.teacher.tasks-bycourse"  bundle="${rb}"/></a></li>
+                        <li><a href="/controller?command=taketeacherrelatedcourses&expectedpage=addtask"><fmt:message key="label.navbar.teacher.add-task" bundle="${rb}"/></a></li>
                     </ul>
                 </li>
             </ul>

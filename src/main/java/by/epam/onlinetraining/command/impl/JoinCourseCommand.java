@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
 public class JoinCourseCommand extends ActionCommand {
     private static final Logger Logger = LogManager.getLogger(JoinCourseCommand.class);
     private static final String COURSE_ID_PARAM = "course_id";
-    private static final String TAKEN_COURSES_PATH = "/controller?command=showtakencourses";
+    private static final String TAKEN_COURSES_PATH = "/controller?command=gettakencourses";
     private static final String JOIN_SUCCESS_MESSAGE = "message.student.course-join-success";
     private static final String JOIN_FAIL_MESSAGE = "message.student.course-join-fail";
 

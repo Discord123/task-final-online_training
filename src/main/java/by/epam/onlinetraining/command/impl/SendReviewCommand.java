@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 public class SendReviewCommand extends ActionCommand {
     private static final Logger Logger = LogManager.getLogger(SendReviewCommand.class);
-    private static final String SHOW_REVIEWS_BY_TASK_ID_PAGE = "/controller?command=showreviewsbytaskid&taskid=";
+    private static final String SHOW_REVIEWS_BY_TASK_ID_PAGE = "/controller?command=takereviewsbytaskid&taskid=";
     private static final String SEND_SUCCESS_MESSAGE = "message.teacher.review-sent-success";
     private static final String SEND_FAIL_MESSAGE = "message.teacher.review-sent-fail";
 

@@ -30,22 +30,25 @@ public class SecurityFilter implements Filter {
         accessMap.put("GETPAGE", "ALL");
         accessMap.put("RECOVERPASSWORD", "ALL");
 
-        accessMap.put("SHOWALLTEACHERS", "ADMIN");
+        accessMap.put("ADDTEACHER", "ADMIN");
+        accessMap.put("GETSTATISTIC", "ADMIN");
+        accessMap.put("SAVESTATISTIC", "ADMIN");
+        accessMap.put("TAKEALLTEACHERS", "ADMIN");
         accessMap.put("DELETEUSER", "ADMIN");
-        accessMap.put("SHOWALLCOURSES", "ADMIN");
+        accessMap.put("TAKEALLCOURSES", "ADMIN");
         accessMap.put("EDITCOURSE", "ADMIN");
         accessMap.put("ADDCOURSE", "ADMIN");
 
-        accessMap.put("SHOWTEACHERRELATEDCOURSES", "TEACHER");
-        accessMap.put("SHOWCOURSERELATEDTASKS", "TEACHER");
-        accessMap.put("SHOWREVIEWSBYTASKID", "TEACHER");
+        accessMap.put("TAKETEACHERRELATEDCOURSES", "TEACHER");
+        accessMap.put("TAKECOURSERELATEDTASKS", "TEACHER");
+        accessMap.put("TAKEREVIEWSBYTASKID", "TEACHER");
         accessMap.put("SENDREVIEW", "TEACHER");
         accessMap.put("ADDTASK", "TEACHER");
 
-        accessMap.put("SHOWAVAILABLECOURSES", "STUDENT");
+        accessMap.put("TAKEAVAILABLECOURSES", "STUDENT");
         accessMap.put("JOINCOURSE", "STUDENT");
-        accessMap.put("SHOWTAKENCOURSES", "STUDENT");
-        accessMap.put("SHOWRECEIVEDTASKS", "STUDENT");
+        accessMap.put("GETETAKENCOURSES", "STUDENT");
+        accessMap.put("TAKERECEIVEDTASKS", "STUDENT");
         accessMap.put("SENDANSWER", "STUDENT");
     }
 
