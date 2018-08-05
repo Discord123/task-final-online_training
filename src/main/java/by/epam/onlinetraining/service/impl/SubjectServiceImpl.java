@@ -21,7 +21,7 @@ public class SubjectServiceImpl implements SubjectService {
         List<Subject> subjectList = null;
 
         SubjectDaoImpl subjectDAO = DAOManager.getSubjectDao();
-        TransactionHelper helper = TransactionHelper.get();
+        TransactionHelper helper = TransactionHelper.getInstance();
         try{
             helper.beginTransaction(subjectDAO);
             subjectList = subjectDAO.showAllSubjects();

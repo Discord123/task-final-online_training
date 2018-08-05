@@ -6,6 +6,8 @@ import by.epam.onlinetraining.entity.Task;
 import java.io.Serializable;
 
 public class TaskDto implements Serializable {
+
+    private static final long serialVersionUID = -2646509672244042786L;
     private Integer id;
     private String name;
     private String description;

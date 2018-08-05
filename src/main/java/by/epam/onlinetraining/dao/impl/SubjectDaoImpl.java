@@ -28,8 +28,8 @@ public class SubjectDaoImpl extends AbstractDao implements SubjectDao {
                 subjectList.add(subject);
             }
         } catch (SQLException e){
-            Logger.log(Level.FATAL, "Fail to get all subjects from dao.", e);
-            throw new DaoException("Fail to get all subjects from dao.", e);
+            Logger.log(Level.FATAL, "Fail to getInstance all subjects from dao.", e);
+            throw new DaoException("Fail to getInstance all subjects from dao.", e);
         }
         return subjectList;
     }

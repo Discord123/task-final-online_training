@@ -165,8 +165,8 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
             teacherCount = resultSet.getInt(1);
 
         } catch (SQLException e){
-            Logger.log(Level.FATAL, "Fail to get statistic information in DAO.", e);
-            throw new DaoException("Fail to get statistic information in DAO.", e);
+            Logger.log(Level.FATAL, "Fail to getInstance statistic information in DAO.", e);
+            throw new DaoException("Fail to getInstance statistic information in DAO.", e);
         }
 
         statisticDTO = new StatisticDTO(usersCount,tasksCount,coursesCount, teacherCount);

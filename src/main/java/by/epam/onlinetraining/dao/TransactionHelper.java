@@ -14,7 +14,7 @@ public class TransactionHelper {
     private ProxyConnection connection = connectionPool.getConnection();
     private static ThreadLocal<TransactionHelper> transactionHelper = ThreadLocal.withInitial(TransactionHelper::new);
 
-    public static TransactionHelper get() {
+    public static TransactionHelper getInstance() {
         return transactionHelper.get();
     }
 

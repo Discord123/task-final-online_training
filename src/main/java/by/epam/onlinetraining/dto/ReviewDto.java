@@ -6,6 +6,8 @@ import by.epam.onlinetraining.entity.User;
 import java.io.Serializable;
 
 public class ReviewDto implements Serializable {
+
+    private static final long serialVersionUID = 5281020140205201973L;
     private Integer userId;
     private Integer taskId;
     private String answer;

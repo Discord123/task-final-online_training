@@ -22,7 +22,7 @@ public class TasksServiceImpl implements TasksService {
         List<TaskDto> taskDtoList;
 
         TasksDaoImpl taskDAO = DAOManager.getTasksDao();
-        TransactionHelper helper = TransactionHelper.get();
+        TransactionHelper helper = TransactionHelper.getInstance();
         try{
             helper.beginTransaction(taskDAO);
             taskDtoList = taskDAO.findReceivedTasks(userId);
@@ -42,7 +42,7 @@ public class TasksServiceImpl implements TasksService {
         List<Task> taskList;
 
         TasksDaoImpl taskDAO = DAOManager.getTasksDao();
-        TransactionHelper helper = TransactionHelper.get();
+        TransactionHelper helper = TransactionHelper.getInstance();
         try {
             helper.beginTransaction(taskDAO);
             taskList = taskDAO.findTasksByCourseId(courseId);
@@ -62,7 +62,7 @@ public class TasksServiceImpl implements TasksService {
         boolean isAdded = false;
 
         TasksDaoImpl taskDAO = DAOManager.getTasksDao();
-        TransactionHelper helper = TransactionHelper.get();
+        TransactionHelper helper = TransactionHelper.getInstance();
         try{
             helper.beginTransaction(taskDAO);
             isAdded = taskDAO.addTask(courseId, taskName, taskDescription);

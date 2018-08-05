@@ -3,6 +3,8 @@ package by.epam.onlinetraining.entity;
 import java.io.Serializable;
 
 public class Task extends OnlineTrainingEntity implements Serializable{
+
+    private static final long serialVersionUID = -7989232959086524564L;
     private int id;
     private String name;
     private String description;

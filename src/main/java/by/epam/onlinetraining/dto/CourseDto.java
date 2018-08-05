@@ -7,6 +7,8 @@ import by.epam.onlinetraining.entity.User;
 import java.io.Serializable;
 
 public class CourseDto implements Serializable {
+
+    private static final long serialVersionUID = 113662446100487998L;
     private Integer id;
     private String title;
     private Status status;

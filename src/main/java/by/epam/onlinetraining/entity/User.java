@@ -3,6 +3,8 @@ package by.epam.onlinetraining.entity;
 import java.io.Serializable;
 
 public class User extends OnlineTrainingEntity implements Serializable{
+
+    private static final long serialVersionUID = -5053904251759353415L;
     private int id;
     private String email;
     private String password;

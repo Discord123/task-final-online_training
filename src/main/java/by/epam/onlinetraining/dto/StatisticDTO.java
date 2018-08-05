@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class StatisticDTO implements Serializable {
 
+    private static final long serialVersionUID = -4297002979065529634L;
     private int usersCount;
     private int tasksCount;
     private int coursesCount;
