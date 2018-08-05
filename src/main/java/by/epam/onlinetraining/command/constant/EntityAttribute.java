@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.command.constant;
 
-public final class EntityAttributes {
+public final class EntityAttribute {
     public static final String ALL_SUBJECTS_PARAM = "allSubjects";
     public static final String ALL_TEACHERS_PARAM = "allTeachers";
 
@@ -33,6 +33,6 @@ public final class EntityAttributes {
     public static final String SUBJECT_LANGUAGE = "subject_language";
     public static final String SUBJECT_LEVEL = "subject_level";
 
-    private EntityAttributes() {
+    private EntityAttribute() {
     }
 }

@@ -53,7 +53,10 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
                     "UNION ALL " +
                     "SELECT COUNT(*) " +
                     "FROM users " +
-                    "WHERE user_role = 'teacher'";
+                    "WHERE user_role = 'teacher'" +
+                    "UNION ALL " +
+                    "SELECT COUNT(DISTINCT subject_language) " +
+                    "FROM subjects ";
 
     private static final String ADD_COURSE_TO_USER =
             "INSERT INTO courses_has_students " +
@@ -152,6 +155,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         int tasksCount = 0;
         int coursesCount = 0;
         int teacherCount = 0;
+        int subjectCount = 0;
 
         try(PreparedStatement statement = proxyConnection.prepareStatement(GET_STATISTIC)){
             ResultSet resultSet = statement.executeQuery();
@@ -163,13 +167,15 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
             coursesCount = resultSet.getInt(1);
             resultSet.next();
             teacherCount = resultSet.getInt(1);
+            resultSet.next();
+            subjectCount = resultSet.getInt(1);
 
         } catch (SQLException e){
             Logger.log(Level.FATAL, "Fail to getInstance statistic information in DAO.", e);
             throw new DaoException("Fail to getInstance statistic information in DAO.", e);
         }
 
-        statisticDTO = new StatisticDTO(usersCount,tasksCount,coursesCount, teacherCount);
+        statisticDTO = new StatisticDTO(usersCount,tasksCount,coursesCount, teacherCount, subjectCount);
 
         return statisticDTO;
     }

@@ -1,7 +1,7 @@
 package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.command.ActionCommand;
-import by.epam.onlinetraining.command.constant.SessionAttributes;
+import by.epam.onlinetraining.command.constant.SessionAttribute;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.ActionResult;
@@ -31,7 +31,7 @@ public class JoinCourseCommand extends ActionCommand {
     public ActionResult execute(RequestContent content) throws CommandException {
 
         Map<String, Object> sessionAttributes = content.getSessionAttributes();
-        User user = (User) sessionAttributes.get(SessionAttributes.USER);
+        User user = (User) sessionAttributes.get(SessionAttribute.USER);
         int userId = user.getId();
 
         String courseIdLine = content.getSingleRequestParameter(COURSE_ID_PARAM);

@@ -2,7 +2,7 @@ package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.command.bundle.PagePathManager;
 import by.epam.onlinetraining.command.ActionCommand;
-import by.epam.onlinetraining.command.constant.EntityAttributes;
+import by.epam.onlinetraining.command.constant.EntityAttribute;
 import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
@@ -35,21 +35,21 @@ public class EditCourseCommand extends ActionCommand {
         ActionResult actionResult = null;
 
         Map<String, String[]> requestParameters = requestContent.getRequestParameters();
-        String[] editedCourseName = requestParameters.get(EntityAttributes.COURSE_TITLE);
+        String[] editedCourseName = requestParameters.get(EntityAttribute.COURSE_TITLE);
         if(editedCourseName == null){
             actionResult = putRequiredDataIntoSession(requestContent);
         } else {
             boolean isUpdated = false;
             try {
-                String idLine = requestContent.getSingleRequestParameter(EntityAttributes.COURSE_ID);
+                String idLine = requestContent.getSingleRequestParameter(EntityAttribute.COURSE_ID);
                 int courseId = Integer.parseInt(idLine);
-                String courseTitle = requestContent.getSingleRequestParameter(EntityAttributes.COURSE_TITLE);
-                String subjectIdLine = requestContent.getSingleRequestParameter(EntityAttributes.SUBJECT_ID);
-                String status = requestContent.getSingleRequestParameter(EntityAttributes.COURSE_STATUS);
+                String courseTitle = requestContent.getSingleRequestParameter(EntityAttribute.COURSE_TITLE);
+                String subjectIdLine = requestContent.getSingleRequestParameter(EntityAttribute.SUBJECT_ID);
+                String status = requestContent.getSingleRequestParameter(EntityAttribute.COURSE_STATUS);
                 int subjectId = Integer.parseInt(subjectIdLine);
-                String isAvailableLine = requestContent.getSingleRequestParameter(EntityAttributes.COURSE_IS_AVAILABLE);
+                String isAvailableLine = requestContent.getSingleRequestParameter(EntityAttribute.COURSE_IS_AVAILABLE);
                 int isAvailable = Integer.parseInt(isAvailableLine);
-                String teacherIdLine = requestContent.getSingleRequestParameter(EntityAttributes.COURSE_TEACHER_ID);
+                String teacherIdLine = requestContent.getSingleRequestParameter(EntityAttribute.COURSE_TEACHER_ID);
                 int teacherId = Integer.parseInt(teacherIdLine);
 
                 CourseService courseService = (CourseService) getService();
@@ -72,11 +72,11 @@ public class EditCourseCommand extends ActionCommand {
         try {
             SubjectService subjectService = ServiceManager.getSubjectService();
             List<Subject> subjectList = subjectService.getAllSubjects();
-            requestContent.setSessionAttributes(EntityAttributes.ALL_SUBJECTS_PARAM, subjectList);
+            requestContent.setSessionAttributes(EntityAttribute.ALL_SUBJECTS_PARAM, subjectList);
 
             UserService userReceiver = new UserServiceImpl();
             List<User> teachersList = userReceiver.getAllTeachers();
-            requestContent.setSessionAttributes(EntityAttributes.ALL_TEACHERS_PARAM, teachersList);
+            requestContent.setSessionAttributes(EntityAttribute.ALL_TEACHERS_PARAM, teachersList);
 
             actionResult = new ActionResult(EDIT_COURSE_PAGE_PATH, NavigationType.FORWARD);
 

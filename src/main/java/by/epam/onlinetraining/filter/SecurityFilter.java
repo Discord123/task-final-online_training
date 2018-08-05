@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.filter;
 
-import by.epam.onlinetraining.command.constant.SessionAttributes;
+import by.epam.onlinetraining.command.constant.SessionAttribute;
 import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.entity.Role;
 
@@ -71,7 +71,7 @@ public class SecurityFilter implements Filter {
             String command = commandValue.toUpperCase();
 
             HttpSession session = httpServletRequest.getSession();
-            User user = (User) session.getAttribute(SessionAttributes.USER);
+            User user = (User) session.getAttribute(SessionAttribute.USER);
 
             String userRole = null;
             if (isUserAuthorised(user)) {

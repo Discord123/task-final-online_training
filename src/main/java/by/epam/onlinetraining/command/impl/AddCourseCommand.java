@@ -2,7 +2,7 @@ package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.command.bundle.PagePathManager;
 import by.epam.onlinetraining.command.ActionCommand;
-import by.epam.onlinetraining.command.constant.EntityAttributes;
+import by.epam.onlinetraining.command.constant.EntityAttribute;
 import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
@@ -52,14 +52,14 @@ public class AddCourseCommand extends ActionCommand {
     private boolean processCourseAdding(RequestContent requestContent) throws CommandException {
         boolean isAdded;
         try {
-            String courseTitle = requestContent.getSingleRequestParameter(EntityAttributes.COURSE_TITLE);
-            String subjectIdLine = requestContent.getSingleRequestParameter(EntityAttributes.SUBJECT_ID);
+            String courseTitle = requestContent.getSingleRequestParameter(EntityAttribute.COURSE_TITLE);
+            String subjectIdLine = requestContent.getSingleRequestParameter(EntityAttribute.SUBJECT_ID);
             int subjectId = Integer.parseInt(subjectIdLine);
-            String status = requestContent.getSingleRequestParameter(EntityAttributes.COURSE_STATUS);
-            String isAvailableLine = requestContent.getSingleRequestParameter(EntityAttributes.COURSE_IS_AVAILABLE);
+            String status = requestContent.getSingleRequestParameter(EntityAttribute.COURSE_STATUS);
+            String isAvailableLine = requestContent.getSingleRequestParameter(EntityAttribute.COURSE_IS_AVAILABLE);
             int isAvailable = Integer.parseInt(isAvailableLine);
 
-            String teacherIdLine = requestContent.getSingleRequestParameter(EntityAttributes.COURSE_TEACHER_ID);
+            String teacherIdLine = requestContent.getSingleRequestParameter(EntityAttribute.COURSE_TEACHER_ID);
             Integer teacherId = Integer.parseInt(teacherIdLine);
 
             CourseService courseService = (CourseService) getService();
@@ -76,11 +76,11 @@ public class AddCourseCommand extends ActionCommand {
         try {
             SubjectService subjectService = ServiceManager.getSubjectService();
             List<Subject> subjectList = subjectService.getAllSubjects();
-            requestContent.setSessionAttributes(EntityAttributes.ALL_SUBJECTS_PARAM, subjectList);
+            requestContent.setSessionAttributes(EntityAttribute.ALL_SUBJECTS_PARAM, subjectList);
 
             UserService userService = new UserServiceImpl();
             List<User> teachersList = userService.getAllTeachers();
-            requestContent.setSessionAttributes(EntityAttributes.ALL_TEACHERS_PARAM, teachersList);
+            requestContent.setSessionAttributes(EntityAttribute.ALL_TEACHERS_PARAM, teachersList);
 
             actionResult = new ActionResult(ADD_COURSE_PAGE_PATH, NavigationType.FORWARD);
 

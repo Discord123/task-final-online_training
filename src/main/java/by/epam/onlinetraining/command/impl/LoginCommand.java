@@ -2,8 +2,8 @@ package by.epam.onlinetraining.command.impl;
 
 
 import by.epam.onlinetraining.command.ActionCommand;
-import by.epam.onlinetraining.command.constant.SessionAttributes;
-import by.epam.onlinetraining.command.constant.SignUpAttributes;
+import by.epam.onlinetraining.command.constant.SessionAttribute;
+import by.epam.onlinetraining.command.constant.SignUpAttribute;
 import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
@@ -38,8 +38,8 @@ public class LoginCommand extends ActionCommand {
         User user = null;
         try {
             UserService userService = (UserService) getService();
-            String emailInput = content.getSingleRequestParameter(SignUpAttributes.EMAIL_PARAM);
-            String passwordInput = content.getSingleRequestParameter(SignUpAttributes.PASSWORD_PARAM);
+            String emailInput = content.getSingleRequestParameter(SignUpAttribute.EMAIL_PARAM);
+            String passwordInput = content.getSingleRequestParameter(SignUpAttribute.PASSWORD_PARAM);
             user = userService.login(emailInput, passwordInput);
         } catch (ServiceException e) {
             Logger.log(Level.FATAL, "Exception during login command");
@@ -50,7 +50,7 @@ public class LoginCommand extends ActionCommand {
         Map<String, Object> requestAttributes = content.getRequestAttributes();
         if(user != null){
             requestAttributes.put(AUTHORIZATION_ATTRIBUTE, Boolean.TRUE);
-            content.setSessionAttributes(SessionAttributes.USER, user);
+            content.setSessionAttributes(SessionAttribute.USER, user);
             Role userRole = user.getRole();
             if(userRole == Role.ADMIN){
                 actionResult = new ActionResult(ADMIN_PAGE, NavigationType.REDIRECT);

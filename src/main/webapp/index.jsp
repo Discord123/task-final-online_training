@@ -19,10 +19,9 @@
 </head>
 
 <body>
-<!--Navbar-->
+
 <jsp:include page="/jsp/parts/header.jsp"/>
 
-<!-- Intro cover picture and header -->
 <div class="intro">
     <div class="layout-positioner">
         <h1 class="promo"><fmt:message key="index.text" bundle="${rb}"/></h1>

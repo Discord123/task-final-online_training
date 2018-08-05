@@ -2,7 +2,7 @@ package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.command.bundle.PagePathManager;
 import by.epam.onlinetraining.command.ActionCommand;
-import by.epam.onlinetraining.command.constant.EntityAttributes;
+import by.epam.onlinetraining.command.constant.EntityAttribute;
 import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
@@ -30,7 +30,7 @@ public class TakeAllTeachersCommand extends ActionCommand {
         try {
             UserService userReceiver = (UserService) getService();
             List<User> teachersList = userReceiver.getAllTeachers();
-            requestContent.setSessionAttributes(EntityAttributes.ALL_TEACHERS_PARAM, teachersList);
+            requestContent.setSessionAttributes(EntityAttribute.ALL_TEACHERS_PARAM, teachersList);
         } catch (ServiceException e) {
             Logger.log(Level.FATAL,"Exception during showing all teachers command");
             throw new CommandException("Exception during showing all teachers command", e);

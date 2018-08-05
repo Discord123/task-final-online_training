@@ -1,7 +1,7 @@
 package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.command.ActionCommand;
-import by.epam.onlinetraining.command.constant.SessionAttributes;
+import by.epam.onlinetraining.command.constant.SessionAttribute;
 import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
@@ -31,7 +31,7 @@ public class DeleteUserCommand extends ActionCommand {
         String userIdLine = requestContent.getSingleRequestParameter(USER_ID_PARAM);
         int userId = Integer.parseInt(userIdLine);
         Map<String, Object> sessionAttributes = requestContent.getSessionAttributes();
-        String locale =(String) sessionAttributes.get(SessionAttributes.LOCALE);
+        String locale =(String) sessionAttributes.get(SessionAttribute.LOCALE);
         UserService userReceiver = (UserService) getService();
         boolean isDeletedSuccessfully = false;
         try{

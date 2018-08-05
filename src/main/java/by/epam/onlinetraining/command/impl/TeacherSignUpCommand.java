@@ -1,7 +1,7 @@
 package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.command.ActionCommand;
-import by.epam.onlinetraining.command.constant.SignUpAttributes;
+import by.epam.onlinetraining.command.constant.SignUpAttribute;
 import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
@@ -43,11 +43,11 @@ public class TeacherSignUpCommand extends ActionCommand{
     @Override
     public ActionResult execute(RequestContent content) throws CommandException {
 
-        email = content.getSingleRequestParameter(SignUpAttributes.EMAIL_PARAM);
-        password = content.getSingleRequestParameter(SignUpAttributes.PASSWORD_PARAM);
-        checkPassword = content.getSingleRequestParameter(SignUpAttributes.CHECK_PASSWORD_PARAM);
-        firstName = content.getSingleRequestParameter(SignUpAttributes.FIRST_NAME_PARAM);
-        lastName = content.getSingleRequestParameter(SignUpAttributes.LAST_NAME_PARAM);
+        email = content.getSingleRequestParameter(SignUpAttribute.EMAIL_PARAM);
+        password = content.getSingleRequestParameter(SignUpAttribute.PASSWORD_PARAM);
+        checkPassword = content.getSingleRequestParameter(SignUpAttribute.CHECK_PASSWORD_PARAM);
+        firstName = content.getSingleRequestParameter(SignUpAttribute.FIRST_NAME_PARAM);
+        lastName = content.getSingleRequestParameter(SignUpAttribute.LAST_NAME_PARAM);
 
         boolean isRegistered = false;
         boolean isParametersValid;

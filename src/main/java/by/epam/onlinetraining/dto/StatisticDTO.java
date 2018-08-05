@@ -9,15 +9,17 @@ public class StatisticDTO implements Serializable {
     private int tasksCount;
     private int coursesCount;
     private int teachersCount;
+    private int subjectsCount;
 
     public StatisticDTO() {
     }
 
-    public StatisticDTO(int usersCount, int tasksCount, int coursesCount, int teachersCount) {
+    public StatisticDTO(int usersCount, int tasksCount, int coursesCount, int teachersCount, int subjectsCount) {
         this.usersCount = usersCount;
         this.tasksCount = tasksCount;
         this.coursesCount = coursesCount;
         this.teachersCount = teachersCount;
+        this.subjectsCount = subjectsCount;
     }
 
     public int getUsersCount() {
@@ -50,5 +52,13 @@ public class StatisticDTO implements Serializable {
 
     public void setTeachersCount(int teachersCount) {
         this.teachersCount = teachersCount;
+    }
+
+    public int getSubjectsCount() {
+        return subjectsCount;
+    }
+
+    public void setSubjectsCount(int subjectsCount) {
+        this.subjectsCount = subjectsCount;
     }
 }

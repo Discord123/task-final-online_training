@@ -1,7 +1,7 @@
 package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.command.ActionCommand;
-import by.epam.onlinetraining.command.constant.SessionAttributes;
+import by.epam.onlinetraining.command.constant.SessionAttribute;
 import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
@@ -37,7 +37,7 @@ public class SendAnswerCommand extends ActionCommand {
 
         String taskIdLine = content.getSingleRequestParameter(TASK_ID_PARAM);
         int taskId = Integer.parseInt(taskIdLine);
-        User user = (User) sessionAttributes.get(SessionAttributes.USER);
+        User user = (User) sessionAttributes.get(SessionAttribute.USER);
         int userId = user.getId();
         String answer = content.getSingleRequestParameter(ANSWER_PARAM);
 

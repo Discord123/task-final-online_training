@@ -1,7 +1,7 @@
 package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.command.ActionCommand;
-import by.epam.onlinetraining.command.constant.SessionAttributes;
+import by.epam.onlinetraining.command.constant.SessionAttribute;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.content.ActionResult;
@@ -25,14 +25,14 @@ public class LocaleCommand extends ActionCommand {
 
     @Override
     public ActionResult execute(RequestContent content) throws CommandException {
-        String requestLocale = content.getSingleRequestParameter(SessionAttributes.LOCALE);
+        String requestLocale = content.getSingleRequestParameter(SessionAttribute.LOCALE);
         String locale = null;
         if(EN_LOCALE_MARKER.equals(requestLocale)) {
             locale = EN_LOCALE_ATTRIBUTE;
         } else {
             locale = RU_LOCALE_ATTRIBUTE;
         }
-        content.setSessionAttributes(SessionAttributes.LOCALE, locale);
+        content.setSessionAttributes(SessionAttribute.LOCALE, locale);
 
         String targetUrl = defineTargetPage(content);
 
@@ -45,7 +45,7 @@ public class LocaleCommand extends ActionCommand {
 
         if(currentUrl.endsWith(EMPTY_COMMAND_PATTERN)){
             Map<String, Object> sessionAttributes = content.getSessionAttributes();
-            User user = (User) sessionAttributes.get(SessionAttributes.USER);
+            User user = (User) sessionAttributes.get(SessionAttribute.USER);
             Role userRole = user.getRole();
             switch (userRole){
                 case STUDENT:

@@ -1,7 +1,7 @@
 package by.epam.onlinetraining.command.impl;
 
 import by.epam.onlinetraining.command.ActionCommand;
-import by.epam.onlinetraining.command.constant.SessionAttributes;
+import by.epam.onlinetraining.command.constant.SessionAttribute;
 import by.epam.onlinetraining.content.ActionResult;
 import by.epam.onlinetraining.content.NavigationType;
 import by.epam.onlinetraining.content.RequestContent;
@@ -41,7 +41,7 @@ public class RecoverPasswordCommand extends ActionCommand {
         try{
             UserService userService = (UserService) getService();
             Map<String, Object> sessionAttributes = content.getSessionAttributes();
-            String locale = (String) sessionAttributes.get(SessionAttributes.LOCALE);
+            String locale = (String) sessionAttributes.get(SessionAttribute.LOCALE);
             ResourceBundle resourceBundle = ResourceBundle.getBundle("localedata", new Locale(locale));
             String subject = resourceBundle.getString(MESSAGE_MAIL_SUBJECT);
             String text = resourceBundle.getString(MESSAGE_MAIL_TEXT);

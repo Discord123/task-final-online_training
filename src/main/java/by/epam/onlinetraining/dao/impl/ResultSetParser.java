@@ -1,6 +1,6 @@
 package by.epam.onlinetraining.dao.impl;
 
-import by.epam.onlinetraining.command.constant.EntityAttributes;
+import by.epam.onlinetraining.command.constant.EntityAttribute;
 import by.epam.onlinetraining.dto.*;
 import by.epam.onlinetraining.entity.*;
 import by.epam.onlinetraining.entity.Language;
@@ -22,12 +22,12 @@ public class ResultSetParser {
     static User createUser(ResultSet resultSet) throws DaoException{
         User user = null;
         try{
-            Integer id = resultSet.getInt(EntityAttributes.USER_ID);
-            String email = resultSet.getString(EntityAttributes.USER_EMAIL);
-            String password = resultSet.getString(EntityAttributes.USER_PASSWORD);
-            String firstName = resultSet.getString(EntityAttributes.USER_FIRST_NAME);
-            String lastName = resultSet.getString(EntityAttributes.USER_LAST_NAME);
-            String roleLine = resultSet.getString(EntityAttributes.USER_ROLE);
+            Integer id = resultSet.getInt(EntityAttribute.USER_ID);
+            String email = resultSet.getString(EntityAttribute.USER_EMAIL);
+            String password = resultSet.getString(EntityAttribute.USER_PASSWORD);
+            String firstName = resultSet.getString(EntityAttribute.USER_FIRST_NAME);
+            String lastName = resultSet.getString(EntityAttribute.USER_LAST_NAME);
+            String roleLine = resultSet.getString(EntityAttribute.USER_ROLE);
             String roleValue = roleLine.toUpperCase();
             Role role = Role.valueOf(roleValue);
 
@@ -43,14 +43,14 @@ public class ResultSetParser {
     static Course createCourse(ResultSet resultSet) throws DaoException{
         Course course = null;
         try{
-            Integer id = resultSet.getInt(EntityAttributes.COURSE_ID);
-            String title = resultSet.getString(EntityAttributes.COURSE_TITLE);
-            int subjectId = resultSet.getInt(EntityAttributes.COURSE_SUBJECT_ID);
-            String statusLine = resultSet.getString(EntityAttributes.COURSE_STATUS);
+            Integer id = resultSet.getInt(EntityAttribute.COURSE_ID);
+            String title = resultSet.getString(EntityAttribute.COURSE_TITLE);
+            int subjectId = resultSet.getInt(EntityAttribute.COURSE_SUBJECT_ID);
+            String statusLine = resultSet.getString(EntityAttribute.COURSE_STATUS);
             String statusValue = statusLine.toUpperCase();
             Status status = Status.valueOf(statusValue);
-            Boolean isAvailable = resultSet.getBoolean(EntityAttributes.COURSE_IS_AVAILABLE);
-            int teacherId = resultSet.getInt(EntityAttributes.COURSE_TEACHER_ID);
+            Boolean isAvailable = resultSet.getBoolean(EntityAttribute.COURSE_IS_AVAILABLE);
+            int teacherId = resultSet.getInt(EntityAttribute.COURSE_TEACHER_ID);
 
             course = new Course(id, title, subjectId, status, isAvailable, teacherId);
 
@@ -65,11 +65,11 @@ public class ResultSetParser {
     static Subject createSubject(ResultSet resultSet) throws DaoException{
         Subject subject = null;
         try{
-            Integer id = resultSet.getInt(EntityAttributes.SUBJECT_ID);
-            String languageLine = resultSet.getString(EntityAttributes.SUBJECT_LANGUAGE);
+            Integer id = resultSet.getInt(EntityAttribute.SUBJECT_ID);
+            String languageLine = resultSet.getString(EntityAttribute.SUBJECT_LANGUAGE);
             String languageValue = languageLine.toUpperCase();
             Language language = Language.valueOf(languageValue);
-            String languageLevelLine = resultSet.getString(EntityAttributes.SUBJECT_LEVEL);
+            String languageLevelLine = resultSet.getString(EntityAttribute.SUBJECT_LEVEL);
             String languageLevelValue = languageLevelLine.toUpperCase();
             LanguageLevel level = LanguageLevel.valueOf(languageLevelValue);
 
@@ -84,10 +84,10 @@ public class ResultSetParser {
     static Task createTask(ResultSet resultSet) throws DaoException{
         Task task = null;
         try{
-            Integer id = resultSet.getInt(EntityAttributes.TASK_ID);
-            String name = resultSet.getString(EntityAttributes.TASK_NAME);
-            String description = resultSet.getString(EntityAttributes.TASK_DESCRIPTION);
-            int courseId = resultSet.getInt(EntityAttributes.TASK_COURSE_ID);
+            Integer id = resultSet.getInt(EntityAttribute.TASK_ID);
+            String name = resultSet.getString(EntityAttribute.TASK_NAME);
+            String description = resultSet.getString(EntityAttribute.TASK_DESCRIPTION);
+            int courseId = resultSet.getInt(EntityAttribute.TASK_COURSE_ID);
 
             task = new Task(id, name, description, courseId);
 
@@ -101,11 +101,11 @@ public class ResultSetParser {
     static Review createReview(ResultSet resultSet) throws DaoException {
         Review review = null;
         try{
-            Integer userId = resultSet.getInt(EntityAttributes.REVIEW_USER_ID);
-            Integer taskId = resultSet.getInt(EntityAttributes.REVIEW_TASK_ID);
-            int mark = resultSet.getInt(EntityAttributes.REVIEW_MARK);
-            String reviewText = resultSet.getString(EntityAttributes.REVIEW_TEXT);
-            String answer = resultSet.getString(EntityAttributes.REVIEW_TASK_ANSWER);
+            Integer userId = resultSet.getInt(EntityAttribute.REVIEW_USER_ID);
+            Integer taskId = resultSet.getInt(EntityAttribute.REVIEW_TASK_ID);
+            int mark = resultSet.getInt(EntityAttribute.REVIEW_MARK);
+            String reviewText = resultSet.getString(EntityAttribute.REVIEW_TEXT);
+            String answer = resultSet.getString(EntityAttribute.REVIEW_TASK_ANSWER);
 
             review = new Review(userId, taskId, answer, reviewText, mark);
 
@@ -123,32 +123,15 @@ public class ResultSetParser {
         return new ReviewDto(review, student);
     }
 
-    static StatisticDTO createStatisticDto(ResultSet resultSet) throws DaoException{
-        StatisticDTO statisticDTO = null;
-
-        try {
-            Integer usersCount = resultSet.getInt(EntityAttributes.USER_ID);
-            Integer tasksCount = resultSet.getInt(EntityAttributes.TASK_ID);
-            Integer coursesCount = resultSet.getInt(EntityAttributes.COURSE_ID);
-
-//            statisticDTO = new StatisticDTO(1, 2, 3);
-        } catch (SQLException e) {
-            Logger.log(Level.FATAL, "Fail to create statistic DTO while parsing.", e);
-            throw new DaoException("Fail to create statistic DTO while parsing.", e);
-        }
-
-        return statisticDTO;
-    }
-
     static CourseDto createCourseDto(ResultSet resultSet) throws DaoException{
         Course course = createCourse(resultSet);
         Subject subject = null;
         User teacher = null;
         try{
-            if (resultSet.getInt(EntityAttributes.SUBJECT_ID) != 0){
+            if (resultSet.getInt(EntityAttribute.SUBJECT_ID) != 0){
                 subject = createSubject(resultSet);
             }
-            if (resultSet.getInt(EntityAttributes.USER_ID) != 0){
+            if (resultSet.getInt(EntityAttribute.USER_ID) != 0){
                 teacher = createUser(resultSet);
             }
         } catch (SQLException e){
