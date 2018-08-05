@@ -4,7 +4,7 @@ import by.epam.onlinetraining.service.impl.*;
 
 public final class ServiceManager {
 
-    private static final CoursesService COURSES_SERVICE = new CoursesServiceImpl();
+    private static final CourseService COURSES_SERVICE = new CourseServiceImpl();
     private static final ReviewService REVIEW_SERVICE = new ReviewServiceImpl();
     private static final SubjectService SUBJECT_SERVICE = new SubjectServiceImpl();
     private static final TasksService TASKS_SERVICE = new TasksServiceImpl();
@@ -13,7 +13,7 @@ public final class ServiceManager {
     private ServiceManager() {
     }
 
-    public static CoursesService getCoursesService() {
+    public static CourseService getCoursesService() {
         return COURSES_SERVICE;
     }
 

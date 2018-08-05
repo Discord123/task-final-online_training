@@ -52,8 +52,8 @@ public class EditCourseCommand extends ActionCommand {
                 String teacherIdLine = requestContent.getSingleRequestParameter(EntityAttributes.COURSE_TEACHER_ID);
                 int teacherId = Integer.parseInt(teacherIdLine);
 
-                CoursesService coursesService = (CoursesService) getService();
-                isUpdated = coursesService.updateCourse(courseId, courseTitle, subjectId, status, isAvailable, teacherId);
+                CourseService courseService = (CourseService) getService();
+                isUpdated = courseService.updateCourse(courseId, courseTitle, subjectId, status, isAvailable, teacherId);
             } catch (ServiceException e) {
                 Logger.log(Level.FATAL,"Fail to update course.");
                 throw new CommandException("Fail to update course.", e);

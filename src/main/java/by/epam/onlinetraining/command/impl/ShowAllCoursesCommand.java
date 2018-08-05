@@ -8,7 +8,7 @@ import by.epam.onlinetraining.content.RequestContent;
 import by.epam.onlinetraining.dto.CourseDto;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
-import by.epam.onlinetraining.service.CoursesService;
+import by.epam.onlinetraining.service.CourseService;
 import by.epam.onlinetraining.service.ServiceManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -28,8 +28,8 @@ public class ShowAllCoursesCommand extends ActionCommand {
     @Override
     public ActionResult execute(RequestContent requestContent) throws CommandException {
         try {
-            CoursesService coursesService = (CoursesService) getService();
-            List<CourseDto> courseList = coursesService.getAllCourses();
+            CourseService courseService = (CourseService) getService();
+            List<CourseDto> courseList = courseService.getAllCourses();
             requestContent.setSessionAttributes(ALL_COURSES_PARAM, courseList);
         } catch (ServiceException e) {
             Logger.log(Level.FATAL,"Exception during show all courses command");

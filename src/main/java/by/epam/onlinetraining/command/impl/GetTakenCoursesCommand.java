@@ -10,7 +10,7 @@ import by.epam.onlinetraining.dto.CourseDto;
 import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
-import by.epam.onlinetraining.service.CoursesService;
+import by.epam.onlinetraining.service.CourseService;
 import by.epam.onlinetraining.service.ServiceManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -35,8 +35,8 @@ public class GetTakenCoursesCommand extends ActionCommand {
         int userId = user.getId();
 
         try {
-            CoursesService coursesService = (CoursesService) getService();
-            List<CourseDto> courseDtoList = coursesService.getTakenCourses(userId);
+            CourseService courseService = (CourseService) getService();
+            List<CourseDto> courseDtoList = courseService.getTakenCourses(userId);
             content.setRequestAttributes(TAKEN_COURSES_PARAM, courseDtoList);
         } catch (ServiceException e) {
             Logger.log(Level.FATAL, "Exception during show taken courses command");

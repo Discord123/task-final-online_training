@@ -10,21 +10,21 @@ import java.util.ResourceBundle;
 public class MailSenderConfig {
     private static final  Logger LOGGER = LogManager.getLogger(MailSenderConfig.class);
 
-    static final String RESOURCE_BUNDLE_NAME = "mail";
-    static final String EMAIL = "mail.username";
-    static final String PASSWORD = "mail.password";
-    static final String AUTH = "mail.smtp.auth";
-    static final String START_TLS = "mail.smtp.starttls.enable";
-    static final String HOST = "mail.smtp.host";
-    static final String PORT = "mail.smtp.port";
+    protected static final String RESOURCE_BUNDLE_NAME = "mail";
+    protected static final String EMAIL = "mail.username";
+    protected static final String PASSWORD = "mail.password";
+    protected static final String AUTH = "mail.smtp.auth";
+    protected static final String START_TLS = "mail.smtp.starttls.enable";
+    protected static final String HOST = "mail.smtp.host";
+    protected static final String PORT = "mail.smtp.port";
 
-    static ResourceBundle resourceBundle;
-    static String email;
-    static String password;
-    static String auth;
-    static String startTls;
-    static String host;
-    static String port;
+    protected static ResourceBundle resourceBundle;
+    protected static String email;
+    protected static String password;
+    protected static String auth;
+    protected static String startTls;
+    protected static String host;
+    protected static String port;
 
     static {
         try {

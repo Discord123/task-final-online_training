@@ -62,8 +62,8 @@ public class AddCourseCommand extends ActionCommand {
             String teacherIdLine = requestContent.getSingleRequestParameter(EntityAttributes.COURSE_TEACHER_ID);
             Integer teacherId = Integer.parseInt(teacherIdLine);
 
-            CoursesService coursesService = (CoursesService) getService();
-            isAdded = coursesService.addCourse(courseTitle, subjectId, status, isAvailable, teacherId);
+            CourseService courseService = (CourseService) getService();
+            isAdded = courseService.addCourse(courseTitle, subjectId, status, isAvailable, teacherId);
         } catch (ServiceException e) {
             Logger.log(Level.FATAL,"Fail to add new course.", e);
             throw new CommandException("Fail to add new course.", e);

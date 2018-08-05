@@ -5,7 +5,7 @@ import by.epam.onlinetraining.exception.ServiceException;
 
 import java.util.List;
 
-public interface CoursesService extends Service {
+public interface CourseService extends Service {
     List<CourseDto> getAvailableCourses(int userId) throws ServiceException;
     List<CourseDto> getAllCourses() throws ServiceException;
     List<CourseDto> getTakenCourses(int userId) throws ServiceException;

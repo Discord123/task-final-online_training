@@ -7,6 +7,7 @@ import by.epam.onlinetraining.dto.ReviewDto;
 import by.epam.onlinetraining.exception.DaoException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.ReviewService;
+import by.epam.onlinetraining.service.util.ScriptSecurityChecker;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,7 +25,7 @@ public class ReviewServiceImpl implements ReviewService {
         TransactionHelper helper = TransactionHelper.get();
         try{
             helper.beginTransaction(reviewDAO);
-            review = scriptCheck(review);
+            review = ScriptSecurityChecker.scriptCheck(review);
             isSent = reviewDAO.sendReview(taskId, userId, mark, review);
             helper.commit();
         } catch (DaoException e){
@@ -46,6 +47,7 @@ public class ReviewServiceImpl implements ReviewService {
         TransactionHelper helper = TransactionHelper.get();
         try{
             helper.beginTransaction(reviewDAO);
+            answer = ScriptSecurityChecker.scriptCheck(answer);
             result = reviewDAO.sendAnswer(taskId, userId, answer) ;
             helper.commit();
         } catch (DaoException e) {
@@ -78,9 +80,5 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewDtoList;
     }
 
-    private String scriptCheck(String review) {
-        review = review.replace("<script>", "(= ");
-        review = review.replace("</script>", " =)");
-        return review;
-    }
+
 }

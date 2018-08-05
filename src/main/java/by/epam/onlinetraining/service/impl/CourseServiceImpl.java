@@ -6,15 +6,15 @@ import by.epam.onlinetraining.dao.impl.CoursesDaoImpl;
 import by.epam.onlinetraining.dto.CourseDto;
 import by.epam.onlinetraining.exception.DaoException;
 import by.epam.onlinetraining.exception.ServiceException;
-import by.epam.onlinetraining.service.CoursesService;
+import by.epam.onlinetraining.service.CourseService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class CoursesServiceImpl implements CoursesService {
-    private static final Logger Logger = LogManager.getLogger(CoursesServiceImpl.class);
+public class CourseServiceImpl implements CourseService {
+    private static final Logger Logger = LogManager.getLogger(CourseServiceImpl.class);
 
     @Override
     public List<CourseDto> getRelatedCourses(int teacherId) throws ServiceException {

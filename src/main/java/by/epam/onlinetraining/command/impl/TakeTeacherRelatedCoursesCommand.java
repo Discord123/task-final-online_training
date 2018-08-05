@@ -10,7 +10,7 @@ import by.epam.onlinetraining.dto.CourseDto;
 import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
-import by.epam.onlinetraining.service.CoursesService;
+import by.epam.onlinetraining.service.CourseService;
 import by.epam.onlinetraining.service.ServiceManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -41,9 +41,9 @@ public class TakeTeacherRelatedCoursesCommand extends ActionCommand {
         Map<String, Object> sessionAttributes = content.getSessionAttributes();
         User user = (User) sessionAttributes.get(SessionAttributes.USER);
         int teacherId = user.getId();
-        CoursesService coursesService = (CoursesService) getService();
+        CourseService courseService = (CourseService) getService();
         try {
-            List<CourseDto> courseDtoList = coursesService.getRelatedCourses(teacherId);
+            List<CourseDto> courseDtoList = courseService.getRelatedCourses(teacherId);
             content.setSessionAttributes(RELATED_COURSES_ATTRIBUTE, courseDtoList);
 
         } catch (ServiceException e) {

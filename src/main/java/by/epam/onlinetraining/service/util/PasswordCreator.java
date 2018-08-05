@@ -8,7 +8,7 @@ public class PasswordCreator {
         StringBuilder password = new StringBuilder();
 
         Random random = new Random();
-        for (int i=0; i<10; i++){
+        for (int i = 0; i < 10; i++){
             int isDigitDefiner = random.nextInt(2);
             boolean isDigit = (isDigitDefiner == 0);
             if (isDigit){
