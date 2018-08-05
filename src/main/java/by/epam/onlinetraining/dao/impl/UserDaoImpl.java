@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -69,14 +70,6 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
                     "user_role) " +
                     "VALUES (?,?,?,?,?)";
 
-    private static final String UPDATE_USER_BY_ID =
-            "UPDATE users" +
-                    "SET user_email=?, " +
-                    "user_password=?, " +
-                    "first_name=?, " +
-                    "last_name=?, " +
-                    "WHERE user_id=?";
-
     private static final String UPDATE_USERS_PASSWORD =
             "UPDATE users " +
                     "SET user_password=? " +
@@ -86,7 +79,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
     @Override
     public boolean deleteUserById(int userID) throws DaoException {
         boolean isDeleteSuccessfully = false;
-        try(PreparedStatement statement = proxyConnection.prepareStatement(DELETE_TEACHER_BY_ID)){
+        try(CallableStatement statement = proxyConnection.prepareCall(DELETE_TEACHER_BY_ID)){
             statement.setInt(1, userID);
             statement.executeUpdate();
             isDeleteSuccessfully=true;
@@ -96,6 +89,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         }
         return isDeleteSuccessfully;
     }
+
 
     @Override
     public List<User> findAllTeachers() throws DaoException {
