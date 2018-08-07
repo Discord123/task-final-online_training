@@ -18,11 +18,18 @@ public class TransactionManager implements AutoCloseable {
     private static ThreadLocal<ProxyConnection> connectionThreadLocal = new ThreadLocal<ProxyConnection>();
 
 
-    public static TransactionManager launchTransaction(AbstractDao... daos){
+    public static TransactionManager launchTransaction(AbstractDao... daos) throws SQLException {
+        return launchTransaction(Isolation.REPEATABLE_READ, daos);
+    }
+
+    public static TransactionManager launchTransaction(Isolation isolationLevel, AbstractDao... daos) throws SQLException {
         TransactionManager instance = instantiate();
         initialize(daos);
 
+        ProxyConnection connection = connectionThreadLocal.get();
+        connection.setTransactionIsolation(isolationLevel.level);
         instance.beginTransaction();
+
         return instance;
     }
 
@@ -31,7 +38,6 @@ public class TransactionManager implements AutoCloseable {
         initialize(daos);
         ProxyConnection connection = connectionThreadLocal.get();
         connection.setReadOnly(true);
-
         return instance;
     }
 
@@ -126,4 +132,21 @@ public class TransactionManager implements AutoCloseable {
             endTransaction();
         }
     }
+
+    public enum Isolation {
+        NONE(0),
+        READ_UNCOMMITTED(1),
+        READ_COMMITTED(2),
+        REPEATABLE_READ(4),
+        SERIALIZABLE(8);
+
+        private int level;
+
+        Isolation(int level){
+            this.level = level;
+        }
+    }
+
 }
+
+
