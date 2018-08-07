@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectionCreator {
+class ConnectionCreator {
     private static final Logger Logger = LogManager.getLogger(ConnectionCreator.class);
     static ProxyConnection createConnection() throws ConnectionPoolException {
         try {

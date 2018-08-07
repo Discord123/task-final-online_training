@@ -14,7 +14,7 @@ public class TransactionHelper {
         try {
             connection.setAutoCommit(false);
         } catch (SQLException e) {
-            Logger.log(Level.ERROR, "Problem when trying to set auto commit false.");
+            Logger.log(Level.ERROR, "Problem when trying to set auto commit false.", e);
         }
     }
 

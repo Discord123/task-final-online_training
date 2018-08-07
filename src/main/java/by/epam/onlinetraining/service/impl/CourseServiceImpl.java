@@ -1,7 +1,7 @@
 package by.epam.onlinetraining.service.impl;
 
-import by.epam.onlinetraining.dao.CoursesDao;
-import by.epam.onlinetraining.dao.DAOManager;
+import by.epam.onlinetraining.dao.*;
+import by.epam.onlinetraining.dao.impl.CoursesDaoImpl;
 import by.epam.onlinetraining.dto.CourseDto;
 import by.epam.onlinetraining.exception.DaoException;
 import by.epam.onlinetraining.exception.ServiceException;
@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class CourseServiceImpl implements CourseService {
@@ -58,18 +59,20 @@ public class CourseServiceImpl implements CourseService {
         return courseDtoList;
     }
 
-    @Override
+    /**
+     * This method is implemented with the brand new <code>TransactionManger</code> class
+     * */
     public boolean addCourse(String courseTitle, int subjectId, String status, int isAvailable, int teacherId) throws ServiceException {
-        boolean isAdded = false;
+        CoursesDaoImpl courseDao = (CoursesDaoImpl) coursesDAO;
 
-        try{
-            isAdded = coursesDAO.addCourse(courseTitle, subjectId, status, isAvailable, teacherId);
-        } catch (DaoException e){
+        try (TransactionManager tm = TransactionManager.launchTransaction(courseDao)) {
+            courseDao.addCourse(courseTitle, subjectId, status, isAvailable, teacherId);
+        } catch (SQLException | DaoException e) {
             Logger.log(Level.FATAL, "Fail to process add course service logic.", e);
             throw new ServiceException("Fail to process add course service logic.",e);
         }
 
-        return isAdded;
+        return true;
     }
 
     @Override
