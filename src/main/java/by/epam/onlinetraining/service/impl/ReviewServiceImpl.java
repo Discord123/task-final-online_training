@@ -1,8 +1,7 @@
 package by.epam.onlinetraining.service.impl;
 
 import by.epam.onlinetraining.dao.DAOManager;
-import by.epam.onlinetraining.dao.TransactionHelper;
-import by.epam.onlinetraining.dao.impl.ReviewDaoImpl;
+import by.epam.onlinetraining.dao.ReviewDao;
 import by.epam.onlinetraining.dto.ReviewDto;
 import by.epam.onlinetraining.exception.DaoException;
 import by.epam.onlinetraining.exception.ServiceException;
@@ -16,24 +15,18 @@ import java.util.List;
 
 public class ReviewServiceImpl implements ReviewService {
     private static final Logger Logger = LogManager.getLogger(ReviewServiceImpl.class);
+    private static ReviewDao reviewDAO = DAOManager.getReviewDao();
 
     @Override
     public boolean sendReview(int taskId, int userId, int mark, String review) throws ServiceException {
         boolean isSent = false;
 
-        ReviewDaoImpl reviewDAO = DAOManager.getReviewDao();
-        TransactionHelper helper = TransactionHelper.getInstance();
         try{
-            helper.beginTransaction(reviewDAO);
             review = ScriptSecurityChecker.scriptCheck(review);
             isSent = reviewDAO.sendReview(taskId, userId, mark, review);
-            helper.commit();
         } catch (DaoException e){
-            helper.rollback();
             Logger.log(Level.FATAL, "Fail to process sendReview logic.", e);
             throw new ServiceException("Fail to process sendReview logic.", e);
-        } finally {
-            helper.endTransaction();
         }
 
         return isSent;
@@ -43,20 +36,14 @@ public class ReviewServiceImpl implements ReviewService {
     public boolean sendAnswer(int taskId, int userId, String answer) throws ServiceException {
         boolean result = false;
 
-        ReviewDaoImpl reviewDAO = DAOManager.getReviewDao();
-        TransactionHelper helper = TransactionHelper.getInstance();
         try{
-            helper.beginTransaction(reviewDAO);
             answer = ScriptSecurityChecker.scriptCheck(answer);
             result = reviewDAO.sendAnswer(taskId, userId, answer) ;
-            helper.commit();
         } catch (DaoException e) {
-            helper.rollback();
             Logger.log(Level.FATAL, "Fail to send answer in service.", e);
             throw new ServiceException("Fail to send answer in service.", e);
-        } finally {
-            helper.endTransaction();
         }
+
         return result;
     }
 
@@ -64,19 +51,13 @@ public class ReviewServiceImpl implements ReviewService {
     public List<ReviewDto> getReviewsByTaskId(int taskId) throws ServiceException {
         List<ReviewDto> reviewDtoList = null;
 
-        ReviewDaoImpl reviewDAO = DAOManager.getReviewDao();
-        TransactionHelper helper = TransactionHelper.getInstance();
         try{
-            helper.beginTransaction(reviewDAO);
             reviewDtoList = reviewDAO.findAllReviewsByTaskId(taskId);
-            helper.commit();
         } catch (DaoException e){
-            helper.rollback();
             Logger.log(Level.FATAL, "Fail to receive all students by task id.", e);
             throw new ServiceException("Fail to receive all students by task id.",e);
-        } finally {
-            helper.endTransaction();
         }
+
         return reviewDtoList;
     }
 

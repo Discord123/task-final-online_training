@@ -16,5 +16,4 @@ public interface UserService extends Service {
     List<User> getAllTeachers() throws ServiceException;
     boolean deleteUserById(int userId) throws ServiceException;
     boolean recoverPassword(String email, String subject, String text) throws ServiceException;
-    boolean saveStatistic(StatisticDTO statisticDTO)  throws ServiceException;
 }

@@ -1,8 +1,7 @@
 package by.epam.onlinetraining.service.impl;
 
 import by.epam.onlinetraining.dao.DAOManager;
-import by.epam.onlinetraining.dao.TransactionHelper;
-import by.epam.onlinetraining.dao.impl.SubjectDaoImpl;
+import by.epam.onlinetraining.dao.SubjectDao;
 import by.epam.onlinetraining.entity.Subject;
 import by.epam.onlinetraining.exception.DaoException;
 import by.epam.onlinetraining.exception.ServiceException;
@@ -15,24 +14,19 @@ import java.util.List;
 
 public class SubjectServiceImpl implements SubjectService {
     private static final Logger Logger = LogManager.getLogger(SubjectServiceImpl.class);
+    private static SubjectDao subjectDAO = DAOManager.getSubjectDao();
 
     @Override
     public List<Subject> getAllSubjects() throws ServiceException {
         List<Subject> subjectList = null;
 
-        SubjectDaoImpl subjectDAO = DAOManager.getSubjectDao();
-        TransactionHelper helper = TransactionHelper.getInstance();
         try{
-            helper.beginTransaction(subjectDAO);
             subjectList = subjectDAO.showAllSubjects();
-            helper.commit();
         } catch (DaoException e){
-            helper.rollback();
             Logger.log(Level.FATAL, "Fail to show all subjects in service.", e);
             throw new ServiceException("Fail to show all subjects in service.", e);
-        }finally {
-            helper.endTransaction();
         }
+
         return subjectList;
     }
 }

@@ -72,7 +72,6 @@ public class ConnectionPool {
                 Logger.log(Level.ERROR, "Exception during pool termination", e);
             }
         }
-        deregisterAllDrivers();
     }
 
     public void releaseConnection(ProxyConnection connection) {
@@ -88,18 +87,6 @@ public class ConnectionPool {
                 Logger.log(Level.FATAL, "Connection does not created", e );
                 throw new RuntimeException("Connection does not created", e);
             }
-        }
-    }
-
-    private void deregisterAllDrivers() {
-        try {
-            Enumeration<Driver> drivers = DriverManager.getDrivers();
-            while (drivers.hasMoreElements()) {
-                Driver driver = drivers.nextElement();
-                DriverManager.deregisterDriver(driver);
-            }
-        } catch (SQLException e) {
-            Logger.log(Level.ERROR,"Deregister driver error");
         }
     }
 }

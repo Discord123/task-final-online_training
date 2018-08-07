@@ -1,8 +1,7 @@
 package by.epam.onlinetraining.service.impl;
 
+import by.epam.onlinetraining.dao.CoursesDao;
 import by.epam.onlinetraining.dao.DAOManager;
-import by.epam.onlinetraining.dao.TransactionHelper;
-import by.epam.onlinetraining.dao.impl.CoursesDaoImpl;
 import by.epam.onlinetraining.dto.CourseDto;
 import by.epam.onlinetraining.exception.DaoException;
 import by.epam.onlinetraining.exception.ServiceException;
@@ -15,24 +14,19 @@ import java.util.List;
 
 public class CourseServiceImpl implements CourseService {
     private static final Logger Logger = LogManager.getLogger(CourseServiceImpl.class);
+    private static CoursesDao coursesDAO = DAOManager.getCoursesDao();
 
     @Override
     public List<CourseDto> getRelatedCourses(int teacherId) throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
-        CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
-        TransactionHelper helper = TransactionHelper.getInstance();
         try {
-            helper.beginTransaction(coursesDAO);
             courseDtoList = coursesDAO.findRelatedCourses(teacherId);
-            helper.commit();
         } catch (DaoException e) {
-            helper.rollback();
             Logger.log(Level.FATAL, "Exception during finding teacher related courses process.", e);
             throw new ServiceException("Exception during finding teacher related courses process.", e);
-        } finally {
-            helper.endTransaction();
         }
+
         return courseDtoList;
     }
 
@@ -41,19 +35,13 @@ public class CourseServiceImpl implements CourseService {
                                 int isAvailable, int teacherId) throws ServiceException {
 
         boolean isUpdated = false;
-        CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
-        TransactionHelper helper = TransactionHelper.getInstance();
         try{
-            helper.beginTransaction(coursesDAO);
             isUpdated = coursesDAO.updateCourseById(courseId, courseTitle, subjectId, status, isAvailable, teacherId);
-            helper.commit();
         } catch (DaoException e){
-            helper.rollback();
             Logger.log(Level.FATAL, "Fail to process update course service logic.", e);
             throw new ServiceException("Fail to process update course service logic.",e);
-        } finally {
-            helper.endTransaction();
         }
+
         return isUpdated;
     }
 
@@ -61,18 +49,11 @@ public class CourseServiceImpl implements CourseService {
     public List<CourseDto> getAvailableCourses(int userId) throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
-        CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
-        TransactionHelper helper = TransactionHelper.getInstance();
         try {
-            helper.beginTransaction(coursesDAO);
             courseDtoList = coursesDAO.findAvailableCourses(userId);
-            helper.commit();
         } catch (DaoException e) {
-            helper.rollback();
             Logger.log(Level.FATAL, "Exception during showing available courses service process", e);
             throw new ServiceException("Exception during showing available courses service process", e);
-        } finally {
-            helper.endTransaction();
         }
         return courseDtoList;
     }
@@ -81,19 +62,13 @@ public class CourseServiceImpl implements CourseService {
     public boolean addCourse(String courseTitle, int subjectId, String status, int isAvailable, int teacherId) throws ServiceException {
         boolean isAdded = false;
 
-        CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
-        TransactionHelper helper = TransactionHelper.getInstance();
         try{
-            helper.beginTransaction(coursesDAO);
             isAdded = coursesDAO.addCourse(courseTitle, subjectId, status, isAvailable, teacherId);
-            helper.commit();
         } catch (DaoException e){
-            helper.rollback();
             Logger.log(Level.FATAL, "Fail to process add course service logic.", e);
             throw new ServiceException("Fail to process add course service logic.",e);
-        }finally {
-            helper.endTransaction();
         }
+
         return isAdded;
     }
 
@@ -101,19 +76,13 @@ public class CourseServiceImpl implements CourseService {
     public List<CourseDto> getTakenCourses(int userId) throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
-        CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
-        TransactionHelper helper = TransactionHelper.getInstance();
         try {
-            helper.beginTransaction(coursesDAO);
             courseDtoList = coursesDAO.findTakenCourses(userId);
-            helper.commit();
         } catch (DaoException e) {
-            helper.rollback();
             Logger.log(Level.FATAL, "Exception during showing taken courses service process", e);
             throw new ServiceException("Exception during showing taken courses service process", e);
-        } finally {
-            helper.endTransaction();
         }
+
         return courseDtoList;
 
     }
@@ -122,19 +91,13 @@ public class CourseServiceImpl implements CourseService {
     public List<CourseDto> getAllCourses() throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
-        CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
-        TransactionHelper helper = TransactionHelper.getInstance();
         try{
-            helper.beginTransaction(coursesDAO);
             courseDtoList = coursesDAO.findAllCourses();
-            helper.commit();
         } catch (DaoException e){
-            helper.rollback();
             Logger.log(Level.FATAL, "Fail to show all courses in service.", e);
             throw new ServiceException("Fail to show all courses in service.",e);
-        } finally {
-            helper.endTransaction();
         }
+
         return courseDtoList;
     }
 }

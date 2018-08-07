@@ -165,12 +165,18 @@ UNLOCK TABLES;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `onlinetraining`.`tasks_AFTER_INSERT` AFTER INSERT ON `tasks` FOR EACH ROW
+
+DROP TRIGGER IF EXISTS onlinetraining.tasks_AFTER_INSERT;
+DELIMITER $$
+USE `onlinetraining`$$
+CREATE DEFINER = CURRENT_USER TRIGGER onlinetraining.tasks_AFTER_INSERT AFTER INSERT ON tasks FOR EACH ROW
   BEGIN
+    SET @task_id = (SELECT MAX(task_id) FROM tasks);
+    SET @course_id = (SELECT task_course_id FROM tasks WHERE task_id = @task_id);
     INSERT INTO students_has_tasks (users_user_id, tasks_task_id)
-      SELECT users_user_id, (SELECT MAX(task_id) FROM tasks) FROM courses_has_students WHERE courses_course_id=1;
-  END */;;
+      SELECT users_user_id, @task_id FROM courses_has_students WHERE courses_course_id = @course_id;
+  END
+$$
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;

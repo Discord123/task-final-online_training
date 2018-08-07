@@ -2,6 +2,9 @@ package by.epam.onlinetraining.dao.impl;
 
 import by.epam.onlinetraining.dao.AbstractDao;
 import by.epam.onlinetraining.dao.CoursesDao;
+import by.epam.onlinetraining.dao.TransactionHelper;
+import by.epam.onlinetraining.dao.pool.ConnectionPool;
+import by.epam.onlinetraining.dao.pool.ProxyConnection;
 import by.epam.onlinetraining.dto.CourseDto;
 import by.epam.onlinetraining.exception.DaoException;
 import org.apache.logging.log4j.Level;
@@ -17,6 +20,7 @@ import java.util.List;
 
 public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
     private static final Logger Logger = LogManager.getLogger(CoursesDaoImpl.class);
+    private static ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     private static final String FIND_RELATED_COURSES =
             "SELECT * FROM courses " +
@@ -78,6 +82,7 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
     @Override
     public List<CourseDto> findRelatedCourses(int teacherID) throws DaoException {
         List<CourseDto> courseDtoList = new ArrayList<>();
+        ProxyConnection proxyConnection = connectionPool.getConnection();
         try(PreparedStatement statement = proxyConnection.prepareStatement(FIND_RELATED_COURSES)){
             statement.setInt(1, teacherID);
             ResultSet resultSet = statement.executeQuery();
@@ -88,6 +93,12 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
         } catch (SQLException e){
             Logger.log(Level.FATAL, "Fail to find all teacher related courses in DAO.", e);
             throw new DaoException("Fail to find all teacher related courses in DAO.", e);
+        } finally {
+            try {
+                proxyConnection.close();
+            } catch (SQLException e) {
+                Logger.log(Level.ERROR, "Problem when trying to close.");
+            }
         }
         return courseDtoList;
     }
@@ -95,7 +106,7 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
     @Override
     public List<CourseDto> findAvailableCourses(int userId) throws DaoException {
         List<CourseDto> courseDtoList = new ArrayList<>();
-
+        ProxyConnection proxyConnection = connectionPool.getConnection();
         try(PreparedStatement statement = proxyConnection.prepareStatement(FIND_AVAILABLE_COURSES_AND_RELATED_DATA)){
             statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
@@ -106,6 +117,12 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
         } catch (SQLException e){
             Logger.log(Level.FATAL, "Exception during find available courses process in DAO.", e);
             throw new DaoException("Exception during find available courses process in DAO.", e);
+        } finally {
+            try {
+                proxyConnection.close();
+            } catch (SQLException e) {
+                Logger.log(Level.ERROR, "Problem when trying to close.");
+            }
         }
         return courseDtoList;
     }
@@ -113,6 +130,7 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
     @Override
     public List<CourseDto> findTakenCourses(int userId) throws DaoException {
         List<CourseDto> takenCourses = new ArrayList<>();
+        ProxyConnection proxyConnection = connectionPool.getConnection();
         try (PreparedStatement statement = proxyConnection.prepareStatement(FIND_TAKEN_COURSES_AND_RELATED_DATA)) {
             statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
@@ -123,6 +141,12 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
         } catch (SQLException e) {
             Logger.log(Level.FATAL, "Exception during find taken courses process in DAO.", e);
             throw new DaoException("Exception during find taken courses process in DAO.", e);
+        } finally {
+            try {
+                proxyConnection.close();
+            } catch (SQLException e) {
+                Logger.log(Level.ERROR, "Problem when trying to close.");
+            }
         }
         return takenCourses;
     }
@@ -130,6 +154,8 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
     @Override
     public boolean updateCourseById(int courseId, String courseTitle, int subjectId, String status, int isAvailable, int teacherId) throws DaoException {
         boolean isUpdated = false;
+        ProxyConnection proxyConnection = connectionPool.getConnection();
+        TransactionHelper.beginTransaction(proxyConnection);
         try(PreparedStatement statement = proxyConnection.prepareStatement(UPDATE_COURSE_BY_ID)){
             statement.setString(1, courseTitle);
             statement.setInt(2, subjectId);
@@ -141,10 +167,16 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
                 statement.setInt(5, teacherId);
             }
             statement.setInt(6, courseId);
+
+            TransactionHelper.commit(proxyConnection);
+
             isUpdated = statement.executeUpdate() != 0;
         } catch (SQLException e){
+            TransactionHelper.rollback(proxyConnection);
             Logger.log(Level.FATAL, "Fail to update course by ID in DAO.", e);
             throw new DaoException("Fail to update course by ID in DAO.", e);
+        } finally {
+            TransactionHelper.endTransaction(proxyConnection);
         }
         return isUpdated;
     }
@@ -152,6 +184,7 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
     @Override
     public List<CourseDto> findAllCourses() throws DaoException {
         List<CourseDto> allCoursesDtoList = new ArrayList<>();
+        ProxyConnection proxyConnection = connectionPool.getConnection();
         try(PreparedStatement statement = proxyConnection.prepareStatement(FIND_ALL_COURSES_AND_RELATED_DATA)){
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
@@ -161,6 +194,12 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
         } catch (SQLException e){
             Logger.log(Level.FATAL, "Exception during find all courses process in DAO.", e);
             throw new DaoException("Exception during find all courses process in DAO.", e);
+        } finally {
+            try {
+                proxyConnection.close();
+            } catch (SQLException e) {
+                Logger.log(Level.ERROR, "Problem when trying to close.");
+            }
         }
         return allCoursesDtoList;
     }
@@ -168,6 +207,8 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
     @Override
     public boolean addCourse(String courseTitle, int subjectId, String status, int isAvailable, int teacherId) throws DaoException {
         boolean isInserted = false;
+        ProxyConnection proxyConnection = connectionPool.getConnection();
+        TransactionHelper.beginTransaction(proxyConnection);
         try(PreparedStatement statement = proxyConnection.prepareStatement(INSERT_NEW_COURSE)){
             statement.setString(1, courseTitle);
             statement.setInt(2, subjectId);
@@ -179,10 +220,15 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
                 statement.setInt(5, teacherId);
             }
 
+            TransactionHelper.commit(proxyConnection);
+
             isInserted = statement.executeUpdate() != 0;
         } catch (SQLException e){
+            TransactionHelper.rollback(proxyConnection);
             Logger.log(Level.FATAL, "Fail to insert new course in DAO.", e);
             throw new DaoException("Fail to insert new course in DAO.", e);
+        } finally {
+            TransactionHelper.endTransaction(proxyConnection);
         }
         return isInserted;
     }

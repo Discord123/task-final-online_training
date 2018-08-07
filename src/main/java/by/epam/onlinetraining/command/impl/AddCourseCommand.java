@@ -11,7 +11,6 @@ import by.epam.onlinetraining.entity.User;
 import by.epam.onlinetraining.exception.CommandException;
 import by.epam.onlinetraining.exception.ServiceException;
 import by.epam.onlinetraining.service.*;
-import by.epam.onlinetraining.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -78,7 +77,7 @@ public class AddCourseCommand extends ActionCommand {
             List<Subject> subjectList = subjectService.getAllSubjects();
             requestContent.setSessionAttributes(EntityAttribute.ALL_SUBJECTS_PARAM, subjectList);
 
-            UserService userService = new UserServiceImpl();
+            UserService userService = ServiceManager.getUserService();
             List<User> teachersList = userService.getAllTeachers();
             requestContent.setSessionAttributes(EntityAttribute.ALL_TEACHERS_PARAM, teachersList);
 

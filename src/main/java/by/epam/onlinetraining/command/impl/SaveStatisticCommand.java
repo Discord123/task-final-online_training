@@ -30,7 +30,6 @@ public class SaveStatisticCommand extends ActionCommand {
         try {
             UserService userService = (UserService) getService();
             StatisticDTO statisticDTO = userService.getStatistic();
-            boolean isSave = userService.saveStatistic(statisticDTO);
 
         } catch (ServiceException e) {
             Logger.log(Level.FATAL,"Exception during statistic command");
