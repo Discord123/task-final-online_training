@@ -15,15 +15,15 @@ import java.util.List;
 
 public class CourseServiceImpl implements CourseService {
     private static final Logger Logger = LogManager.getLogger(CourseServiceImpl.class);
-    private static CoursesDao coursesDAO = DAOManager.getCoursesDao();
+    private static CoursesDaoImpl coursesDAO = DAOManager.getCoursesDao();
 
     @Override
     public List<CourseDto> getRelatedCourses(int teacherId) throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
-        try {
+        try (TransactionManager tm = TransactionManager.launchQuery(coursesDAO)) {
             courseDtoList = coursesDAO.findRelatedCourses(teacherId);
-        } catch (DaoException e) {
+        } catch (SQLException | DaoException e) {
             Logger.log(Level.FATAL, "Exception during finding teacher related courses process.", e);
             throw new ServiceException("Exception during finding teacher related courses process.", e);
         }
@@ -35,43 +35,38 @@ public class CourseServiceImpl implements CourseService {
     public boolean updateCourse(int courseId, String courseTitle, int subjectId, String status,
                                 int isAvailable, int teacherId) throws ServiceException {
 
-        boolean isUpdated = false;
-        try{
-            isUpdated = coursesDAO.updateCourseById(courseId, courseTitle, subjectId, status, isAvailable, teacherId);
-        } catch (DaoException e){
+        try (TransactionManager tm = TransactionManager.launchTransaction(coursesDAO)) {
+            coursesDAO.updateCourseById(courseId, courseTitle, subjectId, status, isAvailable, teacherId);
+        } catch (SQLException | DaoException e) {
             Logger.log(Level.FATAL, "Fail to process update course service logic.", e);
             throw new ServiceException("Fail to process update course service logic.",e);
         }
-
-        return isUpdated;
+        return true;
     }
 
     @Override
     public List<CourseDto> getAvailableCourses(int userId) throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
-        try {
+        try (TransactionManager tm = TransactionManager.launchQuery(coursesDAO)) {
             courseDtoList = coursesDAO.findAvailableCourses(userId);
-        } catch (DaoException e) {
+        } catch (SQLException | DaoException e) {
             Logger.log(Level.FATAL, "Exception during showing available courses service process", e);
             throw new ServiceException("Exception during showing available courses service process", e);
         }
         return courseDtoList;
     }
 
-    /**
-     * This method is implemented with the brand new <code>TransactionManger</code> class
-     * */
+    @Override
     public boolean addCourse(String courseTitle, int subjectId, String status, int isAvailable, int teacherId) throws ServiceException {
-        CoursesDaoImpl courseDao = (CoursesDaoImpl) coursesDAO;
 
-        try (TransactionManager tm = TransactionManager.launchTransaction(courseDao)) {
-            courseDao.addCourse(courseTitle, subjectId, status, isAvailable, teacherId);
+        try (TransactionManager tm = TransactionManager.launchTransaction(coursesDAO)) {
+            coursesDAO.addCourse(courseTitle, subjectId, status, isAvailable, teacherId);
         } catch (SQLException | DaoException e) {
             Logger.log(Level.FATAL, "Fail to process add course service logic.", e);
             throw new ServiceException("Fail to process add course service logic.",e);
         }
-
+        System.out.println("CS 69");
         return true;
     }
 
@@ -79,9 +74,9 @@ public class CourseServiceImpl implements CourseService {
     public List<CourseDto> getTakenCourses(int userId) throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
-        try {
+        try (TransactionManager tm = TransactionManager.launchQuery(coursesDAO)) {
             courseDtoList = coursesDAO.findTakenCourses(userId);
-        } catch (DaoException e) {
+        } catch (SQLException | DaoException e) {
             Logger.log(Level.FATAL, "Exception during showing taken courses service process", e);
             throw new ServiceException("Exception during showing taken courses service process", e);
         }
@@ -94,9 +89,9 @@ public class CourseServiceImpl implements CourseService {
     public List<CourseDto> getAllCourses() throws ServiceException {
         List<CourseDto> courseDtoList = null;
 
-        try{
+        try (TransactionManager tm = TransactionManager.launchQuery(coursesDAO)) {
             courseDtoList = coursesDAO.findAllCourses();
-        } catch (DaoException e){
+        } catch (SQLException | DaoException e) {
             Logger.log(Level.FATAL, "Fail to show all courses in service.", e);
             throw new ServiceException("Fail to show all courses in service.",e);
         }

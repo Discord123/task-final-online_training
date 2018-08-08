@@ -27,7 +27,7 @@ public class MailSender {
         properties.put(MailSenderConfig.PORT, MailSenderConfig.port);
     }
 
-    public void send(String subject, String text, String recipientEmail) throws MessagingException {
+    public void send(String subject, String text, String recipientEmail) {
         Authenticator authenticator = new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
@@ -47,7 +47,6 @@ public class MailSender {
             Transport.send(message);
         } catch (MessagingException e) {
             LOGGER.log(Level.FATAL, "Exception during sending email.", e);
-            throw e;
         }
     }
 }
