@@ -151,6 +151,7 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
                 statement.setInt(5, teacherId);
             }
             statement.setInt(6, courseId);
+            statement.executeUpdate();
         } catch (SQLException e){
             Logger.log(Level.FATAL, "Fail to update course by ID in DAO.", e);
             throw new DaoException("Fail to update course by ID in DAO.", e);
@@ -191,9 +192,7 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
             } else {
                 statement.setInt(5, teacherId);
             }
-            System.out.println("CD 194");
             statement.executeUpdate();
-            System.out.println("CD 196");
         } catch (SQLException e){
             Logger.log(Level.FATAL, "Fail to insert new course in DAO.", e);
             throw new DaoException("Fail to insert new course in DAO.", e);

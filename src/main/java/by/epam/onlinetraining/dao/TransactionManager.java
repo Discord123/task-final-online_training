@@ -36,8 +36,8 @@ public class TransactionManager implements AutoCloseable {
     public static TransactionManager launchQuery(AbstractDao... daos) throws SQLException {
         TransactionManager instance = instantiate();
         initialize(daos);
-//        ProxyConnection connection = connectionThreadLocal.get();
-//        connection.setReadOnly(true);
+        ProxyConnection connection = connectionThreadLocal.get();
+        connection.setReadOnly(true);
         return instance;
     }
 
@@ -120,7 +120,7 @@ public class TransactionManager implements AutoCloseable {
     public void close() throws SQLException {
         ProxyConnection connection = connectionThreadLocal.get();
         if(connection.isReadOnly()){
-//            connection.setReadOnly(true);
+            connection.setReadOnly(false);
             closeConnection();
             return;
         }
