@@ -206,10 +206,9 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
 
     @Override
     public boolean addCourse(String courseTitle, int subjectId, String status, int isAvailable, int teacherId) throws DaoException {
-        boolean isInserted = false;
-        ProxyConnection proxyConnection = connectionPool.getConnection();
-        TransactionHelper.beginTransaction(proxyConnection);
-        try(PreparedStatement statement = proxyConnection.prepareStatement(INSERT_NEW_COURSE)){
+        ProxyConnection connection = connectionThreadLocal.get();
+
+        try(PreparedStatement statement = connection.prepareStatement(INSERT_NEW_COURSE)){
             statement.setString(1, courseTitle);
             statement.setInt(2, subjectId);
             statement.setString(3, status);
@@ -219,17 +218,11 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
             } else {
                 statement.setInt(5, teacherId);
             }
-
-            TransactionHelper.commit(proxyConnection);
-
-            isInserted = statement.executeUpdate() != 0;
+            statement.executeUpdate();
         } catch (SQLException e){
-            TransactionHelper.rollback(proxyConnection);
             Logger.log(Level.FATAL, "Fail to insert new course in DAO.", e);
             throw new DaoException("Fail to insert new course in DAO.", e);
-        } finally {
-            TransactionHelper.endTransaction(proxyConnection);
         }
-        return isInserted;
+        return true;
     }
 }
