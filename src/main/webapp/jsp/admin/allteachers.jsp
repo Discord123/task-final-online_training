@@ -41,19 +41,42 @@
                         <td>${teachers.firstName}</td>
                         <td>${teachers.lastName}</td>
                         <td>
-                            <form action="/controller">
-                                <input type="hidden" name="command" value="deleteuser">
-                                <button type="submit" class="btn btn-danger btn-sm" name="userid" value="${teachers.id}" ><fmt:message key="label.allteachers.delete-teacher-btn" bundle="${rb}"/></button>
-                            </form>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                                <fmt:message key="label.allteachers.delete-teacher-btn" bundle="${rb}"/>
+                            </button>
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><fmt:message key="label.allteachers.delete-teacher-operation" bundle="${rb}"/></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <fmt:message key="label.allteachers.delete-teacher-question" bundle="${rb}"/>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> <fmt:message key="label.allteachers.delete-teacher-close" bundle="${rb}"/></button>
+                                            <form action="/controller">
+                                                <input type="hidden" name="command" value="deleteuser">
+                                                <button type="submit" class="btn btn-primary" name="userid" value="${teachers.id}" ><fmt:message key="label.allteachers.delete-teacher-accept" bundle="${rb}"/></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>
 <jsp:include page="../../jsp/student/parts/footer.jsp"/>
 </body>
 </html>
+
+
+
