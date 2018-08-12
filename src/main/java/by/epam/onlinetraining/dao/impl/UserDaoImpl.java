@@ -28,12 +28,26 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         "CALL deleteTeacher(?);";
 
     private static final String FIND_ALL_USERS_BY_ROLE =
-            "SELECT * FROM users " +
+            "SELECT user_id, " +
+                    "user_email, " +
+                    "user_password, " +
+                    "first_name, " +
+                    "last_name, " +
+                    "user_role, " +
+                    "user_isDeleted " +
+                    "FROM users " +
                     "WHERE user_role=? " +
                     "AND user_isDeleted!=1";
 
     private static final String FIND_USER_BY_EMAIL_AND_PASSWORD =
-            "SELECT * FROM users " +
+            "SELECT user_id, " +
+                    "user_email, " +
+                    "user_password, " +
+                    "first_name, " +
+                    "last_name, " +
+                    "user_role, " +
+                    "user_isDeleted " +
+                    "FROM users " +
                     "WHERE user_email=? " +
                     "AND user_password=?";
 
@@ -43,16 +57,16 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
                     "WHERE user_email=?";
 
     private static final String GET_STATISTIC =
-            "SELECT COUNT(*) " +
+            "SELECT COUNT(user_id) " +
                     "FROM users " +
                     "UNION ALL " +
-                    "SELECT COUNT(*) " +
+                    "SELECT COUNT(task_id) " +
                     "FROM tasks " +
                     "UNION ALL " +
-                    "SELECT COUNT(*) " +
+                    "SELECT COUNT(course_id) " +
                     "FROM courses " +
                     "UNION ALL " +
-                    "SELECT COUNT(*) " +
+                    "SELECT COUNT(user_id) " +
                     "FROM users " +
                     "WHERE user_role = 'teacher'" +
                     "UNION ALL " +
@@ -60,7 +74,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
                     "FROM subjects ";
 
     private static final String ADD_COURSE_TO_USER =
-            "INSERT INTO courses_has_students " +
+            "INSERT INTO students_courses " +
                     "(courses_course_id, " +
                     "users_user_id) " +
                     "VALUES (?,?)";
@@ -75,6 +89,11 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
                     "VALUES (?,?,?,?,?)";
 
     private static final String UPDATE_USERS_PASSWORD =
+            "UPDATE users " +
+                    "SET user_password=? " +
+                    "WHERE user_email=?";
+
+    private static final String GET_COUNT_OF_PEOPLE_WHO_STUDY_THAT_LANGUAGE =
             "UPDATE users " +
                     "SET user_password=? " +
                     "WHERE user_email=?";
@@ -191,6 +210,25 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         }
 
         return statisticDTO;
+    }
+
+    @Override
+    public int getCountOfUsersWhoStudyThatLanguage(String language) throws DaoException {
+
+        int count = 0;
+        ProxyConnection proxyConnection = connectionThreadLocal.get();
+        try(PreparedStatement statement = proxyConnection.prepareStatement(GET_COUNT_OF_PEOPLE_WHO_STUDY_THAT_LANGUAGE)){
+            statement.setString(1, language);
+
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            count = resultSet.getInt(1);
+        } catch (SQLException e) {
+            Logger.log(Level.FATAL, "Fail to get count of people who study that language", e);
+            throw new DaoException("Fail to get count of people who study that language", e);
+        }
+
+        return count;
     }
 
     @Override

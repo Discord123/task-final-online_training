@@ -10,6 +10,7 @@ import java.util.List;
 public interface UserDao {
     User findUserByEmailAndPassword(String email, String password) throws DaoException;
     StatisticDTO getStatistic() throws DaoException;
+    int getCountOfUsersWhoStudyThatLanguage(String language) throws DaoException;
     boolean checkUserByEmail(String email) throws DaoException;
     boolean addUser(String userEmail, String hashedPassword, String firstName, String lastName, String role) throws DaoException;
     boolean updateUserPassword(String email, String password) throws DaoException;

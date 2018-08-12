@@ -20,7 +20,23 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
     private static final Logger Logger = LogManager.getLogger(CoursesDaoImpl.class);
 
     private static final String FIND_RELATED_COURSES =
-            "SELECT * FROM courses " +
+            "SELECT course_id, " +
+                    "course_title, " +
+                    "course_subject_id, " +
+                    "course_status, " +
+                    "course_isAvailable, " +
+                    "course_teacher_id, " +
+                    "subject_id, " +
+                    "subject_language, " +
+                    "subject_level, " +
+                    "user_id, " +
+                    "user_email, " +
+                    "user_password, " +
+                    "first_name, " +
+                    "last_name, " +
+                    "user_role, " +
+                    "user_isDeleted " +
+                    "FROM courses " +
                     "LEFT JOIN subjects " +
                     "ON courses.course_subject_id = subjects.subject_id "+
                     "LEFT JOIN users " +
@@ -28,17 +44,51 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
                     "WHERE course_teacher_id=?";
 
     private static final String FIND_TAKEN_COURSES_AND_RELATED_DATA =
-            "SELECT * FROM courses " +
+            "SELECT course_id, " +
+                    "course_title, " +
+                    "course_subject_id, " +
+                    "course_status, " +
+                    "course_isAvailable, " +
+                    "course_teacher_id, " +
+                    "user_id, " +
+                    "user_email, " +
+                    "user_password, " +
+                    "first_name, " +
+                    "last_name, " +
+                    "user_role, " +
+                    "user_isDeleted, " +
+                    "subject_id, " +
+                    "subject_language, " +
+                    "subject_level, " +
+                    "courses_course_id, " +
+                    "users_user_id " +
+                    "FROM courses " +
                     "LEFT JOIN users " +
                     "ON courses.course_teacher_id = users.user_id " +
                     "LEFT JOIN subjects " +
                     "ON courses.course_subject_id = subjects.subject_id "+
-                    "LEFT JOIN courses_has_students AS chs " +
+                    "LEFT JOIN students_courses AS chs " +
                     "ON courses.course_id = chs.courses_course_id " +
                     "WHERE chs.users_user_id=?";
 
     private static final String FIND_AVAILABLE_COURSES_AND_RELATED_DATA =
-            "SELECT * FROM courses " +
+            "SELECT course_id, " +
+                    "course_title, " +
+                    "course_subject_id, " +
+                    "course_status, " +
+                    "course_isAvailable, " +
+                    "course_teacher_id, " +
+                    "user_id, " +
+                    "user_email, " +
+                    "user_password, " +
+                    "first_name, " +
+                    "last_name, " +
+                    "user_role, " +
+                    "user_isDeleted, " +
+                    "subject_id, " +
+                    "subject_language, " +
+                    "subject_level " +
+                    "FROM courses " +
                     "LEFT JOIN users " +
                     "ON courses.course_teacher_id = users.user_id " +
                     "LEFT JOIN subjects " +
@@ -46,12 +96,28 @@ public class CoursesDaoImpl extends AbstractDao implements CoursesDao {
                     "WHERE course_isAvailable=1 " +
                     "AND course_id NOT IN( " +
                     "SELECT courses_course_id " +
-                    "FROM courses_has_students " +
+                    "FROM students_courses " +
                     "AS taken_courses " +
                     "WHERE users_user_id=?)";
 
     private static final String FIND_ALL_COURSES_AND_RELATED_DATA =
-            "SELECT * FROM courses " +
+            "SELECT course_id, " +
+                    "course_title, " +
+                    "course_subject_id, " +
+                    "course_status, " +
+                    "course_isAvailable, " +
+                    "course_teacher_id, " +
+                    "user_id, " +
+                    "user_email, " +
+                    "user_password, " +
+                    "first_name, " +
+                    "last_name, " +
+                    "user_role, " +
+                    "user_isDeleted, " +
+                    "subject_id, " +
+                    "subject_language, " +
+                    "subject_level " +
+                    "FROM courses " +
                     "LEFT JOIN users " +
                     "ON courses.course_teacher_id = users.user_id " +
                     "LEFT JOIN subjects " +

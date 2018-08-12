@@ -17,7 +17,11 @@ import java.util.List;
 
 public class SubjectDaoImpl extends AbstractDao implements SubjectDao {
     private static final Logger Logger = LogManager.getLogger(SubjectDaoImpl.class);
-    private static final String FIND_ALL_SUBJECTS = "SELECT * FROM subjects";
+    private static final String FIND_ALL_SUBJECTS =
+            "SELECT subject_id, " +
+                    "subject_language, " +
+                    "subject_level " +
+                    "FROM subjects";
 
     @Override
     public List<Subject> showAllSubjects() throws DaoException {

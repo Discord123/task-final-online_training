@@ -20,15 +20,28 @@ public class TasksDaoImpl extends AbstractDao implements TasksDao {
     private static final Logger Logger = LogManager.getLogger(TasksDaoImpl.class);
 
     private static final String FIND_RECEIVED_TASKS =
-            "SELECT * FROM tasks " +
-                    "INNER JOIN students_has_tasks " +
+            "SELECT task_id, " +
+                    "task_name, " +
+                    "task_description, " +
+                    "task_course_id, " +
+                    "users_user_id, " +
+                    "tasks_task_id, " +
+                    "task_answer, " +
+                    "task_review, " +
+                    "task_mark " +
+                    "FROM tasks " +
+                    "INNER JOIN students_tasks " +
                     "AS sht " +
                     "ON tasks_task_id = tasks.task_id " +
                     "WHERE sht.users_user_id=?";
 
     private static final String FIND_TASKS_BY_COURSE_ID =
-            "SELECT * FROM tasks " +
-            "WHERE task_course_id=?";
+            "SELECT task_id, " +
+                    "task_name, " +
+                    "task_description, " +
+                    "task_course_id " +
+                    "FROM tasks " +
+                    "WHERE task_course_id=?";
 
     private static final String ADD_NEW_TASK =
             "INSERT INTO tasks " +

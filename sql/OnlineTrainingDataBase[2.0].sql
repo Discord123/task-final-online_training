@@ -48,20 +48,20 @@ INSERT INTO `courses` VALUES (1,'English for beginers',1,'running',1,2),(2,'Engl
 UNLOCK TABLES;
 
 --
--- Table structure for table `courses_has_students`
+-- Table structure for table `students_courses`
 --
 
-DROP TABLE IF EXISTS `courses_has_students`;
+DROP TABLE IF EXISTS `students_courses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `courses_has_students` (
+CREATE TABLE `students_courses` (
   `courses_course_id` int(11) NOT NULL COMMENT 'courses_course_id - ссылка на course_id таблицы courses.',
   `users_user_id` int(11) NOT NULL,
   PRIMARY KEY (`courses_course_id`,`users_user_id`),
-  KEY `fk_courses_has_users_users1_idx` (`users_user_id`),
-  KEY `fk_courses_has_users_courses1_idx` (`courses_course_id`),
-  CONSTRAINT `fk_courses_has_users_courses1` FOREIGN KEY (`courses_course_id`) REFERENCES `courses` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_courses_has_users_users1` FOREIGN KEY (`users_user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_students_courses_users1_idx` (`users_user_id`),
+  KEY `fk_students_courses_courses1_idx` (`courses_course_id`),
+  CONSTRAINT `fk_students_courses_courses1` FOREIGN KEY (`courses_course_id`) REFERENCES `courses` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_students_courses_users1` FOREIGN KEY (`users_user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Таблица отражающая связь "многие к многим" между таблицами users и courses.\nСтуденты из users могут проходить обучение на нескольких курсах сразу.\nНа каждом курсе обучаются несколько студентов.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -69,29 +69,29 @@ CREATE TABLE `courses_has_students` (
 -- Dumping data for table `courses_has_students`
 --
 
-LOCK TABLES `courses_has_students` WRITE;
-/*!40000 ALTER TABLE `courses_has_students` DISABLE KEYS */;
-INSERT INTO `courses_has_students` VALUES (1,5),(2,5),(1,6),(1,7),(1,8),(1,9),(1,10),(2,11),(2,12),(2,13),(2,14),(2,15),(3,16),(3,17),(4,18),(4,19),(4,20),(4,21),(5,22),(5,23),(5,24);
-/*!40000 ALTER TABLE `courses_has_students` ENABLE KEYS */;
+LOCK TABLES `students_courses` WRITE;
+/*!40000 ALTER TABLE `students_courses` DISABLE KEYS */;
+INSERT INTO `students_courses` VALUES (1,5),(2,5),(1,6),(1,7),(1,8),(1,9),(1,10),(2,11),(2,12),(2,13),(2,14),(2,15),(3,16),(3,17),(4,18),(4,19),(4,20),(4,21),(5,22),(5,23),(5,24);
+/*!40000 ALTER TABLE `students_courses` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `students_has_tasks`
+-- Table structure for table `students_tasks`
 --
 
-DROP TABLE IF EXISTS `students_has_tasks`;
+DROP TABLE IF EXISTS `students_tasks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `students_has_tasks` (
+CREATE TABLE `students_tasks` (
   `users_user_id` int(11) NOT NULL COMMENT 'Ссылка на id студента из таблицы users.',
   `tasks_task_id` int(11) NOT NULL COMMENT 'Ссылка на id задания из таблицы tasks.',
   `task_answer` varchar(4500) DEFAULT NULL,
   `task_review` varchar(1000) DEFAULT NULL COMMENT 'task_review - отзыв преподавателя о работе студента.',
   `task_mark` tinyint(10) unsigned DEFAULT NULL COMMENT 'task_mark - оценака выполненного задания. От 1 до 10 баллов.',
-  KEY `fk_users_has_tasks_tasks1_idx` (`tasks_task_id`),
-  KEY `fk_users_has_tasks_users1_idx` (`users_user_id`),
-  CONSTRAINT `fk_users_has_tasks_tasks1` FOREIGN KEY (`tasks_task_id`) REFERENCES `tasks` (`task_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_users_has_tasks_users1` FOREIGN KEY (`users_user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `fk_students_tasks_tasks1_idx` (`tasks_task_id`),
+  KEY `fk_students_tasks_users1_idx` (`users_user_id`),
+  CONSTRAINT `fk_students_tasks_tasks1` FOREIGN KEY (`tasks_task_id`) REFERENCES `tasks` (`task_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_students_tasks_users1` FOREIGN KEY (`users_user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Таблица отражает связь многие к многим.\nОдин студет может получать несколько заданий.\nОдно задание может быть выдано нескольким студентам.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -99,10 +99,10 @@ CREATE TABLE `students_has_tasks` (
 -- Dumping data for table `students_has_tasks`
 --
 
-LOCK TABLES `students_has_tasks` WRITE;
-/*!40000 ALTER TABLE `students_has_tasks` DISABLE KEYS */;
-INSERT INTO `students_has_tasks` VALUES (5,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','not bad',7),(6,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','try harder',5),(7,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','excellent',9),(8,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','not bad',6),(9,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','pathetic',4),(10,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','not bad',7),(11,2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','try harder',5),(12,2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','not bad',7),(13,2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','good enough',8),(14,2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','excellent',10),(15,2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','not bad',7),(18,3,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','good enough',8),(19,3,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','excellent',9),(20,3,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','not bad',7),(21,3,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','not bad',6),(5,4,NULL,NULL,NULL),(6,4,NULL,NULL,NULL),(7,4,NULL,NULL,NULL),(8,4,NULL,NULL,NULL),(9,4,NULL,NULL,NULL),(5,5,NULL,NULL,NULL),(6,5,NULL,NULL,NULL),(7,5,NULL,NULL,NULL),(8,5,NULL,NULL,NULL),(9,5,NULL,NULL,NULL),(10,5,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `students_has_tasks` ENABLE KEYS */;
+LOCK TABLES `students_tasks` WRITE;
+/*!40000 ALTER TABLE `students_tasks` DISABLE KEYS */;
+INSERT INTO `students_tasks` VALUES (5,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','not bad',7),(6,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','try harder',5),(7,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','excellent',9),(8,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','not bad',6),(9,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','pathetic',4),(10,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','not bad',7),(11,2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','try harder',5),(12,2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','not bad',7),(13,2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','good enough',8),(14,2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','excellent',10),(15,2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','not bad',7),(18,3,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','good enough',8),(19,3,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','excellent',9),(20,3,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','not bad',7),(21,3,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pulvinar aliquam. Nam nunc nibh, interdum non iaculis at, scelerisque non mi. Integer facilisis eros risus, mattis efficitur nibh malesuada eget. In ultricies turpis eu tellus hendrerit euismod. Fusce lacinia quis enim ut cursus. Proin et arcu ac sapien feugiat dictum non id ipsum. Nullam finibus luctus turpis. Aliquam tincidunt.','not bad',6),(5,4,NULL,NULL,NULL),(6,4,NULL,NULL,NULL),(7,4,NULL,NULL,NULL),(8,4,NULL,NULL,NULL),(9,4,NULL,NULL,NULL),(5,5,NULL,NULL,NULL),(6,5,NULL,NULL,NULL),(7,5,NULL,NULL,NULL),(8,5,NULL,NULL,NULL),(9,5,NULL,NULL,NULL),(10,5,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `students_tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -173,8 +173,8 @@ CREATE DEFINER = CURRENT_USER TRIGGER onlinetraining.tasks_AFTER_INSERT AFTER IN
   BEGIN
     SET @task_id = (SELECT MAX(task_id) FROM tasks);
     SET @course_id = (SELECT task_course_id FROM tasks WHERE task_id = @task_id);
-    INSERT INTO students_has_tasks (users_user_id, tasks_task_id)
-      SELECT users_user_id, @task_id FROM courses_has_students WHERE courses_course_id = @course_id;
+    INSERT INTO students_tasks (users_user_id, tasks_task_id)
+      SELECT users_user_id, @task_id FROM students_courses WHERE courses_course_id = @course_id;
   END
 $$
 DELIMITER ;

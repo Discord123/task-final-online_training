@@ -19,20 +19,32 @@ public class ReviewDaoImpl extends AbstractDao implements ReviewDao {
     private static final Logger Logger = LogManager.getLogger(ReviewDaoImpl.class);
 
     private static final String UPDATE_ANSWER_IN_REWIEW =
-            "UPDATE students_has_tasks " +
+            "UPDATE students_tasks " +
                     "SET task_answer=? " +
                     "WHERE users_user_id=? " +
                     "AND tasks_task_id=?";
 
     private static final String FIND_REVIEWS_AND_STUDENTS_BY_TASK_ID =
-            "SELECT * FROM students_has_tasks " +
+            "SELECT users_user_id, " +
+                    "tasks_task_id, " +
+                    "task_answer, " +
+                    "task_review, " +
+                    "task_mark, " +
+                    "user_id, " +
+                    "user_email, " +
+                    "user_password, " +
+                    "first_name, " +
+                    "last_name, " +
+                    "user_role, " +
+                    "user_isDeleted " +
+                    "FROM students_tasks " +
                     "AS sht " +
                     "INNER JOIN users " +
                     "ON sht.users_user_id = users.user_id " +
                     "WHERE sht.tasks_task_id=?";
 
     private static final String SEND_REVIEW =
-            "UPDATE students_has_tasks " +
+            "UPDATE students_tasks " +
                     "SET task_mark=?, task_review=? " +
                     "WHERE users_user_id=? " +
                     "AND tasks_task_id=?";
