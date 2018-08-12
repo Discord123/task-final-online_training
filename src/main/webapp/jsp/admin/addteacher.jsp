@@ -5,6 +5,16 @@
 <fmt:setLocale value="${locale}" scope="session"/>
 <fmt:setBundle basename="localedata" var="rb"/>
 
+<c:if test="${empty sessionScope.failEmail}">
+    <c:set var="failEmail" value="" scope="session"/>
+</c:if>
+<c:if test="${empty sessionScope.failFirstName}">
+    <c:set var="failFirstName" value="" scope="session"/>
+</c:if>
+<c:if test="${empty sessionScope.failLastName}">
+    <c:set var="failLastName" value="" scope="session"/>
+</c:if>
+
 <!DOCTYPE html>
 <html lang="EN">
 <head>
@@ -28,7 +38,7 @@
                     <!-- E-mail -->
                     <label class="control-label" for="email"><fmt:message key="label.registration.email" bundle="${rb}"/><span class="required">*</span></label>
                     <div class="controls">
-                        <input type="email" id="email" name="user_email" required="" class="form-control" placeholder="email@example.com" />
+                        <input type="email" id="email" name="user_email" value="${failEmail}" required="" class="form-control" placeholder="email@example.com" />
                         <p class="help-block"><fmt:message key="label.t.registration.email.help" bundle="${rb}"/></p>
                     </div>
                 </div>
@@ -55,7 +65,7 @@
                     <!-- First Name -->
                     <label class="control-label" for="first_name"><fmt:message key="label.registration.name" bundle="${rb}"/><span class="required">*</span></label>
                     <div class="controls">
-                        <input type="text" id="first_name" name="first_name" required="" class="form-control" placeholder="Иван" pattern="^[А-ЯA-Z][a-яa-z]{2,30}"/>
+                        <input type="text" id="first_name" name="first_name" value="${failFirstName}" required="" class="form-control" placeholder="Иван" pattern="^[А-ЯA-Z][a-яa-z]{2,30}"/>
                         <p class="help-block"><fmt:message key="label.registration.name.help" bundle="${rb}"/></p>
                     </div>
                 </div>
@@ -64,7 +74,7 @@
                     <!-- Last Name -->
                     <label class="control-label" for="last_name"><fmt:message key="label.registration.last-name" bundle="${rb}"/><span class="required">*</span></label>
                     <div class="controls">
-                        <input type="text" id="last_name" name="last_name" required="" class="form-control" placeholder="Иванов" pattern="^[А-ЯA-Z][a-яa-z]{2,30}"/>
+                        <input type="text" id="last_name" name="last_name" value="${failLastName}" required="" class="form-control" placeholder="Иванов" pattern="^[А-ЯA-Z][a-яa-z]{2,30}"/>
                         <p class="help-block"><fmt:message key="label.registration.last-name.help" bundle="${rb}"/></p>
                     </div>
                 </div>

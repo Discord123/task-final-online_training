@@ -55,9 +55,13 @@ public class StudentSignUpCommand extends ActionCommand {
 
         try {
             boolean isParametersValid = isParametersValid(userService);
-            if(isParametersValid){
+            if (isParametersValid) {
                 isRegistered = userService.singUp(email, password, firstName, lastName, USER_ROLE);
             }
+            content.setSessionAttributes("failEmail", email);
+            content.setSessionAttributes("failFirstName", firstName);
+            content.setSessionAttributes("failLastName", lastName);
+
             putMessageIntoSession(content, isRegistered, MESSAGE_SIGN_UP_SUCCESS, signUpFailMessage);
 
         } catch (ServiceException e) {
@@ -66,9 +70,9 @@ public class StudentSignUpCommand extends ActionCommand {
         }
 
         String targetPagePath = null;
-        if(isRegistered){
+        if (isRegistered) {
             targetPagePath = LOGIN_PAGE_PATH;
-        } else{
+        } else {
             targetPagePath = REGISTRATION_PAGE_PATH;
         }
 

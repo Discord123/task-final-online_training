@@ -49,16 +49,19 @@ public class TeacherSignUpCommand extends ActionCommand{
         firstName = content.getSingleRequestParameter(SignUpAttribute.FIRST_NAME_PARAM);
         lastName = content.getSingleRequestParameter(SignUpAttribute.LAST_NAME_PARAM);
 
+        boolean isVirstVisit = true;
         boolean isRegistered = false;
-        boolean isParametersValid;
         UserService userService = (UserService) getService();
 
         try {
-            isParametersValid = isParametersValid(userService);
+            boolean isParametersValid = isParametersValid(userService);
             if(isParametersValid){
                 isRegistered = userService.singUp(email, password, firstName, lastName, USER_ROLE);
                 putMessageIntoSession(content, isRegistered, MESSAGE_SIGN_UP_SUCCESS, signUpFailMessage);
             }
+            content.setSessionAttributes("failEmail", email);
+            content.setSessionAttributes("failFirstName", firstName);
+            content.setSessionAttributes("failLastName", lastName);
 
         } catch (ServiceException e) {
             Logger.log(Level.FATAL, "Problem during user sign up");
