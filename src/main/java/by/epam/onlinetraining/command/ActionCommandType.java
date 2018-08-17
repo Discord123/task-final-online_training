@@ -24,5 +24,4 @@ public enum ActionCommandType {
     ADDTASK,
     RECOVERPASSWORD,
     GETSTATISTIC,
-    SAVESTATISTIC
 }

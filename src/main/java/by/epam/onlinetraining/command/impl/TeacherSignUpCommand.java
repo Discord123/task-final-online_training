@@ -49,16 +49,26 @@ public class TeacherSignUpCommand extends ActionCommand{
         firstName = content.getSingleRequestParameter(SignUpAttribute.FIRST_NAME_PARAM);
         lastName = content.getSingleRequestParameter(SignUpAttribute.LAST_NAME_PARAM);
 
-        boolean isVirstVisit = true;
+        boolean isVirstVisit = false;
         boolean isRegistered = false;
         UserService userService = (UserService) getService();
 
         try {
             boolean isParametersValid = isParametersValid(userService);
+            System.out.println("isParameterValid =  " + isParametersValid);
             if(isParametersValid){
+                System.out.println("isParameterValid code block");
                 isRegistered = userService.singUp(email, password, firstName, lastName, USER_ROLE);
                 putMessageIntoSession(content, isRegistered, MESSAGE_SIGN_UP_SUCCESS, signUpFailMessage);
+                isVirstVisit = true;
             }
+
+            System.out.println("isVirstVisit =  " + isVirstVisit);
+            if(isVirstVisit) {
+                System.out.println("isVirstVisit code block");
+                putMessageIntoSession(content, isRegistered, MESSAGE_SIGN_UP_SUCCESS, signUpFailMessage);
+            }
+
             content.setSessionAttributes("failEmail", email);
             content.setSessionAttributes("failFirstName", firstName);
             content.setSessionAttributes("failLastName", lastName);

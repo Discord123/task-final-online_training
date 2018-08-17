@@ -20,7 +20,6 @@ public class ActionCommandMap {
 
         commandMap.put(ADDTEACHER, new TeacherSignUpCommand());
         commandMap.put(GETSTATISTIC, new GetStatisticCommand());
-        commandMap.put(SAVESTATISTIC, new SaveStatisticCommand());
         commandMap.put(TAKEALLTEACHERS, new TakeAllTeachersCommand());
         commandMap.put(DELETEUSER, new DeleteUserCommand());
         commandMap.put(TAKEALLCOURSES, new TakeAllCoursesCommand());

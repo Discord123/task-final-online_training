@@ -32,7 +32,6 @@ public class SecurityFilter implements Filter {
 
         accessMap.put("ADDTEACHER", "ADMIN");
         accessMap.put("GETSTATISTIC", "ADMIN");
-        accessMap.put("SAVESTATISTIC", "ADMIN");
         accessMap.put("TAKEALLTEACHERS", "ADMIN");
         accessMap.put("DELETEUSER", "ADMIN");
         accessMap.put("TAKEALLCOURSES", "ADMIN");
