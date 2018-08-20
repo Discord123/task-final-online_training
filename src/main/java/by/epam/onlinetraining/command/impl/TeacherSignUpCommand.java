@@ -54,9 +54,7 @@ public class TeacherSignUpCommand extends ActionCommand{
 
         try {
             boolean isParametersValid = isParametersValid(userService);
-            System.out.println("isParameterValid =  " + isParametersValid);
             if(isParametersValid){
-                System.out.println("isParameterValid code block");
                 isRegistered = userService.singUp(email, password, firstName, lastName, USER_ROLE);
                 putMessageIntoSession(content, isRegistered, MESSAGE_SIGN_UP_SUCCESS, signUpFailMessage);
             }

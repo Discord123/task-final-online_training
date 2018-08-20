@@ -41,10 +41,10 @@
                         <td>${teachers.firstName}</td>
                         <td>${teachers.lastName}</td>
                         <td>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal${teachers.id}">
                                 <fmt:message key="label.allteachers.delete-teacher-btn" bundle="${rb}"/>
                             </button>
-                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="myModal${teachers.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -77,6 +77,7 @@
 <jsp:include page="../../jsp/student/parts/footer.jsp"/>
 </body>
 </html>
+
 
 
 

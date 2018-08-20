@@ -30,6 +30,7 @@ public class DeleteUserCommand extends ActionCommand {
     public ActionResult execute(RequestContent requestContent) throws CommandException {
         String userIdLine = requestContent.getSingleRequestParameter(USER_ID_PARAM);
         int userId = Integer.parseInt(userIdLine);
+        System.out.println(userId);
         Map<String, Object> sessionAttributes = requestContent.getSessionAttributes();
         String locale =(String) sessionAttributes.get(SessionAttribute.LOCALE);
         UserService userReceiver = (UserService) getService();
