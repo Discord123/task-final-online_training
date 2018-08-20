@@ -94,9 +94,14 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
                     "WHERE user_email=?";
 
     private static final String GET_COUNT_OF_PEOPLE_WHO_STUDY_THAT_LANGUAGE =
-            "UPDATE users " +
-                    "SET user_password=? " +
-                    "WHERE user_email=?";
+            "SELECT COUNT(users.user_id) FROM users " +
+                    "JOIN students_courses " +
+                    "ON users.user_id = students_courses.users_user_id " +
+                    "JOIN courses " +
+                    "ON students_courses.courses_course_id = courses.course_id " +
+                    "JOIN subjects " +
+                    "ON courses.course_subject_id = subjects.subject_id " +
+                    "WHERE subjects.subject_language IN (?)";
 
 
     @Override
@@ -189,6 +194,11 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         int coursesCount = 0;
         int teacherCount = 0;
         int subjectCount = 0;
+        int englishLanguageCount = 0;
+        int germanLanguageCount = 0;
+        int frenchLanguageCount = 0;
+        int italianLanguageCount = 0;
+        int spanishLanguageCount = 0;
 
         ProxyConnection proxyConnection = connectionThreadLocal.get();
         try(PreparedStatement statement = proxyConnection.prepareStatement(GET_STATISTIC)){
@@ -203,11 +213,19 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
             teacherCount = resultSet.getInt(1);
             resultSet.next();
             subjectCount = resultSet.getInt(1);
-            statisticDTO = new StatisticDTO(usersCount,tasksCount,coursesCount, teacherCount, subjectCount);
+
         } catch (SQLException e){
             Logger.log(Level.FATAL, "Fail to getInstance statistic information in DAO.", e);
             throw new DaoException("Fail to getInstance statistic information in DAO.", e);
         }
+
+        englishLanguageCount = getCountOfUsersWhoStudyThatLanguage("english");
+        germanLanguageCount = getCountOfUsersWhoStudyThatLanguage("german");
+        frenchLanguageCount = getCountOfUsersWhoStudyThatLanguage("french");
+        italianLanguageCount = getCountOfUsersWhoStudyThatLanguage("italian");
+        spanishLanguageCount = getCountOfUsersWhoStudyThatLanguage("spanish");
+
+        statisticDTO = new StatisticDTO(usersCount,tasksCount,coursesCount, teacherCount, subjectCount, englishLanguageCount, germanLanguageCount, frenchLanguageCount, italianLanguageCount, spanishLanguageCount);
 
         return statisticDTO;
     }

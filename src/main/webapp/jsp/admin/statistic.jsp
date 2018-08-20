@@ -21,6 +21,11 @@
     <h3><fmt:message key="label.statistic.tasks-count" bundle="${rb}"/>${sessionScope.getStatistic.tasksCount}</h3>
     <h3><fmt:message key="label.statistic.courses-count" bundle="${rb}"/>${sessionScope.getStatistic.coursesCount}</h3>
     <h3><fmt:message key="label.statistic.subjects-count" bundle="${rb}"/>${sessionScope.getStatistic.subjectsCount}</h3>
+    <h3><fmt:message key="label.statistic.count-people-study-english" bundle="${rb}"/>${sessionScope.getStatistic.englishLanguageCount}</h3>
+    <h3><fmt:message key="label.statistic.count-people-study-german" bundle="${rb}"/>${sessionScope.getStatistic.germanLanguageCount}</h3>
+    <h3><fmt:message key="label.statistic.count-people-study-french" bundle="${rb}"/>${sessionScope.getStatistic.frenchLanguageCount}</h3>
+    <h3><fmt:message key="label.statistic.count-people-study-italian" bundle="${rb}"/>${sessionScope.getStatistic.italianLanguageCount}</h3>
+    <h3><fmt:message key="label.statistic.count-people-study-spanish" bundle="${rb}"/>${sessionScope.getStatistic.spanishLanguageCount}</h3>
     <br/>
 </div>
 
