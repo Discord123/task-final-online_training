@@ -135,7 +135,7 @@ public class TransactionManager implements AutoCloseable {
         }
     }
 
-    public enum Isolation {
+    private enum Isolation {
         NONE(Connection.TRANSACTION_NONE),
         READ_UNCOMMITTED(Connection.TRANSACTION_READ_UNCOMMITTED),
         READ_COMMITTED(Connection.TRANSACTION_READ_COMMITTED),
