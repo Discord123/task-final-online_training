@@ -12,7 +12,7 @@
 
     <properties>
         <!--TomcatServer Properties-->
-        <tomcat.embed.version>9.0.8</tomcat.embed.version>
+        <tomcat.embed.version>9.0.30</tomcat.embed.version>
         <tomcat.maven.plugin.version>2.2</tomcat.maven.plugin.version>
         <tomcat.server.port>9090</tomcat.server.port>
         <tomcat.context.path>/</tomcat.context.path>
